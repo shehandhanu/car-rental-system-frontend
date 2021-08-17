@@ -25,6 +25,7 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 
 
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -71,16 +72,18 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   select:{  
-    width:'400px !important'
+    width:'500px !important'
 
   }
 }));
 
+
+
 export default function SignInSide() {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    age: '',
-    name: 'hai',
+    vehiModel:'',
+    vehiNum:'',
   });
 
   const handleChange = (event) => {
@@ -90,6 +93,8 @@ export default function SignInSide() {
       [name]: event.target.value,
     });
   };
+
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -101,14 +106,54 @@ export default function SignInSide() {
           </Typography>
           <form className={classes.form} noValidate>
 
+          <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="age-native-simple">Vehicle Model</InputLabel>
+                <Select className={classes.select}
+                  native
+                  value={state.vehiModel}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: 'model',
+                    id: 'age-native-simple',
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  <option value={18}>18</option>
+                  <option value={19}>19</option>
+              
+                </Select>
+            </FormControl>
+
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="age-native-simple">Vehicle Number</InputLabel>
+                <Select className={classes.select}
+                  native
+                  value={state.vehiNum}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: 'vehiNum',
+                    id: 'age-native-simple',
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  <option value={18}>18</option>
+                  <option value={19}>19</option>
+              
+                </Select>
+            </FormControl>
+          
+
           <TextField
               margin="normal"
               required
               fullWidth
               id="FName"
-              label="Full Name"
+              label="Issue Of the Vehicle"
               name="FName"
               autoFocus
+              multiline
+              rows={2}
+              rowsMax={4}
             />
             <TextField
               margin="normal"
@@ -130,48 +175,7 @@ export default function SignInSide() {
               autoFocus
             />
 
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-                <Select className={classes.select}
-                  native
-                  value={state.age}
-                  onChange={handleChange}
-                  inputProps={{
-                    name: 'age',
-                    id: 'age-native-simple',
-                  }}
-                >
-                  <option aria-label="None" value="" />
-                  <option value={18}>18</option>
-                  <option value={19}>19</option>
-                  <option value={20}>20</option>
-                  <option value={21}>21</option>
-                  <option value={22}>22</option>
-                  <option value={23}>23</option>
-                  <option value={24}>24</option>
-                  <option value={25}>25</option>
-                  <option value={26}>26</option>
-                  <option value={27}>27</option>
-                  <option value={28}>28</option>
-                  <option value={29}>29</option>
-                  <option value={30}>30</option>
-                  <option value={31}>31</option>
-                  <option value={32}>32</option>
-                  <option value={33}>33</option>
-                  <option value={34}>34</option>
-                  <option value={35}>35</option>
-                  <option value={36}>36</option>
-                  <option value={37}>37</option>
-                  <option value={38}>38</option>
-                  <option value={39}>39</option>
-                  <option value={40}>40</option>
-                  <option value={41}>41</option>
-                  <option value={42}>42</option>
-                  <option value={43}>43</option>
-                  <option value={44}>44</option>
-                  <option value={45}>45</option>
-                </Select>
-            </FormControl>
+            
             <React.Fragment>
               <Typography variant="h6" gutterBottom>
                 <br />
@@ -229,6 +233,9 @@ export default function SignInSide() {
                   <FormControlLabel value="other" control={<Radio />} label="Other" />
                 </RadioGroup>
             </FormControl>
+
+          
+            
   
             <Button
               type="submit"

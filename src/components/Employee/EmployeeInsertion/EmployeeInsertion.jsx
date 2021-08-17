@@ -70,6 +70,10 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  select:{  
+    width:'500px !important'
+
+  }
 }));
 
 export default function SignInSide() {
@@ -128,7 +132,7 @@ export default function SignInSide() {
 
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-                <Select
+                <Select className={classes.select}
                   native
                   value={state.age}
                   onChange={handleChange}
@@ -224,6 +228,21 @@ export default function SignInSide() {
                   <FormControlLabel value="male" control={<Radio />} label="Male" />
                   <FormControlLabel value="other" control={<Radio />} label="Other" />
                 </RadioGroup>
+
+                <Typography variant="h6" gutterBottom>
+                <br />
+                Employee Type
+              </Typography>
+                <RadioGroup
+                  aria-label="type"
+                  defaultValue="driver"
+                  name="radio-buttons-group"
+                  >
+                  <FormControlLabel value="driver" control={<Radio />} label="driver" />
+                  <FormControlLabel value="Accountant" control={<Radio />} label="Accountant" />
+                  <FormControlLabel value="Mechanic" control={<Radio />} label="Mechanic" />
+                </RadioGroup>
+                
             </FormControl>
   
             <Button

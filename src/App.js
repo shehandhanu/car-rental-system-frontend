@@ -8,8 +8,8 @@ import ReIsue from '../src/components/Employee/ReportIssues/ReportIssues'
 function App() {
   return (
     <div className="App">
-      {/* <Header />
-      <Home /> */}
+       {/* <Header /> */}
+      {/* <Home />  */}
        {/* <EmInsertion />  */}
       {/* <Footer /> */}
       <ReIsue/>
