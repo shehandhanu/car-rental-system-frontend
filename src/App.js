@@ -4,6 +4,7 @@ import Home from '../src/components/Home/Home'
 import Footer from '../src/components/Footer/Footer'
 import EmInsertion from '../src/components/Employee/EmployeeInsertion/EmployeeInsertion'
 import ReIsue from '../src/components/Employee/ReportIssues/ReportIssues'
+import AdminHome from '../src/components/Employee/AdminHome/AdminHome'
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       {/* <Home />  */}
        {/* <EmInsertion />  */}
       {/* <Footer /> */}
-      <ReIsue/>
+      {/* <ReIsue/> */}
+      <AdminHome/>
     </div>
   );
 }

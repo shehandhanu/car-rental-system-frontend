@@ -155,84 +155,36 @@ export default function SignInSide() {
               rows={2}
               rowsMax={4}
             />
+
+
             <TextField
               margin="normal"
               required
               fullWidth
-              id="CNo"
-              label="Contact Number"
-              name="CNo"
+              id="date"
+              label="Date"
+              name="date"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="eName"
+              label="Employee Name"
+              name="eName"
               autoFocus
             />
 
-            
-            <React.Fragment>
-              <Typography variant="h6" gutterBottom>
-                <br />
-                Employee's Address
-              </Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    id="address1"
-                    name="address1"
-                    label="Address line 1"
-                    fullWidth
-                    autoComplete="shipping address-line1"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                  
-                    id="address2"
-                    name="address2"
-                    label="Address line 2"
-                    fullWidth
-                    autoComplete="shipping address-line2"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    id="city"
-                    name="city"
-                    label="City"
-                    fullWidth
-                    autoComplete="shipping address-level2"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-                </Grid>
-              </Grid>
-            </React.Fragment>
-            
-            <FormControl component="fieldset">
-            <Typography variant="h6" gutterBottom>
-                <br />
-                Gender
-              </Typography>
-                <RadioGroup
-                  aria-label="gender"
-                  defaultValue="female"
-                  name="radio-buttons-group"
-                  >
-                  <FormControlLabel value="female" control={<Radio />} label="Female" />
-                  <FormControlLabel value="male" control={<Radio />} label="Male" />
-                  <FormControlLabel value="other" control={<Radio />} label="Other" />
-                </RadioGroup>
-            </FormControl>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="emCoNo"
+              label="Employee Contact Number"
+              name="emCoNo"
+              autoFocus
+            />
 
           
             
@@ -244,7 +196,7 @@ export default function SignInSide() {
               color="primary"
               className={classes.submit}
             >
-              Register
+              SUBMIT
             </Button>
        
             <Box mt={5}>
