@@ -6,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import Card from "@material-ui/core/Card";
@@ -86,23 +85,22 @@ const UserReport = () => {
             <form className={classes.form} noValidate>
               <FormControl className={classes.formControl}>
                 <InputLabel shrink htmlFor="age-native-label-placeholder">
-                  Age
+                  Vehical Types
                 </InputLabel>
                 <NativeSelect
+                  style={{ width: 260 }}
                   fullWidth
                   //   value={state.age}
                   //   onChange={handleChange}
-                  inputProps={{
-                    name: "age",
-                    id: "age-native-label-placeholder",
-                  }}
                 >
                   <option value="">None</option>
-                  <option value={10}>Ten</option>
-                  <option value={20}>Twenty</option>
-                  <option value={30}>Thirty</option>
+                  <option value={10}>Van</option>
+                  <option value={20}>Car</option>
+                  <option value={30}>Wedding</option>
+                  <option value={30}>Bike</option>
+                  <option value={30}>Scooter</option>
+                  <option value={30}>Luxury</option>
                 </NativeSelect>
-                <FormHelperText>Label + placeholder</FormHelperText>
               </FormControl>
               <Button
                 type="submit"
@@ -142,7 +140,7 @@ function Album() {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    image="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629518812/afproject/SPM%20Project/bavdbbnata8yrgjsuiix.jpg"
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
@@ -157,9 +155,6 @@ function Album() {
                   <CardActions>
                     <Button size="small" color="primary">
                       View
-                    </Button>
-                    <Button size="small" color="primary">
-                      Edit
                     </Button>
                   </CardActions>
                 </Card>

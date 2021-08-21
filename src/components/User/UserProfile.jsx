@@ -10,13 +10,13 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   paper1: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(0),
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -41,33 +41,26 @@ const UserProfile = () => {
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="md">
-      {/* <div className={classes.paper}>
-        <Box mt={5}></Box>
-        <Avatar className={classes.avatar}>
-          <AccountCircleIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          User Profile
-        </Typography>
-      </div> */}
+      <div className={classes.paper}>
+        <Grid item xs={12}>
+          <div className={classes.paper}>
+            <img
+              src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629539043/afproject/SPM%20Project/1_itpduf.jpg"
+              style={{
+                width: 150,
+                height: 150,
+                borderRadius: 75,
+                marginTop: 30,
+              }}
+            />
+          </div>
+        </Grid>
+      </div>
       <div className={classes.paper1}>
         <Grid item xs={9}>
-          <Grid item xs={12} style={{ marginTop: 20 }}>
-            <div className={classes.paper}>
-              <img
-                src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629539043/afproject/SPM%20Project/1_itpduf.jpg"
-                style={{
-                  width: 150,
-                  height: 150,
-                  borderRadius: 75,
-                  marginBottom: 50,
-                }}
-              />
-            </div>
-          </Grid>
-          <div className={classes.paper}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} container spacing={2}>
+          <div className={classes.paper} style={{ marginTop: 0 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6} container spacing={1}>
                 <Grid item xs={12}>
                   <Typography component="h1" variant="h6">
                     <b>First Name : </b> Shehan
@@ -107,7 +100,7 @@ const UserProfile = () => {
             </Grid>
           </div>
         </Grid>
-        <Grid item xs={3} style={{ marginTop: 150 }} container spacing={2}>
+        <Grid item xs={3} style={{ marginTop: 50 }} container spacing={2}>
           <Box mt={5}></Box>
           <Grid item xs={12}>
             <Button
@@ -117,7 +110,7 @@ const UserProfile = () => {
               component="span"
               style={{ width: "100%" }}
             >
-              Change Cover Page
+              Genarate Report
             </Button>
           </Grid>
           <Grid item xs={12}>
@@ -128,7 +121,7 @@ const UserProfile = () => {
               component="span"
               style={{ width: "100%" }}
             >
-              Change Cover Page
+              Trip History
             </Button>
           </Grid>
           <Grid item xs={12}>
@@ -139,7 +132,7 @@ const UserProfile = () => {
               component="span"
               style={{ width: "100%" }}
             >
-              Change Cover Page
+              Edit Profile
             </Button>
           </Grid>
           <Grid item xs={12}>
@@ -150,7 +143,7 @@ const UserProfile = () => {
               component="span"
               style={{ width: "100%" }}
             >
-              Change Cover Page
+              Logout
             </Button>
           </Grid>
           <Grid item xs={12}>
@@ -161,7 +154,7 @@ const UserProfile = () => {
               component="span"
               style={{ width: "100%" }}
             >
-              Change Cover Page
+              Delete Account
             </Button>
           </Grid>
         </Grid>

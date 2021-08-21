@@ -7,6 +7,11 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import IconButton from "@material-ui/core/IconButton";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import Badge from "@material-ui/core/Badge";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -71,13 +76,18 @@ export default function ButtonAppBar() {
             </a>
           </div>
           <Typography variant="h6" className={classes.title}></Typography>
-          {url === "http://localhost:3000/" ? (
+          {url.toString() === "http://localhost:3000/" ? null : (
             <div>
-              <Button style={{ marginLeft: 20 }} color="inherit">
-                Home
-              </Button>
+              <Link
+                to={"/"}
+                style={{ textDecoration: "none", color: "#fffff0" }}
+              >
+                <Button style={{ marginLeft: 20 }} color="inherit">
+                  Home
+                </Button>
+              </Link>
             </div>
-          ) : null}
+          )}
 
           <a style={{ textDecoration: "none" }} href="#team">
             <Button className={classes.hbutton}>TEAM</Button>
@@ -85,20 +95,40 @@ export default function ButtonAppBar() {
           <a style={{ textDecoration: "none" }} href="#services">
             <Button className={classes.hbutton}>SERVICES</Button>
           </a>
-          <Button style={{ marginLeft: 20 }} color="inherit">
-            Vehicals
-          </Button>
-          <Button style={{ marginLeft: 20 }} color="inherit">
-            Admin
-          </Button>
+          <Link
+            to={"/carlist"}
+            style={{ textDecoration: "none", color: "#fffff0" }}
+          >
+            <Button style={{ marginLeft: 20 }} color="inherit">
+              Vehicals
+            </Button>
+          </Link>
+          <Link
+            to={"/admin"}
+            style={{ textDecoration: "none", color: "#fffff0" }}
+          >
+            <Button style={{ marginLeft: 20 }} color="inherit">
+              Admin Pannel
+            </Button>
+          </Link>
           {!User ? (
             <div>
-              <Button className={classes.buttoncolor} color="inherit">
-                Sign In
-              </Button>
-              <Button className={classes.buttoncolor} color="inherit">
-                Sign Up
-              </Button>
+              <Link
+                to={"/signin"}
+                style={{ textDecoration: "none", color: "#fffff0" }}
+              >
+                <Button className={classes.buttoncolor} color="inherit">
+                  Sign In
+                </Button>
+              </Link>
+              <Link
+                to={"/signup"}
+                style={{ textDecoration: "none", color: "#fffff0" }}
+              >
+                <Button className={classes.buttoncolor} color="inherit">
+                  Sign Up
+                </Button>
+              </Link>
             </div>
           ) : (
             <div>
@@ -106,6 +136,7 @@ export default function ButtonAppBar() {
                 onClick={handleClick}
                 style={{ marginLeft: 20 }}
                 color="inherit"
+                startIcon={<AccountCircleIcon />}
               >
                 {User}
               </Button>
@@ -121,7 +152,7 @@ export default function ButtonAppBar() {
                   <MenuItem onClick={handleClose}>
                     <div>
                       <Link
-                        to={"/addresearch"}
+                        to={"/userreport"}
                         style={{ textDecoration: "none", color: "#00000f" }}
                       >
                         <Button style={{ width: "200px" }} color="inherit">
@@ -135,7 +166,7 @@ export default function ButtonAppBar() {
                   <MenuItem onClick={handleClose}>
                     <div>
                       <Link
-                        to={"/sessionpraposal"}
+                        to={"/userhistory"}
                         style={{ textDecoration: "none", color: "#00000f" }}
                       >
                         <Button style={{ width: "200px" }} color="inherit">
@@ -156,6 +187,29 @@ export default function ButtonAppBar() {
                   </Link>
                 </MenuItem>
               </Menu>
+
+              <IconButton
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={17} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                // aria-controls={menuId}
+                aria-haspopup="true"
+                // onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                {/* <AccountCircle /> */}
+              </IconButton>
+
+              <IconButton color="inherit">
+                <ExitToAppIcon />
+              </IconButton>
             </div>
           )}
         </Toolbar>

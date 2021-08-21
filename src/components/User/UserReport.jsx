@@ -43,12 +43,15 @@ const useStyles = makeStyles((theme) => ({
 
 const UserReport = () => {
   const classes = useStyles();
+  const [file, setFile] = React.useState(
+    "https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629544285/afproject/SPM%20Project/Assessment_2_2021S2_REG_WE_10_1_iyqelm.pdf"
+  );
   return (
     <div>
       <Grid container component="main" className={classes.root}>
         <Grid item xs={12} sm={8} md={3} component={Paper} elevation={6} square>
           <div className={classes.paper}>
-            <Box mt={12}> </Box>
+            <Box mt={10}> </Box>
             <Typography component="h1" variant="h5">
               Report Genaration
             </Typography>
@@ -88,7 +91,16 @@ const UserReport = () => {
             </form>
           </div>
         </Grid>
-        <Grid item xs={false} sm={4} md={9} className={classes.image} />
+        <Grid item xs={false} sm={4} md={9} /*className={classes.image}*/>
+          <div>
+            <iframe
+              style={{ width: "100%", height: "666px" }}
+              src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629544285/afproject/SPM%20Project/Assessment_2_2021S2_REG_WE_10_1_iyqelm.pdf"
+              type="application/pdf"
+              title="title"
+            ></iframe>
+          </div>
+        </Grid>
       </Grid>
     </div>
   );
