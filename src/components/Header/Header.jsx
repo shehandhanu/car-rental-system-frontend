@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     color: "#fffff0",
     textTransform: "none",
-    textDecoration: null,
   },
 }));
 
@@ -55,6 +54,9 @@ export default function ButtonAppBar() {
     setUser(user);
   }, [!User]);
 
+  let url = window.location.href;
+  console.log(url);
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.appbarcolor} position="static">
@@ -69,14 +71,19 @@ export default function ButtonAppBar() {
             </a>
           </div>
           <Typography variant="h6" className={classes.title}></Typography>
-          <a href="#about">
-            <Button className={classes.hbutton}>ABOUT US</Button>
-          </a>
-          <a href="#team">
+          {url === "http://localhost:3000/" ? (
+            <div>
+              <Button style={{ marginLeft: 20 }} color="inherit">
+                Home
+              </Button>
+            </div>
+          ) : null}
+
+          <a style={{ textDecoration: "none" }} href="#team">
             <Button className={classes.hbutton}>TEAM</Button>
           </a>
-          <a href="#contactus">
-            <Button className={classes.hbutton}>CONTACT US</Button>
+          <a style={{ textDecoration: "none" }} href="#services">
+            <Button className={classes.hbutton}>SERVICES</Button>
           </a>
           <Button style={{ marginLeft: 20 }} color="inherit">
             Vehicals
@@ -156,54 +163,3 @@ export default function ButtonAppBar() {
     </div>
   );
 }
-
-// import React from "react";
-
-// const Header = () => {
-//   return (
-//     <div>
-//       <nav className="navbar navbar-expand-lg fixed-top" id="mainNav">
-//         <div className="container">
-//           <a className="navbar-brand" href="#hero">
-//             <img
-//               src={require("../../assets/img/navbar-logo.png").default}
-//               alt="Logo."
-//             />
-//           </a>
-//           <div className="" id="navbarResponsive">
-//             <ul className="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-//               <li className="nav-item">
-//                 <a className="nav-link" href="#services">
-//                   Services
-//                 </a>
-//               </li>
-//               <li className="nav-item">
-//                 <a className="nav-link" href="#team">
-//                   Team
-//                 </a>
-//               </li>
-//               <li class="nav-item">
-//                 <a
-//                   class="btn btn-primary nav-link text-uppercase"
-//                   href="#services"
-//                 >
-//                   Sign In
-//                 </a>
-//               </li>
-//               <li class="nav-item">
-//                 <a
-//                   class="btn btn-primary nav-link text-uppercase"
-//                   href="#services"
-//                 >
-//                   Sign Up
-//                 </a>
-//               </li>
-//             </ul>
-//           </div>
-//         </div>
-//       </nav>
-//     </div>
-//   );
-// };
-
-// export default Header;
