@@ -17,14 +17,14 @@ function App() {
       <div className="App">
        {/* <Header /> */}
       {/* <Home />  */}
-       {/* <EmInsertion />  */}
+      <Route path="/employeeinsert" component={EmInsertion} exact />  
       {/* <Footer /> */}
-      {/* <ReIsue/> */}
+     <Route path="/reportvehicleissue" component={ReIsue} exact /> 
       <Route path="/adminhome" component={AdminHome} exact />
-      {/* <EmployeeHome/> */}
-      {/* <EmployeeUpdate/> */}
-      {/* <UserProfile/> */}
-      <EmployeeList />
+      <Route path="/employeehome" component={EmployeeHome} exact/>
+      <Route path="/employeeupdate" component={EmployeeUpdate} exact/>
+      <Route path ="/userprofile" component={UserProfile} exact /> 
+      <Route path = "/employeelist" component={EmployeeList} exact  />
      </div>
     </Router>
   );
