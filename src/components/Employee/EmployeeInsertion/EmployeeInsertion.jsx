@@ -21,6 +21,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import { SettingsInputCompositeTwoTone } from '@material-ui/icons';
+import axios from 'axios';
 
 
 
@@ -70,18 +72,55 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    age: '',
-    name: 'hai',
-  });
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
+  const [fName, setfName] = React.useState('')
+  const [Nic, setNic] = React.useState('') 
+  const [cNo, setCNo] = React.useState('') 
+  const [email, setEmail] = React.useState('') 
+  const [password, setPassword] = React.useState('') 
+  const [age, setAge] = React.useState('') 
+  const [line1, setLine1] = React.useState('') 
+  const [line2, setLine2] = React.useState('') 
+  const [city, setCity] = React.useState('') 
+  const [state, setState] = React.useState('') 
+  const [gender, setGender] = React.useState('') 
+  const [eType, setEType] = React.useState('') 
+  
+  const onSubmit = async (e) =>{
+    e.preventDefault()
+    const data = {
+      "fName": fName,
+      "Nic": Nic,
+      "emCoNo": cNo,
+      "email": email,
+      "password": password,
+      "age": age,
+      "emAddress":{
+        "line1": line1,
+        "line2": line2,
+        "city": city,
+        "state": state
+      },
+      "gender": gender,
+      "emType": eType
+    }
+
+    const datax = await axios.post("http://localhost:4000/api/v1/employee/addemployee",data)
+    console.log(datax);
+    setfName('')
+    setNic('')
+    setCNo('')
+    setEmail('')
+    setPassword('')
+    setAge('')
+    setLine1('')
+    setLine2('')
+    setCity('')
+    setState('')
+    setGender('')
+    setEType('')
+  }
+
   
   return (
     <Grid container component="main" className={classes.root}>
@@ -92,30 +131,49 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Employee Registration
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit = {onSubmit} noValidate>
 
           <TextField
               margin="normal"
               required
               fullWidth
+              value={fName}
+              onChange={(e) => setfName(e.target.value)}
               id="FName"
               label="Full Name"
               name="FName"
               autoFocus
             />
+
             <TextField
               margin="normal"
               required
               fullWidth
-              id="CNo"
-              label="Contact Number"
-              name="CNo"
+              value={Nic}
+              onChange={(e) => setNic(e.target.value)}
+              id="Nic"
+              label="Nic"
+              name="Nic"
               autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
+              value={cNo}
+              onChange={(e) => setCNo(e.target.value)}
+              id="CNo"
+              label="Contact Number"
+              name="CNo"
+              type="Number"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               id="email"
               label="Email Address"
               name="email"
@@ -123,12 +181,24 @@ export default function SignInSide() {
               autoFocus
             />
 
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+              label="Password"
+              name="password"
+              type="password"
+            />
+
             <FormControl className={classes.formControl}>
               <InputLabel htmlFor="age-native-simple">Age</InputLabel>
                 <Select className={classes.select}
                   native
-                  value={state.age}
-                  onChange={handleChange}
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
                   inputProps={{
                     name: 'age',
                     id: 'age-native-simple',
@@ -178,6 +248,8 @@ export default function SignInSide() {
                     name="address1"
                     label="Address line 1"
                     fullWidth
+                    value={line1}
+                    onChange={(e) => setLine1(e.target.value)}
                     autoComplete="shipping address-line1"
                   />
                 </Grid>
@@ -188,6 +260,8 @@ export default function SignInSide() {
                     name="address2"
                     label="Address line 2"
                     fullWidth
+                    value={line2}
+                    onChange={(e) => setLine2(e.target.value)}
                     autoComplete="shipping address-line2"
                   />
                 </Grid>
@@ -198,11 +272,19 @@ export default function SignInSide() {
                     name="city"
                     label="City"
                     fullWidth
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
                     autoComplete="shipping address-level2"
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField id="state" name="state" label="State/Province/Region" fullWidth />
+                  <TextField id="state" 
+                  name="state" 
+                  label="State/Province/Region" 
+                  fullWidth 
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  />
                 </Grid>
               </Grid>
             </React.Fragment>
@@ -216,6 +298,8 @@ export default function SignInSide() {
                   aria-label="gender"
                   defaultValue="female"
                   name="radio-buttons-group"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
                   >
                   <FormControlLabel value="female" control={<Radio />} label="Female" />
                   <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -230,6 +314,8 @@ export default function SignInSide() {
                   aria-label="type"
                   defaultValue="driver"
                   name="radio-buttons-group"
+                  value={eType}
+                  onChange={(e) => setEType(e.target.value)}
                   >
                   <FormControlLabel value="driver" control={<Radio />} label="driver" />
                   <FormControlLabel value="Accountant" control={<Radio />} label="Accountant" />
