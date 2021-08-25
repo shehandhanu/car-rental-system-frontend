@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80)',
+    backgroundImage: 'url(https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629917640/SPM%20Project/Tharaka/aman-jakhar-CrTTr9xF-w4-unsplash_k8zign.jpg)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -104,6 +104,8 @@ export default function SignInSide() {
       "gender": gender,
       "emType": eType
     }
+
+    
 
     const datax = await axios.post("http://localhost:4000/api/v1/employee/addemployee",data)
     console.log(datax);
