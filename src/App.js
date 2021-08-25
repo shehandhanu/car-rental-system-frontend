@@ -37,14 +37,14 @@ function App() {
       <Route path="/employeelist" component={EmployeeList} exact />
       <Route path="/forgotpassword" component={ForgotPassword} exact />
       <Route path="/forgotpasswordemail" component={ForgotPasswordEmail} exact />
-      <Route path="/changepassword" component={ChangePassword} exact />
+      <Route path="/changepassword/:token" component={ChangePassword} exact />
       <Route path="/signin" component={SignIn} exact />
       <Route path="/signup" component={SignUp} exact />
       <Route path="/profile" component={UserProfile} exact />
       <Route path="/userreport" component={UserReport} exact />
       <Route path="/userhistory" component={TripHistory} exact />
       <Route path="/payment" component={Payment} exact />
-      <Route path="profileupdate/" component={UserProfileUpdate} exact />
+      <Route path="/profileupdate" component={UserProfileUpdate} exact />
       <Route path="/carlist" component={CarList} exact />
       <Route path="/carcheckout" component={CarCheckout} exact />
       <Footer />

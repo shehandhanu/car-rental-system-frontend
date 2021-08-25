@@ -50,8 +50,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ForgotPasswordEmail() {
+export default function ForgotPasswordEmail(props) {
   const classes = useStyles();
+
+  console.log(props.location.email);
 
   return (
     <React.Fragment>
@@ -72,8 +74,8 @@ export default function ForgotPasswordEmail() {
           color="textSecondary"
           component="p"
         >
-          Password reset email send to yor email 'sample@gmail.com'. please
-          check your inbox, i it is not thee please check the spam folder
+          Password reset email send to yor email '{props.location.email}'.
+          please check your inbox, i it is not thee please check the spam folder
         </Typography>
       </Container>
     </React.Fragment>

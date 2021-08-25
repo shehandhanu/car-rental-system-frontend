@@ -9,10 +9,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import IconButton from "@material-ui/core/IconButton";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import Badge from "@material-ui/core/Badge";
+import { useHistory } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import axios from "axios";
+import CookieService from "../../Utils/Cookie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,9 +43,34 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ButtonAppBar() {
-  const [User, setUser] = React.useState("");
-  const classes = useStyles();
+  const [token, settoken] = React.useState(CookieService.get("token"));
+  const [User, setUser] = React.useState();
+  const [UserData, setUserData] = React.useState();
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const classes = useStyles();
+  const history = useHistory();
+
+  // const token = CookieService.get("token");
+
+  React.useEffect(() => {
+    if (token == null) {
+      console.log("No User");
+      setUser(false);
+    } else {
+      setUser(true);
+      async function fectchData() {
+        const userDetails = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/user/profile`,
+          {
+            withCredentials: true,
+          }
+        );
+        setUserData(userDetails.data.user);
+      }
+      fectchData();
+    }
+  }, []);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -54,13 +79,15 @@ export default function ButtonAppBar() {
     setAnchorEl(event.currentTarget);
   };
 
-  React.useEffect(() => {
-    const user = "Shehan Dhanuddara";
-    setUser(user);
-  }, [!User]);
-
   let url = window.location.href;
-  console.log(url);
+
+  const logout = () => {
+    CookieService.remove();
+    settoken(false);
+    setUser(false);
+    // toast.success(`Logout Success`);
+    history.push("/");
+  };
 
   return (
     <div className={classes.root}>
@@ -103,14 +130,18 @@ export default function ButtonAppBar() {
               Vehicals
             </Button>
           </Link>
-          <Link
-            to={"/admin"}
-            style={{ textDecoration: "none", color: "#fffff0" }}
-          >
-            <Button style={{ marginLeft: 20 }} color="inherit">
-              Admin Pannel
-            </Button>
-          </Link>
+          {UserData && UserData.role === "admin" ? (
+            <div>
+              <Link
+                to={"/admin"}
+                style={{ textDecoration: "none", color: "#fffff0" }}
+              >
+                <Button style={{ marginLeft: 20 }} color="inherit">
+                  Admin Pannel
+                </Button>
+              </Link>
+            </div>
+          ) : null}
           {!User ? (
             <div>
               <Link
@@ -138,7 +169,7 @@ export default function ButtonAppBar() {
                 color="inherit"
                 startIcon={<AccountCircleIcon />}
               >
-                {User}
+                {UserData && UserData.firstName + " " + UserData.lastName}
               </Button>
               <Menu
                 id="simple-menu"
@@ -188,7 +219,7 @@ export default function ButtonAppBar() {
                 </MenuItem>
               </Menu>
 
-              <IconButton
+              {/* <IconButton
                 aria-label="show 17 new notifications"
                 color="inherit"
               >
@@ -204,10 +235,10 @@ export default function ButtonAppBar() {
                 // onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                {/* <AccountCircle /> */}
-              </IconButton>
+                <AccountCircle />
+              </IconButton> */}
 
-              <IconButton color="inherit">
+              <IconButton color="inherit" onClick={logout}>
                 <ExitToAppIcon />
               </IconButton>
             </div>
