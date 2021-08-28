@@ -26,4 +26,4 @@ yarn-error.log*
 /src/components/RepairAndService/generateReport.jsx
 /src/components/RepairAndService/getListOfApprovedQuotation.jsx
 /src/components/RepairAndService/getListViewOfQuotationOwner.jsx
-/src/components/RepairAndService/quotationForVehicle.jsx
+
