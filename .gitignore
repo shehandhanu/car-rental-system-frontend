@@ -24,6 +24,5 @@ yarn-error.log*
 
 /src/components/RepairAndService/editQuotationForVehicle.jsx
 /src/components/RepairAndService/generateReport.jsx
-/src/components/RepairAndService/getListOfApprovedQuotation.jsx
 
 
