@@ -22,7 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/src/components/RepairAndService/editQuotationForVehicle.jsx
+
 /src/components/RepairAndService/generateReport.jsx
 
 
