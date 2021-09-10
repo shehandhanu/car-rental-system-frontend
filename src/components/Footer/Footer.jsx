@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     minHeight: "100vh",
     backgroundColor: theme.palette.background.paper,
-    marginTop: theme.spacing(8),
-    padding: theme.spacing(6, 0),
+    marginTop: theme.spacing(50),
+    // padding: theme.spacing(6, 0),
   },
 }));
 

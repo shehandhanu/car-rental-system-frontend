@@ -247,7 +247,8 @@ const UserReport = () => {
                 </Typography>
               </Container>
               <Button
-                type="submit"
+                href={"/payment"}
+                // type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"

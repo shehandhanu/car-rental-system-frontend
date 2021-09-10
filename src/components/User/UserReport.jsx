@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 const UserReport = () => {
   const classes = useStyles();
   const [file, setFile] = React.useState(
-    "https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629544285/afproject/SPM%20Project/Assessment_2_2021S2_REG_WE_10_1_iyqelm.pdf"
+    "https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629948230/SPM%20Project/Shehan/Sample_User_Report_View_prwwez.pdf"
   );
   return (
     <div>
@@ -95,7 +95,7 @@ const UserReport = () => {
           <div>
             <iframe
               style={{ width: "100%", height: "666px" }}
-              src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629544285/afproject/SPM%20Project/Assessment_2_2021S2_REG_WE_10_1_iyqelm.pdf"
+              src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629948230/SPM%20Project/Shehan/Sample_User_Report_View_prwwez.pdf"
               type="application/pdf"
               title="title"
             ></iframe>

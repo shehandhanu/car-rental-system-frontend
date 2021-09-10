@@ -57,18 +57,15 @@ const SignUp = () => {
   // }, [!uploadedImg]);
 
   const uploadImage = async (e) => {
-    e.preventDefault();
     const formData = new FormData();
     formData.append("file", selectedImg);
     formData.append("upload_preset", "spmproject");
-
     const response = await axios.post(
       "https://api.cloudinary.com/v1_1/dxz8wbaqv/image/upload",
       formData
     );
-
     setuploadedImg(response.data.url);
-    handleSubmit();
+    alert("Your Details Are Ok To SignUp");
   };
 
   const handleSubmit = async (e) => {
@@ -263,16 +260,30 @@ const SignUp = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            style={{ backgroundColor: "#bd9400" }}
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
+          {uploadedImg ? (
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ backgroundColor: "#bd9400" }}
+              className={classes.submit}
+            >
+              Sign Up
+            </Button>
+          ) : (
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ backgroundColor: "#bd9400" }}
+              className={classes.submit}
+              onClick={() => uploadImage()}
+            >
+              Check Your Details
+            </Button>
+          )}
+
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href="/signin" variant="body2" style={{ color: "#bd9400" }}>

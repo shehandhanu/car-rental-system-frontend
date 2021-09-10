@@ -159,6 +159,7 @@ const UserProfile = () => {
               color="primary"
               component="span"
               style={{ width: "100%" }}
+              to={"/profileupdate"}
             >
               Edit Profile
             </Button>

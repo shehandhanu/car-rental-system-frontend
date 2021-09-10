@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import CookieService from "../../Utils/Cookie";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,6 +41,7 @@ const ForgotPassword = () => {
   const history = useHistory();
 
   React.useEffect(() => {
+    CookieService.remove();
     const url = window.location.href;
     const words = url.split("/");
     setToken(words[words.length - 1]);
@@ -60,7 +62,7 @@ const ForgotPassword = () => {
 
     if (password.data.success === true) {
       alert("password change successfully");
-      history.push("/");
+      history.push("/signin");
     }
   };
 
@@ -111,7 +113,7 @@ const ForgotPassword = () => {
             style={{ backgroundColor: "#bd9400" }}
             className={classes.submit}
           >
-            Change Password & Sign In
+            Change Password
           </Button>
           <Grid container justifyContent="flex-end"></Grid>
         </form>

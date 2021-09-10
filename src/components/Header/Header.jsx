@@ -103,6 +103,11 @@ export default function ButtonAppBar() {
             </a>
           </div>
           <Typography variant="h6" className={classes.title}></Typography>
+          {UserData && UserData.verifiedAccount === false ? (
+            <Typography style={{ color: "#f70202" }} variant="subtitle1">
+              Your Account Not Verified
+            </Typography>
+          ) : null}
           {url.toString() === "http://localhost:3000/" ? null : (
             <div>
               <Link
