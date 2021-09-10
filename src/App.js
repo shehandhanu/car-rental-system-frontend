@@ -31,6 +31,7 @@ import GetListReportOfFailure from "./components/RepairAndService/getListReportO
 import QuotationForTheVehicle from "./components/RepairAndService/quotationForVehicle";
 import GenerateReport from "./components/RepairAndService/generateReport";
 import EditQuotationForTheVehicle from "./components/RepairAndService/editQuotationForVehicle";
+import NavigationBar from "./components/RepairAndService/navigationbar";
 
 function App() {
   return (
@@ -59,14 +60,15 @@ function App() {
       <Route path="/carcheckout" component={CarCheckout} exact />
       <Route path="/confirmation/:token" component={EmailConfirmation} exact />
 
-      <Route path="/createReportOfService" component={CreateReportOfService} exact />
-      <Route path="/getListOfApprovedQuotation" component={GetListOfApprovedQuotation} exact />
+      <NavigationBar />
+      <Route path="/createReportOfService" component={CreateReportOfService} exact></Route>
+      <Route path="/getListOfApprovedQuotation" component={GetListOfApprovedQuotation} exact></Route>
       <Route path="/tableDeails" component={tableDeails} exact></Route>
-      <Route path="/getListOfQuotationOwner" component={GetListOfQuotationOwner} exact />
-      <Route path="/getListReportOfFailure" component={GetListReportOfFailure} exact />
-      <Route path="/quotationForTheVehicle" component={QuotationForTheVehicle} exact />
+      <Route path="/getListOfQuotationOwner" component={GetListOfQuotationOwner} exact></Route>
+      <Route path="/getListReportOfFailure" component={GetListReportOfFailure} exact></Route>
+      <Route path="/quotationForTheVehicle" component={QuotationForTheVehicle} exact></Route>
       <Route path="/generateReport" component={GenerateReport} exact></Route>
-      <Route path="/editQuotationForTheVehicle" component={EditQuotationForTheVehicle} exact />
+      <Route path="/editQuotationForTheVehicle" component={EditQuotationForTheVehicle} exact></Route>
       <Footer />
     </Router>
   );
