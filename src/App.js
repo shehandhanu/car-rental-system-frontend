@@ -10,12 +10,13 @@ import EmployeeHome from '../src/components/Employee/EmployeeHome/EmployeeHome'
 import UserProfile from '../src/components/Employee/UserProfile/UserProfile'
 import EmployeeUpdate from '../src/components/Employee/EmployeeUpdate/EmployeeUpdate'
 import EmployeeList from './components/Employee/EmployeeList/EmployeeList'
+import EmployeeUpdateAdmin from './components/Employee/EmployeeUpdateAdmin/EmployeeUpdateAdmin'
 
 function App() {
   return (
     <Router>
       <div className="App">
-       {/* <Header /> */}
+       {/* <Header />  */}
       {/* <Home />  */}
       <Route path="/employeeinsert" component={EmInsertion} exact />  
       {/* <Footer /> */}
@@ -25,6 +26,7 @@ function App() {
       <Route path="/employeeupdate" component={EmployeeUpdate} exact/>
       <Route path ="/userprofile" component={UserProfile} exact /> 
       <Route path = "/employeelist" component={EmployeeList} exact  />
+      <Route path = "/employeeupdateadmin" component={EmployeeUpdateAdmin}exact />
      </div>
     </Router>
   );

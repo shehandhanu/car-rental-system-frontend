@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -21,6 +20,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import { Link } from 'react-router-dom';
+import axios from 'axios'
+import Container from "@material-ui/core/Container";
+
 
 
 
@@ -67,7 +70,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const EmployeeList = () => {
+  const classes = useStyles();
+  const [emp, setemp] = React.useState([])
+  const idP = this.props.data;
+  console.log(idP);
+  React.useEffect(async() => {
+      let data = await axios.get('http://localhost:4000/api/v1/employee/getemployee')
+      setemp(data.data.emp)
+      
+  },[!emp])
+  
+  // console.log(emp);
 
+}
 
 export default function SignInSide() {
   const classes = useStyles();
@@ -76,13 +92,7 @@ export default function SignInSide() {
     name: 'hai',
   });
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
+
   
   return (
     <Grid container component="main" className={classes.root}>
@@ -129,7 +139,6 @@ export default function SignInSide() {
                 <Select className={classes.select}
                   native
                   value={state.age}
-                  onChange={handleChange}
                   inputProps={{
                     name: 'age',
                     id: 'age-native-simple',
@@ -203,7 +212,8 @@ export default function SignInSide() {
               autoComplete="email"
               autoFocus
             />
-  
+
+            <Link style={{textDecoration: "none"}}to="/employeeupdate">
             <Button
               type="Button"
               fullWidth
@@ -213,6 +223,8 @@ export default function SignInSide() {
             >
               Update
             </Button>
+            </Link>
+         
        
           
           </form>

@@ -15,6 +15,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import { Button, Box } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -77,13 +78,14 @@ export default EmployeeList
 function FeaturedPost(props) {
   const classes = useStyles();
   const { emp } = props;
-  console.log(emp);
+  console.log(props);
   return (
     <div className={classes.paper}>
       <Grid item xs={12}>
         <CardActionArea component="a" href="#">
           <Card className={classes.card}>
             <div className={classes.cardDetails}>
+              <Link style={{textDecoration: "none", color: "#000000"}}to="/userprofile">
               <CardContent>
                 <Typography component="h2" variant="h5">
                   <b>Employee Name</b> {emp.fName}
@@ -92,9 +94,18 @@ function FeaturedPost(props) {
                  <b>Contact Number</b> {emp.emCoNo}
                 </Typography>
                 <Typography variant="subtitle1" paragraph>
-                  {/* {emp.description} */}
+                  {emp._id}
                 </Typography>
               </CardContent>
+              </Link>
+
+              <Link
+                to={{
+                  pathname: "/UserProfile",
+                  data: emp, 
+                }}
+              ></Link>
+             
             </div>
             <Hidden xsDown>
               <div
@@ -102,14 +113,22 @@ function FeaturedPost(props) {
                 image={emp.image}
                 title={emp.imageTitle}
               >
+                  
                   <Grid xs={12}>
                     <Box mt={3}>
 
                     </Box>
-                    <button type="button" className="btn btn-warning button m-2">Update</button>
+
+
+                    <Link to="/employeeupdateadmin">
+                      <button type="button" className="btn btn-warning button m-2">Update</button>
+                    </Link>
+                    
                     
                     <button type="button" className="btn btn-danger button m-2">Delete</button>
                   </Grid>
+                  
+              
                  
                   </div>
             </Hidden>
