@@ -3,6 +3,7 @@ import { MDBDataTable } from "mdbreact";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import MaterialTable from "material-table";
@@ -12,23 +13,13 @@ const initialState = {
 };
 
 export default class GetListReportOfFailure extends React.Component {
-  // const [serviceDetails, setServiceDetails] = useState([]);
-
-  // useEffect(async () => {
-  //   let details = await axios.get(
-  //     "http://localhost:4000/api/v1/service/getReportOfservice"
-  //   );
-  //   console.log(details.data.reportOfService);
-  //   setServiceDetails(details.data.reportOfService);
-  // }, [!serviceDetails]);
-
   constructor(props) {
     super(props);
     this.state = initialState;
     axios
       .get("http://localhost:4000/api/v1/service/getReportOfservice")
       .then((Response) => {
-        console.log(Response);
+        //console.log(Response);
         this.setState({ serviceDetails: Response.data.reportOfService });
       })
       .catch((error) => {
@@ -37,7 +28,7 @@ export default class GetListReportOfFailure extends React.Component {
   }
 
   ischecked = async (id) => {
-    console.log(id);
+    //console.log(id);
     await axios.get(
       "http://localhost:4000/api/v1/service/checkReportOfservice/" + id._id
     );
@@ -52,24 +43,6 @@ export default class GetListReportOfFailure extends React.Component {
         alert(error.message);
       });
   };
-
-  // deleteRow(id, e) {
-  //   axios
-  //     .delete(
-  //       "http://localhost:4000/api/v1/service/deleteReportOfservice/${id}"
-  //     )
-  //     .then((Response) => {
-  //       console.log(Response);
-  //       console.log(Response.data);
-  //       const serviceDetails = this.state.serviceDetails.filter(
-  //         (item) => item._id !== id
-  //       );
-  //       this.setState({ serviceDetails });
-  //     })
-  //     .catch((error) => {
-  //       alert(error.message);
-  //     });
-  // }
   deleteDetails = (id) => {
     axios
       .delete(
@@ -85,6 +58,11 @@ export default class GetListReportOfFailure extends React.Component {
           });
         }
       });
+  };
+
+  UpdateDetails = (id) => {
+    //console.log(id);
+    this.props.history.push("/quotationForTheVehicle/" + id);
   };
 
   render() {
@@ -111,7 +89,7 @@ export default class GetListReportOfFailure extends React.Component {
               <th scope="col">Vehicle No.</th>
               <th scope="col">Service/Failure Date</th>
               <th scope="col">Assembling Parts</th>
-              <th scope="col" className="w-25">
+              <th scope="col" style={{ width: 400 }}>
                 Actions
               </th>
             </tr>
@@ -143,16 +121,20 @@ export default class GetListReportOfFailure extends React.Component {
                   </Button>
                   {id.isChecked === true ? (
                     // <div>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{ marginLeft: 5 }}
-                      onClick={() =>
-                        (window.location.href = "/quotationForTheVehicle")
-                      }
+                    <Link
+                      to={{
+                        pathname: "/quotationForTheVehicle",
+                        state: id,
+                      }}
                     >
-                      Create a Quotation
-                    </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        style={{ marginLeft: 5 }}
+                      >
+                        Create a Quotation
+                      </Button>
+                    </Link>
                   ) : // </div>
                   null}
                 </td>

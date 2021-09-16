@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../RepairAndService/main.css";
 import "../RepairAndService/main.min.css";
 // import "../RepairAndService/select2.min.css";
@@ -8,9 +8,50 @@ import IconButton from "@material-ui/core/IconButton";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 
-const QuotationForTheVehicle = () => {
+const QuotationForTheVehicle = (props) => {
+  const [data, setData] = useState(props.location.state);
   const [parts, setParts] = useState([{ item: "", price: "" }]);
+  const [totPrice, setTotPrice] = useState();
+  const [specialNote, setSpecialnote] = useState();
+
+  console.log(data);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const details = {
+      type: data.type,
+      vehino: data.vehino,
+      serviceDate: data.serviceDate,
+      serviceParts: data.serviceParts,
+      totPrice: totPrice,
+      specialNote: specialNote,
+      items: parts,
+    };
+
+    axios
+      .post(
+        "http://localhost:4000/api/v1/service/createQuotation/" + e._id,
+        details
+      )
+      .then((Response) => {
+        alert("vehicle Added Successfully");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    setData("");
+    setParts("");
+    setTotPrice("");
+    setSpecialnote("");
+  };
+
+  const handle = (e) => {
+    const newdata = { ...data };
+    newdata[e.target.id] = e.target.value;
+    setData(newdata);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +59,6 @@ const QuotationForTheVehicle = () => {
   };
 
   const handleChangeParts = (index, event) => {
-    // console.log(index, event.target.name);
     const values = [...parts];
     values[index][event.target.name] = event.target.value;
     setParts(values);
@@ -42,7 +82,7 @@ const QuotationForTheVehicle = () => {
             <h2 class="title">Quotation For The Vehicle Repair or Service</h2>
           </div>
           <div class="card-body">
-            <form method="POST" onSubmit={handleSubmit}>
+            <form method="POST" onSubmit={(handleSubmit, onSubmit)}>
               <div class="form-row  m-b-55">
                 <div class="name">Repair/Service</div>
                 <div class="value">
@@ -52,14 +92,11 @@ const QuotationForTheVehicle = () => {
                         name="subject"
                         class="input--style-5 w-100"
                         style={{ height: 50 }}
+                        value={data.type}
+                        onChange={(e) => handle(e)}
+                        disabled
                       >
-                        <option
-                          disabled="disabled"
-                          selected="selected"
-                          class="input--style-5"
-                        >
-                          Choose option
-                        </option>
+                        <option>Choose option</option>
                         <option>Repair</option>
                         <option>Service</option>
                       </select>
@@ -76,6 +113,9 @@ const QuotationForTheVehicle = () => {
                       class="input--style-5"
                       type="text"
                       name="company"
+                      value={data.vehino}
+                      onChange={(e) => handle(e)}
+                      disabled
                     ></input>
                   </div>
                 </div>
@@ -88,7 +128,10 @@ const QuotationForTheVehicle = () => {
                       class="input--style-5"
                       type="date"
                       name="email"
+                      value={data.serviceDate}
+                      onChange={(e) => handle(e)}
                       style={{ height: 50 }}
+                      disabled
                     ></input>
                   </div>
                 </div>
@@ -177,7 +220,8 @@ const QuotationForTheVehicle = () => {
                 <button
                   class="btn btn--radius-2 btn-warning m-5"
                   type="submit"
-                  onClick={handleSubmit}
+                  value="submit"
+                  // onClick={handleSubmit}
                 >
                   Submit
                 </button>
