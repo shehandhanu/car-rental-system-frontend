@@ -9,14 +9,30 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import { useHistory } from "react-router";
 
 const QuotationForTheVehicle = (props) => {
+  const history = useHistory();
   const [data, setData] = useState(props.location.state);
   const [parts, setParts] = useState([{ item: "", price: "" }]);
   const [totPrice, setTotPrice] = useState();
-  const [specialNote, setSpecialnote] = useState();
+  const [specialNote, setSpecialnote] = useState("");
 
   console.log(data);
+
+  useEffect(() => {
+    let tot = 0;
+
+    if (parts.length !== 0) {
+      parts.map((part) => {
+        console.log(part.price);
+        if (parseInt(part.price) !== null) {
+          tot += parseInt(part.price);
+        }
+      });
+    }
+    setTotPrice(tot);
+  }, [parts]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -30,9 +46,10 @@ const QuotationForTheVehicle = (props) => {
       items: parts,
     };
 
+    console.log(data._id);
     axios
       .post(
-        "http://localhost:4000/api/v1/service/createQuotation/" + e._id,
+        "http://localhost:4000/api/v1/service/createQuotation/" + data._id,
         details
       )
       .then((Response) => {
@@ -41,10 +58,7 @@ const QuotationForTheVehicle = (props) => {
       .catch((error) => {
         alert(error.message);
       });
-    setData("");
-    setParts("");
-    setTotPrice("");
-    setSpecialnote("");
+    history.push("/getListReportOfFailure");
   };
 
   const handle = (e) => {
@@ -55,7 +69,6 @@ const QuotationForTheVehicle = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Parts: ", parts);
   };
 
   const handleChangeParts = (index, event) => {
@@ -166,6 +179,7 @@ const QuotationForTheVehicle = (props) => {
                             <input
                               class="input--style-5"
                               name="price"
+                              type="number"
                               value={part.price}
                               onChange={(event) =>
                                 handleChangeParts(index, event)
@@ -195,7 +209,7 @@ const QuotationForTheVehicle = (props) => {
                   <div class="input-group" readonly>
                     {/* <input class="input--style-5" type="text" readonly></input> */}
                     <div class="input--style-5" readonly>
-                      Total Price
+                      {totPrice}
                     </div>
                   </div>
                 </div>
@@ -208,13 +222,15 @@ const QuotationForTheVehicle = (props) => {
                       class="input--style-5 w-100"
                       type="partTextArea"
                       name="partTextArea"
+                      value={specialNote}
+                      onChange={(e) => setSpecialnote(e.target.value)}
                     ></textarea>
                   </div>
                 </div>
               </div>
 
               <div>
-                <button class="btn btn--radius-2 btn--red" type="submit">
+                <button class="btn btn--radius-2 btn--red" type="cancel">
                   Cancel
                 </button>
                 <button

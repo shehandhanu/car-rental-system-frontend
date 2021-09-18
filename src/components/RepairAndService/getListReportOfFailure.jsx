@@ -89,7 +89,7 @@ export default class GetListReportOfFailure extends React.Component {
               <th scope="col">Vehicle No.</th>
               <th scope="col">Service/Failure Date</th>
               <th scope="col">Assembling Parts</th>
-              <th scope="col" style={{ width: 400 }}>
+              <th scope="col" style={{ width: 380 }}>
                 Actions
               </th>
             </tr>
@@ -120,22 +120,39 @@ export default class GetListReportOfFailure extends React.Component {
                     Delete
                   </Button>
                   {id.isChecked === true ? (
-                    // <div>
-                    <Link
-                      to={{
-                        pathname: "/quotationForTheVehicle",
-                        state: id,
-                      }}
-                    >
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        style={{ marginLeft: 5 }}
-                      >
-                        Create a Quotation
-                      </Button>
-                    </Link>
-                  ) : // </div>
+                    <div style={{ float: "right" }}>
+                      {id.isQutationCreated == false ? (
+                        <Link
+                          to={{
+                            pathname: "/quotationForTheVehicle",
+                            state: id,
+                          }}
+                        >
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            style={{ marginLeft: 5 }}
+                          >
+                            Create a Quotation
+                          </Button>
+                        </Link>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          style={{
+                            marginLeft: 5,
+                            backgroundColor: "#61CC63",
+                            color: "#ffffff",
+                            width: 180,
+                            fontSize: 12,
+                          }}
+                        >
+                          Quotation Completed
+                        </Button>
+                      )}
+                    </div>
+                  ) : // <div>
+                  // </div>
                   null}
                 </td>
               </tr>

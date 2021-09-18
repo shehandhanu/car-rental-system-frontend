@@ -12,7 +12,7 @@ import Home from "./components/Home/Home";
 import Footer from "./components/Footer/Footer";
 import SignIn from "./components/Sign In/SignIn";
 import SignUp from "./components/Sign Up/SignUp";
-import EmailConfirmation from './components/User/EmailConfirmation'
+import EmailConfirmation from "./components/User/EmailConfirmation";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import ForgotPasswordEmail from "./components/ForgotPassword/ForgotPasswordEmail";
 import ChangePassword from "./components/PasswordChange/PasswordChange";
@@ -31,6 +31,7 @@ import GetListReportOfFailure from "./components/RepairAndService/getListReportO
 import QuotationForTheVehicle from "./components/RepairAndService/quotationForVehicle";
 import GenerateReport from "./components/RepairAndService/generateReport";
 import EditQuotationForTheVehicle from "./components/RepairAndService/editQuotationForVehicle";
+import ViewQuotation from "./components/RepairAndService/viewQuotationDetails";
 
 function App() {
   return (
@@ -46,7 +47,11 @@ function App() {
       <Route path="/employeelist" component={EmployeeList} exact />
 
       <Route path="/forgotpassword" component={ForgotPassword} exact />
-      <Route path="/forgotpasswordemail" component={ForgotPasswordEmail} exact />
+      <Route
+        path="/forgotpasswordemail"
+        component={ForgotPasswordEmail}
+        exact
+      />
       <Route path="/changepassword/:token" component={ChangePassword} exact />
       <Route path="/signin" component={SignIn} exact />
       <Route path="/signup" component={SignUp} exact />
@@ -59,14 +64,39 @@ function App() {
       <Route path="/carcheckout" component={CarCheckout} exact />
       <Route path="/confirmation/:token" component={EmailConfirmation} exact />
 
-      <Route path="/createReportOfService" component={CreateReportOfService} exact />
-      <Route path="/getListOfApprovedQuotation" component={GetListOfApprovedQuotation} exact />
+      <Route
+        path="/createReportOfService"
+        component={CreateReportOfService}
+        exact
+      />
+      <Route
+        path="/getListOfApprovedQuotation"
+        component={GetListOfApprovedQuotation}
+        exact
+      />
       <Route path="/tableDeails" component={tableDeails} exact></Route>
-      <Route path="/getListOfQuotationOwner" component={GetListOfQuotationOwner} exact />
-      <Route path="/getListReportOfFailure" component={GetListReportOfFailure} exact />
-      <Route path="/quotationForTheVehicle" component={QuotationForTheVehicle} exact />
+      <Route
+        path="/getListOfQuotationOwner"
+        component={GetListOfQuotationOwner}
+        exact
+      />
+      <Route
+        path="/getListReportOfFailure"
+        component={GetListReportOfFailure}
+        exact
+      />
+      <Route
+        path="/quotationForTheVehicle"
+        component={QuotationForTheVehicle}
+        exact
+      />
       <Route path="/generateReport" component={GenerateReport} exact></Route>
-      <Route path="/editQuotationForTheVehicle" component={EditQuotationForTheVehicle} exact />
+      <Route path="/viewQuotation" component={ViewQuotation} exact></Route>
+      <Route
+        path="/editQuotationForTheVehicle"
+        component={EditQuotationForTheVehicle}
+        exact
+      />
       <Footer />
     </Router>
   );
