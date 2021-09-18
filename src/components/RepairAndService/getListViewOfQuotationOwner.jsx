@@ -13,29 +13,14 @@ import { DialogContentText } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-// const initialState = {
-//   quotationDetails: [],
-// };
-
 const GetListOfQuotationOwner = () => {
-  const [showModal, setShowModal] = useState(false);
   const [quotationDetails, setQuotationDetails] = useState([]);
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   useEffect(() => {
-    //super(props);
-    //state = initialState;
     axios
       .get("http://localhost:4000/api/v1/service/getListOfQuotations")
       .then((Response) => {
-        console.log(Response.data);
+        console.log(Response.data.quotationOfService);
         setQuotationDetails(Response.data.quotationOfService);
       })
       .catch((error) => {
@@ -58,8 +43,20 @@ const GetListOfQuotationOwner = () => {
       });
   };
 
-  const openModal = (id) => {
-    setShowModal((prev) => !prev);
+  const isApproved = async (id) => {
+    console.log(id);
+    await axios.get(
+      "http://localhost:4000/api/v1/service/approveQuotations/" + id._id
+    );
+
+    await axios
+      .get("http://localhost:4000/api/v1/service/getListOfQuotations")
+      .then((Response) => {
+        setQuotationDetails(Response.data.quotationOfService);
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -93,11 +90,18 @@ const GetListOfQuotationOwner = () => {
           <tbody>
             {id.isQutationCreated === true ? (
               <tr>
-                <th scope="row" style={{ textAlign: "center" }}>
-                  {i + 1}
+                <th
+                  scope="row"
+                  style={{ textAlign: "center", fontSize: "16px" }}
+                >
+                  {"0" + (i + 1)}
                 </th>
-                <td style={{ textAlign: "center" }}>{id.type}</td>
-                <td style={{ textAlign: "center" }}>{id.vehino}</td>
+                <td style={{ textAlign: "center", fontSize: "16px" }}>
+                  {id.type}
+                </td>
+                <td style={{ textAlign: "center", fontSize: "16px" }}>
+                  {id.vehino}
+                </td>
                 <td>
                   <Link
                     to={{
@@ -107,7 +111,6 @@ const GetListOfQuotationOwner = () => {
                   >
                     <Button
                       variant="contained"
-                      onClick={openModal}
                       style={{ marginLeft: 5, color: grey }}
                     >
                       View
@@ -133,23 +136,33 @@ const GetListOfQuotationOwner = () => {
                     Delete
                   </Button>
 
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ marginLeft: 5, color: purple }}
-                    // onClick={() =>
-                    //   (window.location.href = "/quotationForTheVehicle")
-                    // }
-                  >
-                    Approve
-                  </Button>
+                  {id.isApproved === true ? (
+                    <Button
+                      variant="contained"
+                      style={{
+                        marginLeft: 5,
+                        color: "#ffffff",
+                        backgroundColor: "#800080",
+                      }}
+                    >
+                      Approved
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      style={{ marginLeft: 5, color: purple }}
+                      onClick={() => isApproved(id)}
+                    >
+                      Approve
+                    </Button>
+                  )}
                 </td>
               </tr>
             ) : null}
           </tbody>
         ))}
       </table>
-      {/* <Modal showModal={showModal} setShowModal={setShowModal} /> */}
     </div>
   );
 };

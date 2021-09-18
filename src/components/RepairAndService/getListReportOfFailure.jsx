@@ -43,6 +43,7 @@ export default class GetListReportOfFailure extends React.Component {
         alert(error.message);
       });
   };
+
   deleteDetails = (id) => {
     axios
       .delete(
@@ -84,12 +85,22 @@ export default class GetListReportOfFailure extends React.Component {
         <table class="table table-striped table-bordered table-hover">
           <thead class="thead-dark">
             <tr className="table-dark">
-              <th scope="col">No</th>
-              <th scope="col">Failure/Service</th>
-              <th scope="col">Vehicle No.</th>
-              <th scope="col">Service/Failure Date</th>
-              <th scope="col">Assembling Parts</th>
-              <th scope="col" style={{ width: 380 }}>
+              <th scope="col" style={{ textAlign: "center" }}>
+                No
+              </th>
+              <th scope="col" style={{ textAlign: "center" }}>
+                Failure/Service
+              </th>
+              <th scope="col" style={{ textAlign: "center" }}>
+                Vehicle No.
+              </th>
+              <th scope="col" style={{ textAlign: "center" }}>
+                Service/Failure Date
+              </th>
+              <th scope="col" style={{ textAlign: "center" }}>
+                Assembling Parts
+              </th>
+              <th scope="col" style={{ width: 380, textAlign: "center" }}>
                 Actions
               </th>
             </tr>
@@ -97,11 +108,24 @@ export default class GetListReportOfFailure extends React.Component {
           {this.state.serviceDetails.map((id, i) => (
             <tbody>
               <tr>
-                <th scope="row">{i + 1}</th>
-                <td>{id.type}</td>
-                <td>{id.vehino}</td>
-                <td>{id.serviceDate}</td>
-                <td>{id.serviceParts}</td>
+                <th
+                  scope="row"
+                  style={{ textAlign: "center", fontSize: "16px" }}
+                >
+                  {"0" + (i + 1)}
+                </th>
+                <td style={{ textAlign: "center", fontSize: "16px" }}>
+                  {id.type}
+                </td>
+                <td style={{ textAlign: "center", fontSize: "16px" }}>
+                  {id.vehino}
+                </td>
+                <td style={{ textAlign: "center", fontSize: "16px" }}>
+                  {id.serviceDate}
+                </td>
+                <td style={{ textAlign: "center", fontSize: "16px" }}>
+                  {id.serviceParts}
+                </td>
                 <td>
                   <Button
                     variant="contained"

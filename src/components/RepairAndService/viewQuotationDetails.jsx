@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const ViewQuotation = (props) => {
   const [data, setData] = useState(props.location.state);
-  console.log(data);
+  const history = useHistory();
 
   return (
     <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
@@ -72,40 +72,42 @@ const ViewQuotation = (props) => {
               </Grid>
               <Grid xs={10}>
                 <div>
-                  {/* {parts.map((part, index) => ( */}
-                  <div
-                    class="row"
-                    style={{ marginTop: 10, marginLeft: 25 }}
-                    //key={index}
-                  >
-                    <div class="col-6">
-                      <div class="input-group-desc">
-                        <input
-                          class="input--style-5"
-                          name="item"
-                          //value={part.item}
-                          // onChange={(event) =>
-                          //   handleChangeParts(index, event)
-                          // }
-                        ></input>
-                        <label class="label--desc">Item</label>
+                  {data.items.map((part, index) => (
+                    <div
+                      class="row"
+                      style={{ marginTop: 10, marginLeft: 25 }}
+                      key={index}
+                    >
+                      <div class="col-6">
+                        <div class="input-group-desc">
+                          <input
+                            class="input--style-5"
+                            name="item"
+                            value={part.item}
+                            disabled
+                            // onChange={(event) =>
+                            //   handleChangeParts(index, event)
+                            // }
+                          ></input>
+                          <label class="label--desc">Item</label>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="input-group-desc">
-                        <input
-                          class="input--style-5"
-                          name="price"
-                          type="number"
-                          // value={part.price}
-                          // onChange={(event) =>
-                          //   handleChangeParts(index, event)
-                          // }
-                        ></input>
-                        <label class="label--desc">Price</label>
+                      <div class="col-6">
+                        <div class="input-group-desc">
+                          <input
+                            class="input--style-5"
+                            name="price"
+                            type="number"
+                            value={part.price}
+                            disabled
+                            // onChange={(event) =>
+                            //   handleChangeParts(index, event)
+                            // }
+                          ></input>
+                          <label class="label--desc">Price</label>
+                        </div>
                       </div>
-                    </div>
-                    {/* <div class="col-1">
+                      {/* <div class="col-1">
                           <IconButton onClick={() => handleRemoveFields(index)}>
                             <RemoveIcon />
                           </IconButton>
@@ -115,8 +117,8 @@ const ViewQuotation = (props) => {
                             <AddIcon />
                           </IconButton>
                         </div> */}
-                  </div>
-                  {/* ))} */}
+                    </div>
+                  ))}
                 </div>
               </Grid>
             </div>
@@ -148,16 +150,13 @@ const ViewQuotation = (props) => {
               </div>
             </div>
             <div>
-              <Link
-                to={{
-                  pathname: "/getListOfQuotationOwner",
-                  // state: id,
-                }}
+              <button
+                class="btn btn--radius-2 btn--red"
+                type="cancel"
+                onClick={() => history.goBack()}
               >
-                <button class="btn btn--radius-2 btn--red" type="cancel">
-                  Back
-                </button>
-              </Link>
+                Back
+              </button>
             </div>
           </div>
         </div>
