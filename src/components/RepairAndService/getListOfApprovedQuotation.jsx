@@ -83,17 +83,24 @@ const GetListOfApprovedQuotation = () => {
                       View
                     </Button>
                   </Link>
-                  <Button
-                    variant="contained"
-                    //onClick={() => this.ischecked(id)}
-                    style={{
-                      marginLeft: 5,
-                      backgroundColor: "#61CC63",
-                      color: "#ffffff",
+                  <Link
+                    to={{
+                      pathname: "/editQuotationForTheVehicle",
+                      state: id,
                     }}
+                    style={{ textDecoration: "none" }}
                   >
-                    Update
-                  </Button>
+                    <Button
+                      variant="contained"
+                      style={{
+                        marginLeft: 5,
+                        backgroundColor: "#61CC63",
+                        color: "#ffffff",
+                      }}
+                    >
+                      Update
+                    </Button>
+                  </Link>
                   <Button
                     variant="contained"
                     color="secondary"
