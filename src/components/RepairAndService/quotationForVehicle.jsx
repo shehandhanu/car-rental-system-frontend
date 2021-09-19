@@ -230,7 +230,10 @@ const QuotationForTheVehicle = (props) => {
               </div>
 
               <div>
-                <button class="btn btn--radius-2 btn--red" type="cancel">
+                <button
+                  class="btn btn--radius-2 btn--red"
+                  onClick={() => history.goBack()}
+                >
                   Cancel
                 </button>
                 <button

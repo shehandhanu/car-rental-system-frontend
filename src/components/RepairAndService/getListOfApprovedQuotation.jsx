@@ -74,6 +74,7 @@ const GetListOfApprovedQuotation = () => {
                       pathname: "/viewQuotation",
                       state: id,
                     }}
+                    style={{ textDecoration: "none" }}
                   >
                     <Button
                       variant="contained"

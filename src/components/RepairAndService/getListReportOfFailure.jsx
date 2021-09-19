@@ -151,6 +151,7 @@ export default class GetListReportOfFailure extends React.Component {
                             pathname: "/quotationForTheVehicle",
                             state: id,
                           }}
+                          style={{ textDecoration: "none" }}
                         >
                           <Button
                             variant="contained"

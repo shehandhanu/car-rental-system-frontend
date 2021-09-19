@@ -1,44 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { MDBDataTable } from "mdbreact";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { green, grey, purple } from "@material-ui/core/colors";
 import axios from "axios";
-import Dialog from "@material/react-dialog";
-import { DialogTitle } from "@material/react-dialog";
-import { DialogContent } from "@material/react-dialog";
-import { DialogActions } from "@material-ui/core";
-import { DialogContentText } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
-const GetListOfQuotationOwner = () => {
+const GetListOfQuotationOwner = (props) => {
   const [quotationDetails, setQuotationDetails] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/v1/service/getListOfQuotations")
       .then((Response) => {
-        console.log(Response.data.quotationOfService);
         setQuotationDetails(Response.data.quotationOfService);
       })
       .catch((error) => {
         alert(error.message);
       });
-  }, [!quotationDetails]);
+  }, [quotationDetails]);
 
   const deleteDetails = (id) => {
     axios
       .delete("http://localhost:4000/api/v1/service/deleteQuotations/" + id)
       .then((response) => {
         if (response.data != null) {
+          console.log(response.data);
           alert("Quotation Details Deleted");
-          this.setState({
-            quotationDetails: this.state.quotationDetails.filter(
-              (detail) => detail._id !== id
-            ),
-          });
+          // this.setState({
+          //   quotationDetails: this.state.quotationDetails.filter(
+          //     (detail) => detail._id !== id
+          //   ),
+          // });
         }
       });
   };
@@ -108,6 +103,7 @@ const GetListOfQuotationOwner = () => {
                       pathname: "/viewQuotation",
                       state: id,
                     }}
+                    style={{ textDecoration: "none" }}
                   >
                     <Button
                       variant="contained"
@@ -116,17 +112,24 @@ const GetListOfQuotationOwner = () => {
                       View
                     </Button>
                   </Link>
-                  <Button
-                    variant="contained"
-                    //onClick={() => this.ischecked(id)}
-                    style={{
-                      marginLeft: 5,
-                      backgroundColor: "#61CC63",
-                      color: "#ffffff",
+                  <Link
+                    to={{
+                      pathname: "/editQuotationForTheVehicle",
+                      state: id,
                     }}
+                    style={{ textDecoration: "none" }}
                   >
-                    Update
-                  </Button>
+                    <Button
+                      variant="contained"
+                      style={{
+                        marginLeft: 5,
+                        backgroundColor: "#61CC63",
+                        color: "#ffffff",
+                      }}
+                    >
+                      Update
+                    </Button>
+                  </Link>
                   <Button
                     variant="contained"
                     color="secondary"
