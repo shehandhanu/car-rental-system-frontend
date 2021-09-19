@@ -11,6 +11,9 @@ import UserProfile from '../src/components/Employee/UserProfile/UserProfile'
 import EmployeeUpdate from '../src/components/Employee/EmployeeUpdate/EmployeeUpdate'
 import EmployeeList from './components/Employee/EmployeeList/EmployeeList'
 import EmployeeUpdateAdmin from './components/Employee/EmployeeUpdateAdmin/EmployeeUpdateAdmin'
+import UserProfileEmployee from './components/Employee/UserProfileEmployee/UserProfileEmployee'
+import ApplyLeaves from './components/Employee/ApplyLeaves/ApplyLeaves'
+import ApproveLeaves from './components/Employee/ApproveLeaves/ApproveLeaves'
 
 function App() {
   return (
@@ -27,6 +30,9 @@ function App() {
       <Route path ="/userprofile" component={UserProfile} exact /> 
       <Route path = "/employeelist" component={EmployeeList} exact  />
       <Route path = "/employeeupdateadmin" component={EmployeeUpdateAdmin}exact />
+      <Route path = "/userprofileemployee" component={UserProfileEmployee}exact />
+      <Route path = "/applyleaves" component={ApplyLeaves}exact />
+      <Route path = "/approveleaves" component={ApproveLeaves}exact />
      </div>
     </Router>
   );

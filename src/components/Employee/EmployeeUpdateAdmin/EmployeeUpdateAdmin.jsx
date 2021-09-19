@@ -70,21 +70,36 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function SignInSide() {
+export default function SignInSide(props) {
   const classes = useStyles();
+  console.log(props);
+  const [emp, setemp] = React.useState(props.location.data.empData)
+  //const [state, setState] = React.useState({
+    // fName: emp.fName,
+    // Nic: emp.Nic,
+    // emCoNo: emp.emCoNo,
+    // email: emp.email,
+    // age: emp.age,
+    // line1: emp.emAddress.line1,
+    // line2: emp.emAddress.line2,
+    // city: emp.emAddress.city,
+    // state: emp.emAddress.state,
+    // gender: emp.gender,
+    // emType: emp.emType
+  //});
 
-  const [fName, setfName] = React.useState('')
-  const [Nic, setNic] = React.useState('') 
-  const [cNo, setCNo] = React.useState('') 
-  const [email, setEmail] = React.useState('') 
+  const [fName, setfName] = React.useState(emp.fName)
+  const [Nic, setNic] = React.useState(emp.Nic) 
+  const [cNo, setCNo] = React.useState(emp.emCoNo) 
+  const [email, setEmail] = React.useState(emp.email) 
   const [password, setPassword] = React.useState('') 
-  const [age, setAge] = React.useState('') 
-  const [line1, setLine1] = React.useState('') 
-  const [line2, setLine2] = React.useState('') 
-  const [city, setCity] = React.useState('') 
-  const [state, setState] = React.useState('') 
-  const [gender, setGender] = React.useState('') 
-  const [eType, setEType] = React.useState('') 
+  const [age, setAge] = React.useState(emp.age) 
+  const [line1, setLine1] = React.useState(emp.emAddress.line1) 
+  const [line2, setLine2] = React.useState(emp.emAddress.line2) 
+  const [city, setCity] = React.useState(emp.emAddress.city) 
+  const [state, setState] = React.useState(emp.emAddress.state) 
+  const [gender, setGender] = React.useState(emp.gender) 
+  const [eType, setEType] = React.useState(emp.emType) 
   
   const onSubmit = async (e) =>{
     e.preventDefault()
@@ -107,20 +122,20 @@ export default function SignInSide() {
 
     
 
-    const datax = await axios.post("http://localhost:4000/api/v1/employee/addemployee",data)
-    console.log(datax);
-    setfName('')
-    setNic('')
-    setCNo('')
-    setEmail('')
-    setPassword('')
-    setAge('')
-    setLine1('')
-    setLine2('')
-    setCity('')
-    setState('')
-    setGender('')
-    setEType('')
+    const datax = await axios.post("http://localhost:4000/api/v1/employee/updateemployee/" + emp._id,data)
+    // console.log(datax);
+    // setfName('')
+    // setNic('')
+    // setCNo('')
+    // setEmail('')
+    // setPassword('')
+    // setAge('')
+    // setLine1('')
+    // setLine2('')
+    // setCity('')
+    // setState('')
+    // setGender('')
+    // setEType('')
   }
 
   
@@ -183,60 +198,28 @@ export default function SignInSide() {
               autoFocus
             />
 
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              // onChange={(e) => setPassword(e.target.value)}
               id="password"
               label="Password"
               name="password"
               type="password"
-            />
+            /> */}
 
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-                <Select className={classes.select}
-                  native
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                  inputProps={{
-                    name: 'age',
-                    id: 'age-native-simple',
-                  }}
-                >
-                  <option aria-label="None" value="" />
-                  <option value={18}>18</option>
-                  <option value={19}>19</option>
-                  <option value={20}>20</option>
-                  <option value={21}>21</option>
-                  <option value={22}>22</option>
-                  <option value={23}>23</option>
-                  <option value={24}>24</option>
-                  <option value={25}>25</option>
-                  <option value={26}>26</option>
-                  <option value={27}>27</option>
-                  <option value={28}>28</option>
-                  <option value={29}>29</option>
-                  <option value={30}>30</option>
-                  <option value={31}>31</option>
-                  <option value={32}>32</option>
-                  <option value={33}>33</option>
-                  <option value={34}>34</option>
-                  <option value={35}>35</option>
-                  <option value={36}>36</option>
-                  <option value={37}>37</option>
-                  <option value={38}>38</option>
-                  <option value={39}>39</option>
-                  <option value={40}>40</option>
-                  <option value={41}>41</option>
-                  <option value={42}>42</option>
-                  <option value={43}>43</option>
-                  <option value={44}>44</option>
-                  <option value={45}>45</option>
-                </Select>
-            </FormControl>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              value={age}
+              id="age"
+              label="Age"
+              name="age"
+              autoFocus
+            />
             <React.Fragment>
               <Typography variant="h6" gutterBottom>
                 <br />
@@ -298,12 +281,12 @@ export default function SignInSide() {
               </Typography>
                 <RadioGroup
                   aria-label="gender"
-                  defaultValue="female"
                   name="radio-buttons-group"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                   >
-                  <FormControlLabel value="female" control={<Radio />} label="Female" />
+                  
+                  <FormControlLabel  value="female" control={<Radio />} label="Female" />
                   <FormControlLabel value="male" control={<Radio />} label="Male" />
                   <FormControlLabel value="other" control={<Radio />} label="Other" />
                 </RadioGroup>
@@ -314,7 +297,6 @@ export default function SignInSide() {
               </Typography>
                 <RadioGroup
                   aria-label="type"
-                  defaultValue="driver"
                   name="radio-buttons-group"
                   value={eType}
                   onChange={(e) => setEType(e.target.value)}

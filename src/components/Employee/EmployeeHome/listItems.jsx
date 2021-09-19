@@ -24,10 +24,18 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <Link style={{textDecoration: "none", color: "#000000"}} to="/userprofile">
+      <Link style={{textDecoration: "none", color: "#000000"}} to="/userprofileemployee">
         <ListItemText primary="My Account" />
       </Link>
-      
+    </ListItem>
+
+    <ListItem button>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <Link style={{textDecoration: "none", color: "#000000"}} to="/applyleaves">
+        <ListItemText primary="Apply Leaves" />
+      </Link>
     </ListItem>
  
    

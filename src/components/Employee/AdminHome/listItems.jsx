@@ -20,8 +20,6 @@ export const mainListItems = (
       <Link style={{textDecoration: "none", color: "#000000"}} to="/employeeinsert">
         <ListItemText primary="Employee Registration"/>
       </Link>
-      
-  
     </ListItem>
 
     <ListItem button>
@@ -31,8 +29,17 @@ export const mainListItems = (
       <Link style={{textDecoration: "none", color: "#000000"}} to="/employeelist">
         <ListItemText primary="Employee Details" />
       </Link>
-      
     </ListItem>
+
+    <ListItem button>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <Link style={{textDecoration: "none", color: "#000000"}} to="/approveleaves">
+        <ListItemText primary="Approve Leaves"/>
+      </Link>
+    </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />
