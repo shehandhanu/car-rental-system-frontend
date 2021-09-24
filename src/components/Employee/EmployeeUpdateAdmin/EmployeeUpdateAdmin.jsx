@@ -92,7 +92,7 @@ export default function SignInSide(props) {
   const [Nic, setNic] = React.useState(emp.Nic) 
   const [cNo, setCNo] = React.useState(emp.emCoNo) 
   const [email, setEmail] = React.useState(emp.email) 
-  const [password, setPassword] = React.useState('') 
+  //const [password, setPassword] = React.useState('') 
   const [age, setAge] = React.useState(emp.age) 
   const [line1, setLine1] = React.useState(emp.emAddress.line1) 
   const [line2, setLine2] = React.useState(emp.emAddress.line2) 
@@ -100,30 +100,42 @@ export default function SignInSide(props) {
   const [state, setState] = React.useState(emp.emAddress.state) 
   const [gender, setGender] = React.useState(emp.gender) 
   const [eType, setEType] = React.useState(emp.emType) 
+
+
   
   const onSubmit = async (e) =>{
     e.preventDefault()
     const data = {
-      "fName": fName,
-      "Nic": Nic,
-      "emCoNo": cNo,
-      "email": email,
-      "password": password,
-      "age": age,
-      "emAddress":{
-        "line1": line1,
-        "line2": line2,
-        "city": city,
-        "state": state
+      fName: fName,
+      Nic: Nic,
+      emCoNo: cNo,
+      email: email,
+      //password: password,
+      age: age,
+      emAddress:{
+        line1: line1,
+        line2: line2,
+        city: city,
+        state: state
       },
-      "gender": gender,
-      "emType": eType
+      gender: gender,
+      emType: eType
     }
 
     
+    console.log(data);
+    console.log(emp._id);
+    axios.post("http://localhost:4000/api/v1/employee/updateemployee/" + emp._id,data)
+    .then((res)=>{
+      console.log(res)
+      alert("Successfully Updated")
+    })
+    .catch((err)=>{
+      alert(err.message)
+      console.log(err.message)
+    })
+    
 
-    const datax = await axios.post("http://localhost:4000/api/v1/employee/updateemployee/" + emp._id,data)
-    // console.log(datax);
     // setfName('')
     // setNic('')
     // setCNo('')
@@ -148,7 +160,7 @@ export default function SignInSide(props) {
           <Typography component="h1" variant="h5">
             Employee Updation
           </Typography>
-          <form className={classes.form} onSubmit = {onSubmit} noValidate>
+          <form className={classes.form} method="post" onSubmit = {onSubmit} noValidate>
 
           <TextField
               margin="normal"
@@ -203,12 +215,12 @@ export default function SignInSide(props) {
               required
               fullWidth
               value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               id="password"
               label="Password"
               name="password"
               type="password"
-            /> */}
+            />  */}
 
             <TextField
               margin="normal"
@@ -314,6 +326,7 @@ export default function SignInSide(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
+              type="submit"
             >
               Update
             </Button>

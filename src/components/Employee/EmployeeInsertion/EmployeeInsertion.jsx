@@ -108,6 +108,7 @@ export default function SignInSide() {
     
 
     const datax = await axios.post("http://localhost:4000/api/v1/employee/addemployee",data)
+    alert("Successfully Added")
     console.log(datax);
     setfName('')
     setNic('')

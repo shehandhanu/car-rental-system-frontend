@@ -126,9 +126,9 @@ function FeaturedPost(props) {
                     </Box>
 
 
-                    <Link to={{pathname:"/employeeupdateadmin", data: {empData:leaves},}}>
-                      <button type="button" className="btn btn-warning button m-2">Accept</button>
-                    </Link>
+      
+                    <button type="button" className="btn btn-warning button m-2">Accept</button>
+            
                     
                     
                     <button type="button" className="btn btn-danger button m-2">Reject</button>

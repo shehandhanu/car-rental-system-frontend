@@ -50,10 +50,13 @@ const EmployeeList = () => {
     const [emp, setemp] = React.useState([])
 
     React.useEffect(async() => {
-        let data = await axios.get('http://localhost:4000/api/v1/employee/getemployee')
-        setemp(data.data.emp)
+      let data = await axios.get('http://localhost:4000/api/v1/employee/getemployee')
+      setemp(data.data.emp)
+        
         
     },[!emp])
+
+
     
     // console.log(emp);
     return (
@@ -78,6 +81,12 @@ export default EmployeeList
 function FeaturedPost(props) {
   const classes = useStyles();
   const { emp } = props;
+
+  const deleteDetails = async (id) =>{
+    alert("Deleted Successfully")
+    await axios.delete('http://localhost:4000/api/v1/employee/deleteemployee/'+ id)
+
+  }
   //console.log(props);
   return (
     <div className={classes.paper}>
@@ -114,7 +123,7 @@ function FeaturedPost(props) {
                     </Link>
                     
                     
-                    <button type="button" className="btn btn-danger button m-2">Delete</button>
+                    <button type="button" className="btn btn-danger button m-2" onClick={()=>deleteDetails(emp._id)}>Delete</button>
                   </Grid>
                   
               
