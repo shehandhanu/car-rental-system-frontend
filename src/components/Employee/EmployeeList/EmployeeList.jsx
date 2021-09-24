@@ -16,6 +16,7 @@ import Hidden from "@material-ui/core/Hidden";
 import { Button, Box } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
+//import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +53,7 @@ const EmployeeList = () => {
     React.useEffect(async() => {
       let data = await axios.get('http://localhost:4000/api/v1/employee/getemployee')
       setemp(data.data.emp)
-        
+       
         
     },[!emp])
 
@@ -81,10 +82,14 @@ export default EmployeeList
 function FeaturedPost(props) {
   const classes = useStyles();
   const { emp } = props;
+  //let history = useHistory(); 
 
   const deleteDetails = async (id) =>{
     alert("Deleted Successfully")
     await axios.delete('http://localhost:4000/api/v1/employee/deleteemployee/'+ id)
+    //history.push("/employeelist");
+    window. location. reload()
+    
 
   }
   //console.log(props);
