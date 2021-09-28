@@ -28,8 +28,10 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    backgroundImage:'url(https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629226148/SPM%20Project/Tharaka/back_tgoyyp.jpg)',
-    
+    backgroundImage:'url(https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629917258/SPM%20Project/Tharaka/brock-wegner-pWGUMQSWBwI-unsplash_jhd24t.jpg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed

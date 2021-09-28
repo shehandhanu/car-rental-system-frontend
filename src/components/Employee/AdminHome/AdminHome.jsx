@@ -14,11 +14,11 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './listItems';
+import { Link } from 'react-router-dom';
 
 
 
@@ -28,7 +28,11 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    backgroundImage:'url(https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629226148/SPM%20Project/Tharaka/back_tgoyyp.jpg)',
+    backgroundImage:'url(https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629917258/SPM%20Project/Tharaka/brock-wegner-pWGUMQSWBwI-unsplash_jhd24t.jpg)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    
     
   },
   toolbar: {
