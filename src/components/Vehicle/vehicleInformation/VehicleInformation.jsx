@@ -27,38 +27,6 @@ export default function VehicleInformation() {
     { title: "Specification", field: "specification" },
   ]);
 
-  const [dataz, setDataz] = useState([
-    {
-      vehicleNumber: "5898V",
-      vehicleName: "Toyota CHR",
-      vehicleCategory: "Car",
-      manufactureYear: 2015,
-      vehicleSupplier: "KIA Motors",
-      vehicleColor: "Crimson",
-      vehicleType: "Automatic",
-      vehiclePrice: 2500000.0,
-      vehicleCondition: "Used",
-      mileage: 15000,
-      fuelType: "Diesel",
-      registerDate: "2020 / 05 / 07",
-      specification: "Bodykit",
-    },
-    {
-      vehicleNumber: "9562G",
-      vehicleName: "Toyota Camri",
-      vehicleCategory: "Car",
-      manufactureYear: 2012,
-      vehicleSupplier: "Ikman",
-      vehicleColor: "Silver",
-      vehicleType: "Automatic",
-      vehiclePrice: 2000000.0,
-      vehicleCondition: "Used",
-      mileage: 20000,
-      fuelType: "Diesel",
-      registerDate: "2019 / 01 / 01",
-      specification: "",
-    },
-  ]);
 
   const [vehicles, setVehicles] = React.useState([]);
 
@@ -67,31 +35,39 @@ export default function VehicleInformation() {
       "http://localhost:4000/api/v1/vehical/getvehicals"
     );
     setVehicles(data.data.vehical);
+
+    console.log("vehiclessss", vehicles);
   }, []);
 
-  console.log("vehiclessss", vehicles);
 
-  // const [tableDatas, setTableData] = useState(
-  //   vehicles.map((e) => ({
-  //     vehicleNumber: e.vehicleNumber,
-  //     vehicleName: e.vehicleName,
-  //     vehicleCategory: e.vehicleCategory,
-  //     id: e.attendanceInfoId,
-  //     teamId: e.teamId,
-  //     locationId: e.locationId,
-  //     employee: e.username,
-  //     team: e.teamName,
-  //     date: e.attendanceDate,
-  //     startTime: e.startTime
-  //       ? moment(new Date(e.attendanceDate + " " + e.startTime)).format()
-  //       : "",
-  //     endTime: e.endTime
-  //       ? moment(new Date(e.attendanceDate + " " + e.endTime)).format()
-  //       : "",
-  //   }))
-  // );
 
-  // console.log("tableDatassss", tableDatas);
+
+    const updateVehicle = async (newData) => {
+        console.log("new dataaa", newData)
+        console.log("new data iddd", newData._id)
+        await axios.put("http://localhost:4000/api/v1/vehical/updatevehicals/" + newData._id,newData)
+            .then((res)=>{
+                console.log(res)
+                alert("Successfully Updated")
+            })
+            .catch((err)=>{
+                alert(err.message)
+            })
+    }
+
+    const deleteVehicle = async (oldData) => {
+        // console.log("new dataaa", newData)
+        // console.log("new data iddd", newData._id)
+        await axios.delete("http://localhost:4000/api/v1/vehical/deletevehicals/" + oldData._id)
+            .then((res)=>{
+                console.log(res)
+                alert("Successfully Deleted")
+            })
+            .catch((err)=>{
+                alert(err.message)
+            })
+    }
+
 
   return (
     <div style={{ height: "100vh" }}>
@@ -126,6 +102,7 @@ export default function VehicleInformation() {
                 dataUpdate[index] = newData;
                 setVehicles([...dataUpdate]);
 
+                updateVehicle(newData);
                 resolve();
               }, 1000);
             }),
@@ -137,6 +114,7 @@ export default function VehicleInformation() {
                 dataDelete.splice(index, 1);
                 setVehicles([...dataDelete]);
 
+                deleteVehicle(oldData);
                 resolve();
               }, 1000);
             }),

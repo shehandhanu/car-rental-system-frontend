@@ -1,19 +1,3 @@
-import './App.css';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
-import Header from '../src/components/Header/Header'
-import Home from '../src/components/Home/Home'
-import Footer from '../src/components/Footer/Footer'
-import EmInsertion from '../src/components/Employee/EmployeeInsertion/EmployeeInsertion'
-import ReIsue from '../src/components/Employee/ReportIssues/ReportIssues'
-import AdminHome from '../src/components/Employee/AdminHome/AdminHome'
-import EmployeeHome from '../src/components/Employee/EmployeeHome/EmployeeHome'
-import UserProfile from '../src/components/Employee/UserProfile/UserProfile'
-import EmployeeUpdate from '../src/components/Employee/EmployeeUpdate/EmployeeUpdate'
-import EmployeeList from './components/Employee/EmployeeList/EmployeeList'
-import EmployeeUpdateAdmin from './components/Employee/EmployeeUpdateAdmin/EmployeeUpdateAdmin'
-import UserProfileEmployee from './components/Employee/UserProfileEmployee/UserProfileEmployee'
-import ApplyLeaves from './components/Employee/ApplyLeaves/ApplyLeaves'
-import ApproveLeaves from './components/Employee/ApproveLeaves/ApproveLeaves'
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import EmInsertion from "../src/components/Employee/EmployeeInsertion/EmployeeInsertion";
@@ -44,60 +28,45 @@ import OwnerRegistration from "./components/Vehicle/ownerRegistration/OwnerRegis
 import OwnerInformation from "./components/Vehicle/ownerInformation/OwnerInformation";
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-       {/* <Header />  */}
-      {/* <Home />  */}
-      <Route path="/employeeinsert" component={EmInsertion} exact />  
-      {/* <Footer /> */}
-     <Route path="/reportvehicleissue" component={ReIsue} exact /> 
-      <Header />
-      <Route path="/" component={Home} exact />
-      <Route path="/employeeinsert" component={EmInsertion} exact />
-      <Route path="/reportvehicleissue" component={ReIsue} exact />
-      <Route path="/adminhome" component={AdminHome} exact />
-      <Route path="/employeehome" component={EmployeeHome} exact/>
-      <Route path="/employeeupdate" component={EmployeeUpdate} exact/>
-      <Route path ="/userprofile" component={UserProfile} exact /> 
-      <Route path = "/employeelist" component={EmployeeList} exact  />
-      <Route path = "/employeeupdateadmin" component={EmployeeUpdateAdmin}exact />
-      <Route path = "/userprofileemployee" component={UserProfileEmployee}exact />
-      <Route path = "/applyleaves" component={ApplyLeaves}exact />
-      <Route path = "/approveleaves" component={ApproveLeaves}exact />
-     </div>
-      <Route path="/employeehome" component={EmployeeHome} exact />
-      <Route path="/employeeupdate" component={EmployeeUpdate} exact />
-      <Route path="/userprofile" component={EmpUserProfile} exact />
-      <Route path="/employeelist" component={EmployeeList} exact />
-      <Route path="/forgotpassword" component={ForgotPassword} exact />
-      <Route
-        path="/forgotpasswordemail"
-        component={ForgotPasswordEmail}
-        exact
-      />
-      <Route path="/changepassword" component={ChangePassword} exact />
-      <Route path="/signin" component={SignIn} exact />
-      <Route path="/signup" component={SignUp} exact />
-      <Route path="/profile" component={UserProfile} exact />
-      <Route path="/userreport" component={UserReport} exact />
-      <Route path="/userhistory" component={TripHistory} exact />
-      <Route path="/payment" component={Payment} exact />
-      <Route path="profileupdate/" component={UserProfileUpdate} exact />
-      <Route path="/carlist" component={CarList} exact />
-      <Route path="/carcheckout" component={CarCheckout} exact />
+    return (
+        <Router>
+            <Header />
+            <Route path="/" component={Home} exact />
+            <Route path="/employeeinsert" component={EmInsertion} exact />
+            <Route path="/reportvehicleissue" component={ReIsue} exact />
+            <Route path="/adminhome" component={AdminHome} exact />
+            <Route path="/employeehome" component={EmployeeHome} exact />
+            <Route path="/employeeupdate" component={EmployeeUpdate} exact />
+            <Route path="/userprofile" component={EmpUserProfile} exact />
+            <Route path="/employeelist" component={EmployeeList} exact />
+            <Route path="/forgotpassword" component={ForgotPassword} exact />
+            <Route
+                path="/forgotpasswordemail"
+                component={ForgotPasswordEmail}
+                exact
+            />
+            <Route path="/changepassword" component={ChangePassword} exact />
+            <Route path="/signin" component={SignIn} exact />
+            <Route path="/signup" component={SignUp} exact />
+            <Route path="/profile" component={UserProfile} exact />
+            <Route path="/userreport" component={UserReport} exact />
+            <Route path="/userhistory" component={TripHistory} exact />
+            <Route path="/payment" component={Payment} exact />
+            <Route path="profileupdate/" component={UserProfileUpdate} exact />
+            <Route path="/carlist" component={CarList} exact />
+            <Route path="/carcheckout" component={CarCheckout} exact />
 
-      <Route
-        path="/vehicleregistration"
-        component={VehicleRegistration}
-        exact
-      />
-      <Route path="/vehicleinformation" component={VehicleInformation} exact />
-      <Route path="/ownerregistration" component={OwnerRegistration} exact />
-      <Route path="/ownerinformation" component={OwnerInformation} exact />
-      <Footer />
-    </Router>
-  );
+            <Route
+                path="/vehicleregistration"
+                component={VehicleRegistration}
+                exact
+            />
+            <Route path="/vehicleinformation" component={VehicleInformation} exact />
+            <Route path="/ownerregistration" component={OwnerRegistration} exact />
+            <Route path="/ownerinformation" component={OwnerInformation} exact />
+            <Footer />
+        </Router>
+    );
 }
 
 export default App;

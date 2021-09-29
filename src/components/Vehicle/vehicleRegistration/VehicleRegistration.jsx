@@ -85,6 +85,7 @@ export default function VehicleRegistration() {
       "http://localhost:4000/api/v1/vehical/addvehical",
       values
     );
+    alert("done");
     console.log(datax);
     setValues(INITIAL_VALUES);
   };
