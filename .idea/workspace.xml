@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="facd0b45-580e-4165-b969-9229821bcd83" name="Default Changelist" comment="report gen">
+    <list default="true" id="facd0b45-580e-4165-b969-9229821bcd83" name="Default Changelist" comment="reset">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Vehicle/ownerRegistration/OwnerRegistration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/ownerRegistration/OwnerRegistration.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Vehicle/vehicleInformation/VehicleInformation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/vehicleInformation/VehicleInformation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Vehicle/vehicleRegistration/VehicleRegistration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/vehicleRegistration/VehicleRegistration.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +55,7 @@
       <workItem from="1632937604570" duration="33000" />
       <workItem from="1632981704271" duration="1775000" />
       <workItem from="1633009021361" duration="558000" />
-      <workItem from="1633014989169" duration="10307000" />
+      <workItem from="1633014989169" duration="11312000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionality">
       <created>1629610791890</created>
@@ -94,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633022971162</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="reset">
+      <created>1633025461982</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1633025461982</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +124,7 @@
     <MESSAGE value="after patch" />
     <MESSAGE value="new" />
     <MESSAGE value="report gen" />
-    <option name="LAST_COMMIT_MESSAGE" value="report gen" />
+    <MESSAGE value="reset" />
+    <option name="LAST_COMMIT_MESSAGE" value="reset" />
   </component>
 </project>

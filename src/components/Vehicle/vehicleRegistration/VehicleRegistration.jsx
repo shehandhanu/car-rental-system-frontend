@@ -208,32 +208,23 @@ export default function VehicleRegistration() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControl
-                    style={{ paddingBottom: 20 }}
-                    variant="outlined"
-                    className={classes.formControl}
-                  >
-                    <InputLabel id="demo-simple-select-outlined-label">
-                      Category
-                    </InputLabel>
-                    <Select
-                      style={{ width: 200 }}
-                      labelId="demo-simple-select-outlined-label"
-                      // id="demo-simple-select-outlined"
-                      value={values.vehicleCategory}
-                      onChange={(e) => {
-                        setValues({
-                          ...values,
-                          vehicleCategory: e.target.value,
-                        });
-                      }}
-                      // label="Category"
-                    >
-                      <MenuItem value={"Car"}>Car</MenuItem>
-                      <MenuItem value={"Van"}>Van</MenuItem>
-                      <MenuItem value={"Pickup Truck"}>Pickup Truck</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <TextField
+                      style={{ paddingBottom: 20, width: 300 }}
+                      // autoComplete="fname"
+                      // name="firstName"
+                      variant="outlined"
+                      required
+                      // fullWidth
+                      // id="firstName"
+                      label="Vehicle Number"
+                      value={values.vehicleNumber}
+                      onChange={(e) =>
+                          setValues({ ...values, vehicleNumber: e.target.value })
+                      }
+                  />
+
+
+
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -342,19 +333,20 @@ export default function VehicleRegistration() {
               <Grid container>
                 <Grid item xs={12}>
                   <TextField
-                    style={{ paddingBottom: 20, width: 300 }}
-                    // autoComplete="fname"
-                    // name="firstName"
-                    variant="outlined"
-                    required
-                    // fullWidth
-                    // id="firstName"
-                    label="Vehicle Number"
-                    value={values.vehicleNumber}
-                    onChange={(e) =>
-                      setValues({ ...values, vehicleNumber: e.target.value })
-                    }
+                      style={{ paddingBottom: 20, width: 300 }}
+                      // autoComplete="fname"
+                      // name="firstName"
+                      variant="outlined"
+                      required
+                      // fullWidth
+                      // id="firstName"
+                      label="Supplier"
+                      value={values.vehicleSupplier}
+                      onChange={(e) =>
+                          setValues({ ...values, vehicleSupplier: e.target.value })
+                      }
                   />
+
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl
@@ -381,20 +373,35 @@ export default function VehicleRegistration() {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
-                    style={{ paddingBottom: 20, width: 300 }}
-                    // autoComplete="fname"
-                    // name="firstName"
-                    variant="outlined"
-                    required
-                    // fullWidth
-                    // id="firstName"
-                    label="Supplier"
-                    value={values.vehicleSupplier}
-                    onChange={(e) =>
-                      setValues({ ...values, vehicleSupplier: e.target.value })
-                    }
-                  />
+                  <FormControl
+                      style={{ paddingBottom: 20 }}
+                      variant="outlined"
+                      className={classes.formControl}
+                  >
+                    <InputLabel id="demo-simple-select-outlined-label">
+                      Category
+                    </InputLabel>
+                    <Select
+                        style={{ width: 200 }}
+                        labelId="demo-simple-select-outlined-label"
+                        // id="demo-simple-select-outlined"
+                        value={values.vehicleCategory}
+                        onChange={(e) => {
+                          setValues({
+                            ...values,
+                            vehicleCategory: e.target.value,
+                          });
+                        }}
+                        // label="Category"
+                    >
+                      <MenuItem value={"Car"}>Car</MenuItem>
+                      <MenuItem value={"Van"}>Van</MenuItem>
+                      <MenuItem value={"Pickup Truck"}>Pickup Truck</MenuItem>
+                    </Select>
+                  </FormControl>
+
+
+
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl
