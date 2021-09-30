@@ -23,6 +23,8 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import Container from "@material-ui/core/Container";
+import 'jspdf-autotable';
+import jsPDF from 'jspdf';
 
 
 
@@ -90,14 +92,13 @@ export default function SignInSide(props) {
   });
   console.log(emp);
 
-
-
+ 
   
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={12} sm={8} md={3} component={Paper} elevation={6} square></Grid>
-      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square >
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             User Profile
@@ -112,6 +113,16 @@ export default function SignInSide(props) {
               label="Full Name"
               name="FName"
               value = {state.fName}
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Nic"
+              label="NIC"
+              name="FName"
+              value = {state.Nic}
               autoFocus
             />
             <TextField
@@ -222,7 +233,8 @@ export default function SignInSide(props) {
         </div>
       </Grid>
       <Grid item xs={12} sm={8} md={3} component={Paper} elevation={6} square></Grid>
-
+    
     </Grid>
+    
   );
 }

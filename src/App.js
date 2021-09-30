@@ -14,6 +14,7 @@ import EmployeeUpdateAdmin from './components/Employee/EmployeeUpdateAdmin/Emplo
 import UserProfileEmployee from './components/Employee/UserProfileEmployee/UserProfileEmployee'
 import ApplyLeaves from './components/Employee/ApplyLeaves/ApplyLeaves'
 import ApproveLeaves from './components/Employee/ApproveLeaves/ApproveLeaves'
+import Report from './components/Employee/ReportGen/ReportGen'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
       <Route path = "/userprofileemployee" component={UserProfileEmployee}exact />
       <Route path = "/applyleaves" component={ApplyLeaves}exact />
       <Route path = "/approveleaves" component={ApproveLeaves}exact />
+      <Route path = "/reportgen" component={Report}exact />
      </div>
     </Router>
   );

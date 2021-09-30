@@ -54,6 +54,10 @@ const LeavesList = () => {
         setLeaves(data.data.leaves)
         
     },[!leaves])
+
+
+
+
     
     // console.log(emp);
     return (
@@ -78,6 +82,14 @@ export default LeavesList
 function FeaturedPost(props) {
   const classes = useStyles();
   const { leaves } = props;
+  const ApproveLeaves = async (id)=>{
+    alert('Approved');
+    let data = await axios.get('http://localhost:4000/api/v1/leaves/approveleaves/'+ id);
+  }
+  const rejectLeaves = async (id)=>{
+    alert('Rejected');
+    let data = await axios.get('http://localhost:4000/api/v1/leaves/rejectleaves/'+ id);
+  }
   //console.log(props);
   return (
     <div className={classes.paper}>
@@ -127,11 +139,11 @@ function FeaturedPost(props) {
 
 
       
-                    <button type="button" className="btn btn-warning button m-2">Accept</button>
+                    <button type="button" className="btn btn-warning button m-2" onClick={()=>ApproveLeaves(leaves._id)}>Accept</button>
             
                     
                     
-                    <button type="button" className="btn btn-danger button m-2">Reject</button>
+                    <button type="button" className="btn btn-danger button m-2" onClick={()=>rejectLeaves(leaves._id)}>Reject</button>
                   </Grid>
                   
               
