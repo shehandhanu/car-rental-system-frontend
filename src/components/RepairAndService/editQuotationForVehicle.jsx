@@ -241,7 +241,6 @@ const EditQuotationForTheVehicle = (props) => {
               <div>
                 <button
                   class="btn btn--radius-2 btn--red"
-                  type="cancel"
                   onClick={() => history.goBack()}
                 >
                   Cancel
