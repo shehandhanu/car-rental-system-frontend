@@ -10,6 +10,13 @@ import Grid from "@material-ui/core/Grid";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function VehicleInformation() {
   const [columns, setColumns] = useState([
     { title: "Vehicle Number", field: "vehicleNumber" },
@@ -28,6 +35,8 @@ export default function VehicleInformation() {
   ]);
 
 
+
+
   const [vehicles, setVehicles] = React.useState([]);
 
   React.useEffect(async () => {
@@ -35,8 +44,6 @@ export default function VehicleInformation() {
       "http://localhost:4000/api/v1/vehical/getvehicals"
     );
     setVehicles(data.data.vehical);
-
-    console.log("vehiclessss", vehicles);
   }, []);
 
 
@@ -48,7 +55,7 @@ export default function VehicleInformation() {
         await axios.put("http://localhost:4000/api/v1/vehical/updatevehicals/" + newData._id,newData)
             .then((res)=>{
                 console.log(res)
-                alert("Successfully Updated")
+                // alert("Successfully Updated")
             })
             .catch((err)=>{
                 alert(err.message)
@@ -60,8 +67,7 @@ export default function VehicleInformation() {
         // console.log("new data iddd", newData._id)
         await axios.delete("http://localhost:4000/api/v1/vehical/deletevehicals/" + oldData._id)
             .then((res)=>{
-                console.log(res)
-                alert("Successfully Deleted")
+                // alert("Successfully Deleted")
             })
             .catch((err)=>{
                 alert(err.message)
@@ -79,12 +85,17 @@ export default function VehicleInformation() {
       >
         Vehicle Information
       </Typography>
+        
       <MaterialTable
         style={{ padding: 20, marginTop: 30 }}
         title=""
         columns={columns}
         data={vehicles}
         options={{
+            exportButton: true,
+            rowStyle: (rowData) => ({
+                backgroundColor: rowData.tableData.id % 2 === 0 ? "#EEE" : "#FFF",
+            }),
           headerStyle: {
             backgroundColor: "#ffc800",
             color: "#000",

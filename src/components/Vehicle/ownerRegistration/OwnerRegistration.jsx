@@ -11,7 +11,16 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 import Container from "@material-ui/core/Container";
+
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,13 +51,37 @@ export default function OwnerRegistration() {
     ownerContact: null,
     ownerAddress: null,
     vehicleNumbers: null,
+    open: false,
   };
+
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setValues({...values, open: false})
+
+  };
+
+
 
   const [values, setValues] = React.useState(INITIAL_VALUES);
 
   console.log("values", values);
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const datax = await axios.post(
+        "http://localhost:4000/api/v1/owner/addowner",
+        values
+    );
+    setValues({...values, open: true})
+  };
+
   const classes = useStyles();
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -60,7 +93,12 @@ export default function OwnerRegistration() {
         <Typography component="h1" variant="h5">
           Vehicle Owner Registration
         </Typography>
-        <form className={classes.form} noValidate>
+        <Snackbar open={values.open} autoHideDuration={2000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Successfully Inserted!
+          </Alert>
+        </Snackbar>
+        <form className={classes.form} onSubmit={onSubmit} >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -184,6 +222,7 @@ export default function OwnerRegistration() {
           >
             Register User
           </Button>
+
         </form>
       </div>
     </Container>

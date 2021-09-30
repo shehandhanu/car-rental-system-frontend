@@ -25,6 +25,14 @@ import {
 } from "@material-ui/pickers";
 import axios from "axios";
 
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -70,6 +78,16 @@ export default function VehicleRegistration() {
     fuelType: null,
     registerDate: null,
     specification: null,
+    open: false,
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setValues({...values, open: false})
+
   };
 
   const [values, setValues] = React.useState(INITIAL_VALUES);
@@ -85,9 +103,7 @@ export default function VehicleRegistration() {
       "http://localhost:4000/api/v1/vehical/addvehical",
       values
     );
-    alert("done");
-    console.log(datax);
-    setValues(INITIAL_VALUES);
+    setValues({...values, open: true})
   };
 
   const [image, setImage] = useState("");
@@ -112,6 +128,8 @@ export default function VehicleRegistration() {
     setLoading(false);
   };
 
+
+
   return (
     <Container component="main">
       <CssBaseline />
@@ -122,7 +140,12 @@ export default function VehicleRegistration() {
         <Typography component="h1" variant="h4">
           Vehicle Registration
         </Typography>
-        <form className={classes.form} onSubmit={onSubmit} noValidate>
+        <Snackbar open={values.open} autoHideDuration={2000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Successfully Inserted!
+          </Alert>
+        </Snackbar>
+        <form className={classes.form} onSubmit={onSubmit} >
           <Grid container>
             {/* 1st column */}
             <Grid item xs={4}>
@@ -134,6 +157,7 @@ export default function VehicleRegistration() {
               >
                 Upload Image
               </Typography>
+
               <input
                 type="file"
                 name="file"
