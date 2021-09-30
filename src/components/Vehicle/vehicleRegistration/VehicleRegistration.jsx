@@ -65,19 +65,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VehicleRegistration() {
   const INITIAL_VALUES = {
-    vehicleName: null,
-    vehicleNumber: null,
-    vehicleCategory: null,
-    manufactureYear: null,
-    vehicleSupplier: null,
-    vehicleColor: null,
-    vehicleType: null,
-    vehiclePrice: null,
-    vehicleCondition: null,
-    mileage: null,
-    fuelType: null,
+    vehicleName: "",
+    vehicleNumber: "",
+    vehicleCategory: "",
+    manufactureYear: "",
+    vehicleSupplier: "",
+    vehicleColor: "",
+    vehicleType: "",
+    vehiclePrice: "",
+    vehicleCondition: "",
+    mileage: "",
+    fuelType: "",
     registerDate: null,
-    specification: null,
+    specification: "",
     open: false,
   };
 
@@ -103,7 +103,22 @@ export default function VehicleRegistration() {
       "http://localhost:4000/api/v1/vehical/addvehical",
       values
     );
-    setValues({...values, open: true})
+    setValues({
+      vehicleName: "",
+      vehicleNumber: "",
+      vehicleCategory: "",
+      manufactureYear: "",
+      vehicleSupplier: "",
+      vehicleColor: "",
+      vehicleType: "",
+      vehiclePrice: "",
+      vehicleCondition: "",
+      mileage: "",
+      fuelType: "",
+      registerDate: null,
+      specification: "",
+      open: true,
+    })
   };
 
   const [image, setImage] = useState("");
@@ -127,6 +142,8 @@ export default function VehicleRegistration() {
     setImage(file.secure_url);
     setLoading(false);
   };
+
+
 
 
 
@@ -177,11 +194,11 @@ export default function VehicleRegistration() {
                   <TextField
                     style={{ paddingBottom: 20, width: 300 }}
                     // autoComplete="fname"
-                    // name="firstName"
+                    // name="vehicleName"
                     variant="outlined"
                     required
                     // fullWidth
-                    // id="firstName"
+                    // id="vehicleName"
                     label="Vehicle Name"
                     autoFocus
                     value={values.vehicleName}
@@ -477,6 +494,7 @@ export default function VehicleRegistration() {
                   >
                     Register
                   </Button>
+
                 </Grid>
               </Grid>
             </Grid>

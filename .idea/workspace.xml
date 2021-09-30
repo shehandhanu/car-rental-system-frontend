@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="facd0b45-580e-4165-b969-9229821bcd83" name="Default Changelist" comment="new">
+    <list default="true" id="facd0b45-580e-4165-b969-9229821bcd83" name="Default Changelist" comment="report gen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Vehicle/ownerInformation/OwnerInformation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/ownerInformation/OwnerInformation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Vehicle/ownerRegistration/OwnerRegistration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/ownerRegistration/OwnerRegistration.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Vehicle/vehicleInformation/VehicleInformation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/vehicleInformation/VehicleInformation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Vehicle/vehicleRegistration/VehicleRegistration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/vehicleRegistration/VehicleRegistration.jsx" afterDir="false" />
@@ -60,7 +57,7 @@
       <workItem from="1632937604570" duration="33000" />
       <workItem from="1632981704271" duration="1775000" />
       <workItem from="1633009021361" duration="558000" />
-      <workItem from="1633014989169" duration="7723000" />
+      <workItem from="1633014989169" duration="10307000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionality">
       <created>1629610791890</created>
@@ -90,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632908753627</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="report gen">
+      <created>1633022971162</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1633022971162</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,6 +118,7 @@
     <MESSAGE value="basic functionality v2" />
     <MESSAGE value="after patch" />
     <MESSAGE value="new" />
-    <option name="LAST_COMMIT_MESSAGE" value="new" />
+    <MESSAGE value="report gen" />
+    <option name="LAST_COMMIT_MESSAGE" value="report gen" />
   </component>
 </project>

@@ -44,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function OwnerRegistration() {
   const INITIAL_VALUES = {
-    ownerFirstName: null,
-    ownerLastName: null,
-    ownerNIC: null,
-    ownerEmail: null,
-    ownerContact: null,
-    ownerAddress: null,
-    vehicleNumbers: null,
+    ownerFirstName: "",
+    ownerLastName: "",
+    ownerNIC: "",
+    ownerEmail: "",
+    ownerContact: "",
+    ownerAddress: "",
+    vehicleNumbers: "",
     open: false,
   };
 
@@ -77,7 +77,16 @@ export default function OwnerRegistration() {
         "http://localhost:4000/api/v1/owner/addowner",
         values
     );
-    setValues({...values, open: true})
+    setValues({
+      ownerFirstName: "",
+      ownerLastName: "",
+      ownerNIC: "",
+      ownerEmail: "",
+      ownerContact: "",
+      ownerAddress: "",
+      vehicleNumbers: "",
+      open: true,
+    })
   };
 
   const classes = useStyles();

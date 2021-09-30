@@ -55,6 +55,7 @@ export default function VehicleInformation() {
         await axios.put("http://localhost:4000/api/v1/vehical/updatevehicals/" + newData._id,newData)
             .then((res)=>{
                 console.log(res)
+                window. location. reload()
                 // alert("Successfully Updated")
             })
             .catch((err)=>{
@@ -85,7 +86,7 @@ export default function VehicleInformation() {
       >
         Vehicle Information
       </Typography>
-        
+
       <MaterialTable
         style={{ padding: 20, marginTop: 30 }}
         title=""
