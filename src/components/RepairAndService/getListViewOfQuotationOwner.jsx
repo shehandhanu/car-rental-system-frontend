@@ -24,7 +24,9 @@ const GetListOfQuotationOwner = (props) => {
 
   const deleteDetails = (id) => {
     axios
-      .delete("http://localhost:4000/api/v1/service/deleteQuotations/" + id)
+      .delete(
+        "http://localhost:4000/api/v1/service/deleteQuotationsOwner/" + id
+      )
       .then((response) => {
         if (response.data != null) {
           console.log(response.data);
@@ -83,7 +85,9 @@ const GetListOfQuotationOwner = (props) => {
         </thead>
         {quotationDetails.map((id, i) => (
           <tbody>
-            {id.isQutationCreated === true ? (
+            {id.isQutationCreated === true &&
+            id.isDeleted !== 1 &&
+            id.isDeleted !== 4 ? (
               <tr>
                 <th
                   scope="row"

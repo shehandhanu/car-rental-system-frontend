@@ -22,6 +22,24 @@ const GetListOfApprovedQuotation = () => {
       });
   }, [!quotationDetails]);
 
+  const deleteDetails = (id) => {
+    axios
+      .delete(
+        "http://localhost:4000/api/v1/service/deleteQuotationsManager/" + id
+      )
+      .then((response) => {
+        if (response.data != null) {
+          console.log(response.data);
+          alert("Quotation Details Deleted");
+          // this.setState({
+          //   quotationDetails: this.state.quotationDetails.filter(
+          //     (detail) => detail._id !== id
+          //   ),
+          // });
+        }
+      });
+  };
+
   return (
     <div className="w-75 mx-auto mt-5">
       <Typography
@@ -54,7 +72,9 @@ const GetListOfApprovedQuotation = () => {
 
         {quotationDetails.map((id, i) => (
           <tbody>
-            {id.isApproved === true ? (
+            {id.isApproved === true &&
+            id.isDeleted !== 2 &&
+            id.isDeleted !== 4 ? (
               <tr>
                 <th
                   scope="row"
@@ -105,7 +125,7 @@ const GetListOfApprovedQuotation = () => {
                     variant="contained"
                     color="secondary"
                     style={{ marginLeft: 5 }}
-                    //onClick={this.deleteDetails.bind(this, id._id)}
+                    onClick={deleteDetails.bind(this, id._id)}
                   >
                     Delete
                   </Button>

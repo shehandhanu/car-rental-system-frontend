@@ -47,7 +47,7 @@ export default class GetListReportOfFailure extends React.Component {
   deleteDetails = (id) => {
     axios
       .delete(
-        "http://localhost:4000/api/v1/service/deleteReportOfservice/" + id
+        "http://localhost:4000/api/v1/service/deleteQuotationsManager/" + id
       )
       .then((response) => {
         if (response.data != null) {
@@ -107,80 +107,82 @@ export default class GetListReportOfFailure extends React.Component {
           </thead>
           {this.state.serviceDetails.map((id, i) => (
             <tbody>
-              <tr>
-                <th
-                  scope="row"
-                  style={{ textAlign: "center", fontSize: "16px" }}
-                >
-                  {"0" + (i + 1)}
-                </th>
-                <td style={{ textAlign: "center", fontSize: "16px" }}>
-                  {id.type}
-                </td>
-                <td style={{ textAlign: "center", fontSize: "16px" }}>
-                  {id.vehino}
-                </td>
-                <td style={{ textAlign: "center", fontSize: "16px" }}>
-                  {id.serviceDate}
-                </td>
-                <td style={{ textAlign: "center", fontSize: "16px" }}>
-                  {id.serviceParts}
-                </td>
-                <td>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.ischecked(id)}
-                    style={{ marginLeft: 5 }}
+              {id.isDelated !== 2 && id.isDeleted !== 4 ? (
+                <tr>
+                  <th
+                    scope="row"
+                    style={{ textAlign: "center", fontSize: "16px" }}
                   >
-                    Check
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    style={{ marginLeft: 5 }}
-                    onClick={this.deleteDetails.bind(this, id._id)}
-                  >
-                    Delete
-                  </Button>
-                  {id.isChecked === true ? (
-                    <div style={{ float: "right" }}>
-                      {id.isQutationCreated == false ? (
-                        <Link
-                          to={{
-                            pathname: "/quotationForTheVehicle",
-                            state: id,
-                          }}
-                          style={{ textDecoration: "none" }}
-                        >
+                    {"0" + (i + 1)}
+                  </th>
+                  <td style={{ textAlign: "center", fontSize: "16px" }}>
+                    {id.type}
+                  </td>
+                  <td style={{ textAlign: "center", fontSize: "16px" }}>
+                    {id.vehino}
+                  </td>
+                  <td style={{ textAlign: "center", fontSize: "16px" }}>
+                    {id.serviceDate}
+                  </td>
+                  <td style={{ textAlign: "center", fontSize: "16px" }}>
+                    {id.serviceParts}
+                  </td>
+                  <td>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => this.ischecked(id)}
+                      style={{ marginLeft: 5 }}
+                    >
+                      Check
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      style={{ marginLeft: 5 }}
+                      onClick={this.deleteDetails.bind(this, id._id)}
+                    >
+                      Delete
+                    </Button>
+                    {id.isChecked === true ? (
+                      <div style={{ float: "right" }}>
+                        {id.isQutationCreated == false ? (
+                          <Link
+                            to={{
+                              pathname: "/quotationForTheVehicle",
+                              state: id,
+                            }}
+                            style={{ textDecoration: "none" }}
+                          >
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              style={{ marginLeft: 5 }}
+                            >
+                              Create a Quotation
+                            </Button>
+                          </Link>
+                        ) : (
                           <Button
                             variant="contained"
-                            color="primary"
-                            style={{ marginLeft: 5 }}
+                            style={{
+                              marginLeft: 5,
+                              backgroundColor: "#61CC63",
+                              color: "#ffffff",
+                              width: 180,
+                              fontSize: 12,
+                            }}
                           >
-                            Create a Quotation
+                            Quotation Completed
                           </Button>
-                        </Link>
-                      ) : (
-                        <Button
-                          variant="contained"
-                          style={{
-                            marginLeft: 5,
-                            backgroundColor: "#61CC63",
-                            color: "#ffffff",
-                            width: 180,
-                            fontSize: 12,
-                          }}
-                        >
-                          Quotation Completed
-                        </Button>
-                      )}
-                    </div>
-                  ) : // <div>
-                  // </div>
-                  null}
-                </td>
-              </tr>
+                        )}
+                      </div>
+                    ) : // <div>
+                    // </div>
+                    null}
+                  </td>
+                </tr>
+              ) : null}
             </tbody>
           ))}
         </table>

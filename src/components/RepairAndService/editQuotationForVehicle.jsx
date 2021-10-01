@@ -72,11 +72,6 @@ const EditQuotationForTheVehicle = (props) => {
     history.push("/getListOfQuotationOwner");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Parts: ", parts);
-  };
-
   const handleChangeParts = (index, event) => {
     // console.log(index, event.target.name);
     const values = [...parts];
@@ -94,6 +89,10 @@ const EditQuotationForTheVehicle = (props) => {
     setParts(values);
   };
 
+  const back = () => {
+    history.push("/getListOfQuotationOwner");
+  };
+
   return (
     <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
       <div class="wrapper wrapper--w960">
@@ -104,7 +103,7 @@ const EditQuotationForTheVehicle = (props) => {
             </h2>
           </div>
           <div class="card-body">
-            <form method="POST" onSubmit={(handleSubmit, onSubmit)}>
+            <form method="POST" onSubmit={onSubmit}>
               <div class="form-row  m-b-55">
                 <div class="name">Repair/Service</div>
                 <div class="value">
@@ -241,7 +240,8 @@ const EditQuotationForTheVehicle = (props) => {
               <div>
                 <button
                   class="btn btn--radius-2 btn--red"
-                  onClick={() => history.goBack()}
+                  type="button"
+                  onClick={() => back()}
                 >
                   Cancel
                 </button>
