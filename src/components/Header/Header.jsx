@@ -51,8 +51,6 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   const history = useHistory();
 
-  // const token = CookieService.get("token");
-
   React.useEffect(() => {
     if (token == null) {
       console.log("No User");
@@ -121,11 +119,11 @@ export default function ButtonAppBar() {
             </div>
           )}
 
-          <a style={{ textDecoration: "none" }} href="#team">
-            <Button className={classes.hbutton}>TEAM</Button>
-          </a>
           <a style={{ textDecoration: "none" }} href="#services">
             <Button className={classes.hbutton}>SERVICES</Button>
+          </a>
+          <a style={{ textDecoration: "none" }} href="#team">
+            <Button className={classes.hbutton}>TEAM</Button>
           </a>
           <Link
             to={"/carlist"}

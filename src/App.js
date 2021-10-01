@@ -33,6 +33,7 @@ import GenerateReport from "./components/RepairAndService/generateReport";
 import EditQuotationForTheVehicle from "./components/RepairAndService/editQuotationForVehicle";
 import ViewQuotation from "./components/RepairAndService/viewQuotationDetails";
 
+
 function App() {
   return (
     <Router>
@@ -63,7 +64,6 @@ function App() {
       <Route path="/carlist" component={CarList} exact />
       <Route path="/carcheckout" component={CarCheckout} exact />
       <Route path="/confirmation/:token" component={EmailConfirmation} exact />
-
       <Route
         path="/createReportOfService"
         component={CreateReportOfService}
@@ -97,6 +97,7 @@ function App() {
         component={EditQuotationForTheVehicle}
         exact
       />
+
       <Footer />
     </Router>
   );

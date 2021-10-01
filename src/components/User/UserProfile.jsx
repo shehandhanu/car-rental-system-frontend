@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import CookieService from "../../Utils/Cookie";
@@ -153,16 +154,20 @@ const UserProfile = () => {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            <Button
-              variant="contained"
-              align="center"
-              color="primary"
-              component="span"
-              style={{ width: "100%" }}
+            <Link
+              style={{ textDecoration: "none", color: "#fffff0" }}
               to={"/profileupdate"}
             >
-              Edit Profile
-            </Button>
+              <Button
+                variant="contained"
+                align="center"
+                color="primary"
+                component="span"
+                style={{ width: "100%" }}
+              >
+                Edit Profile
+              </Button>
+            </Link>
           </Grid>
           <Grid item xs={12}>
             <Button
