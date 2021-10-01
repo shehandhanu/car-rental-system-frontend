@@ -9,6 +9,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
@@ -16,20 +17,36 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Employee Registration" />
+      <Link style={{textDecoration: "none", color: "#000000"}} to="/employeeinsert">
+        <ListItemText primary="Employee Registration"/>
+      </Link>
     </ListItem>
 
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Employee Details" />
+      <Link style={{textDecoration: "none", color: "#000000"}} to="/employeelist">
+        <ListItemText primary="Employee Details" />
+      </Link>
     </ListItem>
+
+    <ListItem button>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <Link style={{textDecoration: "none", color: "#000000"}} to="/approveleaves">
+        <ListItemText primary="Approve Leaves"/>
+      </Link>
+    </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Report Generate" />
+      <Link style={{textDecoration: "none", color: "#000000"}} to="/reportgen">
+        <ListItemText primary="Report Generate" />
+      </Link>
     </ListItem>
    
   </div>

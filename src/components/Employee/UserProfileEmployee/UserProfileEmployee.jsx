@@ -23,8 +23,6 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import Container from "@material-ui/core/Container";
-import 'jspdf-autotable';
-import jsPDF from 'jspdf';
 
 
 
@@ -76,29 +74,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide(props) {
   const classes = useStyles();
-  const [emp, setemp] = React.useState(props.location.data.empData)
-  const [state, setState] = React.useState({
-    fName: emp.fName,
-    Nic: emp.Nic,
-    emCoNo: emp.emCoNo,
-    email: emp.email,
-    age: emp.age,
-    line1: emp.emAddress.line1,
-    line2: emp.emAddress.line2,
-    city: emp.emAddress.city,
-    state: emp.emAddress.state,
-    gender: emp.gender,
-    emType: emp.emType
-  });
-  console.log(emp);
-
  
-  
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={12} sm={8} md={3} component={Paper} elevation={6} square></Grid>
-      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square >
+      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             User Profile
@@ -112,17 +94,6 @@ export default function SignInSide(props) {
               id="FName"
               label="Full Name"
               name="FName"
-              value = {state.fName}
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="Nic"
-              label="NIC"
-              name="FName"
-              value = {state.Nic}
               autoFocus
             />
             <TextField
@@ -132,7 +103,6 @@ export default function SignInSide(props) {
               id="CNo"
               label="Contact Number"
               name="CNo"
-              value = {state.emCoNo}
               autoFocus
             />
             <TextField
@@ -141,7 +111,6 @@ export default function SignInSide(props) {
               fullWidth
               id="email"
               label="Email Address"
-              value = {state.email}
               name="email"
               autoComplete="email"
               autoFocus
@@ -152,7 +121,6 @@ export default function SignInSide(props) {
               fullWidth
               id="age"
               label="Age"
-              value = {state.age}
               name="age"
               autoFocus
             />
@@ -168,7 +136,6 @@ export default function SignInSide(props) {
                   <TextField
                     required
                     id="address1"
-                    value = {state.line1}
                     name="address1"
                     label="Address line 1"
                     fullWidth
@@ -179,7 +146,6 @@ export default function SignInSide(props) {
                   <TextField
                   
                     id="address2"
-                    value = {state.line2}
                     name="address2"
                     label="Address line 2"
                     fullWidth
@@ -190,7 +156,6 @@ export default function SignInSide(props) {
                   <TextField
                     required
                     id="city"
-                    value = {state.city}
                     name="city"
                     label="City"
                     fullWidth
@@ -198,7 +163,7 @@ export default function SignInSide(props) {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField id="state" value = {state.state} name="state" label="State/Province/Region" fullWidth />
+                  <TextField id="state"  name="state" label="State/Province/Region" fullWidth />
                 </Grid>
               </Grid>
             </React.Fragment>
@@ -209,7 +174,6 @@ export default function SignInSide(props) {
               fullWidth
               id="gender"
               label="Gender"
-              value = {state.gender}
               name="gender"
               autoComplete="email"
               autoFocus
@@ -220,12 +184,22 @@ export default function SignInSide(props) {
               required
               fullWidth
               id="emType"
-              value = {state.emType}
               label="Employee Type"
               name="emType"
               autoFocus
             />
 
+            <Link style={{textDecoration: "none"}}to="/employeeupdate">
+            <Button
+              type="Button"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Update
+            </Button>
+            </Link>
          
        
           
@@ -233,8 +207,7 @@ export default function SignInSide(props) {
         </div>
       </Grid>
       <Grid item xs={12} sm={8} md={3} component={Paper} elevation={6} square></Grid>
-    
+
     </Grid>
-    
   );
 }

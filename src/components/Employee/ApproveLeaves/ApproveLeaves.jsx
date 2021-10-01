@@ -16,7 +16,6 @@ import Hidden from "@material-ui/core/Hidden";
 import { Button, Box } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
-//import { useHistory } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,16 +45,17 @@ const useStyles = makeStyles((theme) => ({
   
   }));
 
-const EmployeeList = () => {
+const LeavesList = () => {
     const classes = useStyles();
-    const [emp, setemp] = React.useState([])
+    const [leaves, setLeaves] = React.useState([])
 
     React.useEffect(async() => {
-      let data = await axios.get('http://localhost:4000/api/v1/employee/getemployee')
-      setemp(data.data.emp)
-       
+        let data = await axios.get('http://localhost:4000/api/v1/leaves/getleaves')
+        setLeaves(data.data.leaves)
         
-    },[!emp])
+    },[!leaves])
+
+
 
 
     
@@ -65,8 +65,8 @@ const EmployeeList = () => {
         <div className={classes.paper}>
             <Container maxWidth="lg">
             <Grid justifyContent="center" container spacing={4}>
-                {emp.map((emp) => (
-                <FeaturedPost  key={emp._id} emp={emp} />
+                {leaves.map((leaves) => (
+                <FeaturedPost  key={leaves._id} leaves={leaves} />
                 ))}
             </Grid>
             </Container>
@@ -75,55 +75,61 @@ const EmployeeList = () => {
     )
 }
 
-export default EmployeeList
+export default LeavesList
 
 
 
 function FeaturedPost(props) {
   const classes = useStyles();
-  const { emp } = props;
-  //let history = useHistory(); 
-
-  const deleteDetails = async (id) =>{
-    alert("Deleted Successfully")
-    await axios.delete('http://localhost:4000/api/v1/employee/deleteemployee/'+ id)
-    //history.push("/employeelist");
-    window. location. reload()
-    
-
+  const { leaves } = props;
+  const ApproveLeaves = async (id)=>{
+    alert('Approved');
+    let data = await axios.get('http://localhost:4000/api/v1/leaves/approveleaves/'+ id);
   }
-
-  //generate item Report
-
-  //generate item Report
-
-
-
+  const rejectLeaves = async (id)=>{
+    alert('Rejected');
+    let data = await axios.get('http://localhost:4000/api/v1/leaves/rejectleaves/'+ id);
+  }
   //console.log(props);
   return (
-    
-      <div className={classes.paper}  id="EmployeeReportTable">
-    
-      <Grid item xs={12} >
-        <CardActionArea component="a" href="#" >
+    <div className={classes.paper}>
+      <Grid item xs={20}>
+        <CardActionArea component="a" href="#">
           <Card className={classes.card}>
-            <div className={classes.cardDetails} >
-              <Link style={{textDecoration: "none", color: "#000000"}}to= {{pathname:"/userprofile",data: {empData:emp}, }} >
+            <div className={classes.cardDetails}>
+              <Link style={{textDecoration: "none", color: "#000000"}}to= {{pathname:"/userprofile",data: {empData:leaves}, }} >
               <CardContent>
-                <Typography component="h2" variant="h5">
-                  <b>Employee Name</b> {emp.fName}
+                <Typography component="h5" variant="h5">
+                  <b>Employee Name : </b> {leaves.emName}
                 </Typography>
+
                 <Typography variant="subtitle1" color="textSecondary">
-                 <b>Contact Number</b> {emp.emCoNo}
+                 <b>Number Of Days : </b> {leaves.noOfDates}
                 </Typography>
+            
+                <Typography component="subtitle1" color="textSecondary">
+                  <b>From : </b> {leaves.startDate}
+                </Typography>
+                <br/>
+                <Typography component="subtitle1" color="textSecondary">
+                  <b>To : </b> {leaves.endDate}
+                </Typography>
+                <br/>
+                <Typography component="subtitle1" color="textSecondary">
+                  <b>Email : </b> {leaves.email}
+                </Typography>
+                <br/>
+                <Typography component="subtitle1" color="textSecondary">
+                  <b>Reason : </b> {leaves.reason}
+                </Typography> 
               </CardContent>
               </Link>
             </div>
             <Hidden xsDown>
               <div
                 className={classes.cardMedia}
-                image={emp.image}
-                title={emp.imageTitle}
+                image={leaves.image}
+                title={leaves.imageTitle}
               >
                   
                   <Grid xs={12}>
@@ -132,28 +138,22 @@ function FeaturedPost(props) {
                     </Box>
 
 
-                    <Link to={{pathname:"/employeeupdateadmin", data: {empData:emp},}}>
-                      <button type="button" className="btn btn-warning button m-2">Update</button>
-                    </Link>
+      
+                    <button type="button" className="btn btn-warning button m-2" onClick={()=>ApproveLeaves(leaves._id)}>Accept</button>
+            
                     
                     
-                    <button type="button" className="btn btn-danger button m-2" onClick={()=>deleteDetails(emp._id)}>Delete</button>
+                    <button type="button" className="btn btn-danger button m-2" onClick={()=>rejectLeaves(leaves._id)}>Reject</button>
                   </Grid>
                   
               
                  
                   </div>
-
             </Hidden>
           </Card>
         </CardActionArea>
       </Grid>
     </div>
-
-
-
-    
-    
   );
 }
 
