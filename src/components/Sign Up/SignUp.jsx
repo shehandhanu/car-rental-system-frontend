@@ -76,7 +76,7 @@ const SignUp = () => {
       email: email,
       password: password,
       public_id: "sampleid",
-      url: "uploadedImg",
+      url: uploadedImg,
       birthday: birthday,
       phoneNumber: mobile,
     };

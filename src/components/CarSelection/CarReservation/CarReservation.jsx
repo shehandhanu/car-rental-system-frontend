@@ -135,7 +135,6 @@ const UserReport = (props) => {
           carData._id
       );
       setreserveDates(data.data.changedDates);
-      console.log(data.data.changedDates);
     }
     fetchData();
   }, []);
@@ -172,10 +171,13 @@ const UserReport = (props) => {
       data,
       { withCredentials: true }
     );
-
+    console.log(user.data.reservation._id);
+    const id = user.data.reservation._id;
     alert("Your Booking is Success");
-    history.push("/payment");
+    history.push("/payment/" + id);
   };
+
+  console.log(props);
 
   const getDateCount = () => {
     console.log("working");
@@ -290,7 +292,7 @@ const UserReport = (props) => {
                   Rs. {price}.00
                 </Typography>
               </Container>
-              {checked == false ? (
+              {checked === false ? (
                 <Button
                   onClick={onSubmitButtton}
                   fullWidth

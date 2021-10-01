@@ -5,8 +5,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import axios from "axios";
@@ -49,8 +48,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Checkout() {
+  const location = useLocation();
+
   const classes = useStyles();
   const history = useHistory();
+
+  let word = location.pathname.toString();
+
+  const id = word.slice(-24);
+
+  console.log(id);
 
   const [cardNumber, setcardNumber] = React.useState();
   const [cardOwnerName, setcardOwnerName] = React.useState();
@@ -58,6 +65,7 @@ export default function Checkout() {
   const [cvv, setcvv] = React.useState();
 
   const handleSubmit = async (e) => {
+    console.log("works");
     e.preventDefault();
     const data = {
       cardNumber: cardNumber,
@@ -69,9 +77,12 @@ export default function Checkout() {
     console.log(data);
 
     const user = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/user/signup`,
+      `${process.env.REACT_APP_BACKEND_URL}/reservation/addpaymentdetails/${id}`,
       data
     );
+    if (user.status === 200) {
+      alert("Payment SuccessFul..!");
+    }
     history.push("/");
   };
 
@@ -96,7 +107,7 @@ export default function Checkout() {
               <Grid item xs={12} md={6}>
                 <TextField
                   value={cardNumber}
-                  onChange={(e) => setcardNumber(e.target.cardNumber)}
+                  onChange={(e) => setcardNumber(e.target.value)}
                   required
                   id="cardName"
                   label="Name on card"
@@ -106,7 +117,7 @@ export default function Checkout() {
               <Grid item xs={12} md={6}>
                 <TextField
                   value={cardOwnerName}
-                  onChange={(e) => setcardOwnerName(e.target.cardOwnerName)}
+                  onChange={(e) => setcardOwnerName(e.target.value)}
                   required
                   id="cardNumber"
                   label="Card number"
@@ -115,8 +126,9 @@ export default function Checkout() {
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
+                  type="date"
                   value={expireDate}
-                  onChange={(e) => setexpireDate(e.target.expireDate)}
+                  onChange={(e) => setexpireDate(e.target.value)}
                   required
                   id="expDate"
                   label="Expiry date"
@@ -125,8 +137,9 @@ export default function Checkout() {
               </Grid>
               <Grid item xs={12} md={6}>
                 <TextField
+                  style={{ marginTop: "15px" }}
                   value={cvv}
-                  onChange={(e) => setcvv(e.target.cvv)}
+                  onChange={(e) => setcvv(e.target.value)}
                   required
                   id="cvv"
                   label="CVV"
@@ -143,6 +156,7 @@ export default function Checkout() {
                 <Button
                   variant="contained"
                   color="primary"
+                  onClick={(e) => handleSubmit(e)}
                   className={classes.button}
                 >
                   Process Payment

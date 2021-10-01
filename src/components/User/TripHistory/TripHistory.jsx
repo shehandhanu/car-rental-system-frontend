@@ -12,6 +12,9 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import CookieService from "../../../Utils/Cookie";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     display: "flex",
-    width: "100%",
+    width: "750px",
     align: "center",
   },
   cardDetails: {
@@ -41,82 +44,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const featuredPosts = [
-  {
-    title: "Featured post",
-    date: "Nov 12",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageText: "Image Text",
-  },
-  {
-    title: "Post title",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageText: "Image Text",
-  },
-  {
-    title: "Post title",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageText: "Image Text",
-  },
-  {
-    title: "Post title",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageText: "Image Text",
-  },
-  {
-    title: "Post title",
-    date: "Nov 11",
-    description:
-      "This is a wider card with supporting text below as a natural lead-in to additional content.",
-    image: "https://source.unsplash.com/random",
-    imageText: "Image Text",
-  },
-];
-
 function FeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
+  console.log(post.reservationID.isPaid);
+  const due = new Date(post.reservationID.due);
+  const to = new Date(post.reservationID.to);
   return (
     <div className={classes.paper}>
       <Grid item xs={12}>
-        <CardActionArea component="a" href="#">
-          <Card className={classes.card}>
-            <div className={classes.cardDetails}>
-              <CardContent>
-                <Typography component="h2" variant="h5">
-                  {post.title}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  {post.date}
-                </Typography>
-                <Typography variant="subtitle1" paragraph>
-                  {post.description}
-                </Typography>
-                <Typography variant="subtitle1" color="primary">
-                  Continue reading...
-                </Typography>
-              </CardContent>
-            </div>
-            <Hidden xsDown>
-              <CardMedia
-                className={classes.cardMedia}
-                image={post.image}
-                title={post.imageTitle}
-              />
-            </Hidden>
-          </Card>
-        </CardActionArea>
+        <Card className={classes.card}>
+          <div className={classes.cardDetails}>
+            <CardContent>
+              <Typography component="h2" variant="h5">
+                Due :
+                {due.getFullYear() + "/" + due.getMonth() + "/" + due.getDate()}{" "}
+                - To :
+                {to.getFullYear() + "/" + to.getMonth() + "/" + to.getDate()}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                Vihical ID : {post.reservationID.carID}
+              </Typography>
+              <Typography variant="subtitle1" paragraph>
+                User ID: {post.reservationID.userID}
+              </Typography>
+              <Typography variant="subtitle1" color="primary">
+                Pyament :{post.reservationID.payment} Payment Status :
+                {post.reservationID.isPaid == false ? " Not Paid" : " Paid"}
+              </Typography>
+            </CardContent>
+          </div>
+          <Hidden xsDown>
+            <CardMedia
+              className={classes.cardMedia}
+              image={post.image}
+              title={post.imageTitle}
+            />
+          </Hidden>
+        </Card>
       </Grid>
     </div>
   );
@@ -128,14 +93,35 @@ FeaturedPost.propTypes = {
 
 const TripHistory = () => {
   const classes = useStyles();
+
+  const [UserData, setUserData] = React.useState();
+  const [token, settoken] = React.useState(CookieService.get("token"));
+
+  React.useEffect(() => {
+    if (token == null) {
+      console.log("No User");
+    } else {
+      async function fectchData() {
+        const userDetails = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/user/profile`,
+          {
+            withCredentials: true,
+          }
+        );
+        setUserData(userDetails.data.user.reservations);
+      }
+      fectchData();
+    }
+  }, [!UserData]);
   return (
     <div>
       <div className={classes.paper}>
         <Container maxWidth="lg">
           <Grid justifyContent="center" container spacing={4}>
-            {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
-            ))}
+            {UserData &&
+              UserData.map((post) => (
+                <FeaturedPost key={post.title} post={post} />
+              ))}
           </Grid>
         </Container>
       </div>

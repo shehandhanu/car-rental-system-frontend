@@ -64,8 +64,6 @@ const UserProfile = () => {
     }
   }, []);
 
-  console.log(UserData && UserData);
-
   return (
     <Container component="main" maxWidth="md">
       <div className={classes.paper}>

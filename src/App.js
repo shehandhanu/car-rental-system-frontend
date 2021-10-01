@@ -61,16 +61,18 @@ function App() {
       <Route path="/applyleaves" component={ApplyLeaves} exact />
       <Route path="/approveleaves" component={ApproveLeaves} exact />
       <Route path="/reportgen" component={Report} exact />
-      {/* Service  */}
-      <Route path="/" component={Home} exact />
       <Route path="/employeeinsert" component={EmInsertion} exact />
-      <Route path="/reportvehicleissue" component={ReIsue} exact />
-      <Route path="/adminhome" component={AdminHome} exact />
-      <Route path="/employeehome" component={EmployeeHome} exact />
-      <Route path="/employeeupdate" component={EmployeeUpdate} exact />
-      <Route path="/userprofile" component={EmpUserProfile} exact />
-      <Route path="/employeelist" component={EmployeeList} exact />
+      {/* Service  */}
+      <Route path="/createReportOfService" component={CreateReportOfService} exact />
+      <Route path="/getListOfApprovedQuotation" component={GetListOfApprovedQuotation} exact />
+      <Route path="/getListOfQuotationOwner" component={GetListOfQuotationOwner} exact />
+      <Route path="/getListReportOfFailure" component={GetListReportOfFailure} exact />
+      <Route path="/generateReport" component={GenerateReport} exact></Route>
+      <Route path="/quotationForTheVehicle" component={QuotationForTheVehicle} exact />
+      <Route path="/viewQuotation" component={ViewQuotation} exact></Route>
+      <Route path="/editQuotationForTheVehicle" component={EditQuotationForTheVehicle} exact />
       {/* User  */}
+      <Route path="/" component={Home} exact />
       <Route path="/forgotpassword" component={ForgotPassword} exact />
       <Route path="/forgotpasswordemail" component={ForgotPasswordEmail} exact />
       <Route path="/changepassword/:token" component={ChangePassword} exact />
@@ -79,26 +81,17 @@ function App() {
       <Route path="/profile" component={UserProfile} exact />
       <Route path="/userreport" component={UserReport} exact />
       <Route path="/userhistory" component={TripHistory} exact />
-      <Route path="/payment" component={Payment} exact />
+      <Route path="/payment/:id" component={Payment} exact />
       <Route path="/profileupdate" component={UserProfileUpdate} exact />
       <Route path="/carlist" component={CarList} exact />
       <Route path="/carcheckout" component={CarCheckout} exact />
       <Route path="/confirmation/:token" component={EmailConfirmation} exact />
-      <Route path="/createReportOfService" component={CreateReportOfService} exact />
-      <Route path="/getListOfApprovedQuotation" component={GetListOfApprovedQuotation} exact />
-      <Route path="/tableDeails" component={tableDeails} exact></Route>
-      <Route path="/getListOfQuotationOwner" component={GetListOfQuotationOwner} exact />
-      <Route path="/getListReportOfFailure" component={GetListReportOfFailure} exact />
-      <Route path="/quotationForTheVehicle" component={QuotationForTheVehicle} exact />
-      <Route path="/generateReport" component={GenerateReport} exact></Route>
-      <Route path="/viewQuotation" component={ViewQuotation} exact></Route>
-      <Route path="/editQuotationForTheVehicle" component={EditQuotationForTheVehicle} exact />
       {/* Vehical  */}
       <Route path="/vehicleregistration" component={VehicleRegistration} exact />
       <Route path="/vehicleinformation" component={VehicleInformation} exact />
       <Route path="/ownerregistration" component={OwnerRegistration} exact />
       <Route path="/ownerinformation" component={OwnerInformation} exact />
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

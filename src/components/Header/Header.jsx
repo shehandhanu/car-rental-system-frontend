@@ -45,11 +45,11 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
   const [token, settoken] = React.useState(CookieService.get("token"));
   const [User, setUser] = React.useState();
-  const [UserData, setUserData] = React.useState();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const classes = useStyles();
   const history = useHistory();
+  const [UserData, setUserData] = React.useState();
 
   React.useEffect(() => {
     if (token == null) {
@@ -133,14 +133,38 @@ export default function ButtonAppBar() {
               Vehicals
             </Button>
           </Link>
-          {UserData && UserData.role === "admin" ? (
+          {UserData && UserData.role === "Employee" ? (
             <div>
               <Link
-                to={"/admin"}
+                to={"/employeehome"}
+                style={{ textDecoration: "none", color: "#fffff0" }}
+              >
+                <Button style={{ marginLeft: 20 }} color="inherit">
+                  Employee Pannel
+                </Button>
+              </Link>
+            </div>
+          ) : null}
+          {UserData && UserData.role === "Admin" ? (
+            <div>
+              <Link
+                to={"/adminhome"}
                 style={{ textDecoration: "none", color: "#fffff0" }}
               >
                 <Button style={{ marginLeft: 20 }} color="inherit">
                   Admin Pannel
+                </Button>
+              </Link>
+            </div>
+          ) : null}
+          {UserData && UserData.role === "Admin" ? (
+            <div>
+              <Link
+                to={"/employeehome"}
+                style={{ textDecoration: "none", color: "#fffff0" }}
+              >
+                <Button style={{ marginLeft: 20 }} color="inherit">
+                  Employee Panal
                 </Button>
               </Link>
             </div>
