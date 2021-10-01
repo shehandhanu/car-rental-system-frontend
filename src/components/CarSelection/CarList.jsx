@@ -14,6 +14,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +75,21 @@ const useStyles = makeStyles((theme) => ({
 
 const UserReport = () => {
   const classes = useStyles();
+  const [vehicals, setvehicals] = React.useState();
+
+  const [type, settype] = React.useState();
+
+  React.useEffect(() => {
+    async function getData() {
+      const data = await axios.get(
+        "http://localhost:4000/api/v1/vehical/getvehicals"
+      );
+      setvehicals(data.data.vehical);
+      console.log(vehicals);
+    }
+
+    getData();
+  }, [!vehicals, type]);
   return (
     <div>
       <Grid container component="main" className={classes.root}>
@@ -91,16 +107,16 @@ const UserReport = () => {
                 <NativeSelect
                   style={{ width: 260 }}
                   fullWidth
-                  //   value={state.age}
-                  //   onChange={handleChange}
+                  value={type}
+                  onChange={(e) => settype(e.target.value)}
                 >
-                  <option value="">None</option>
-                  <option value={10}>Van</option>
-                  <option value={20}>Car</option>
-                  <option value={30}>Wedding</option>
-                  <option value={30}>Bike</option>
-                  <option value={30}>Scooter</option>
-                  <option value={30}>Luxury</option>
+                  <option value={"None"}>None</option>
+                  <option value={"Van"}>Van</option>
+                  <option value={"Car"}>Car</option>
+                  <option value={"Wedding"}>Wedding</option>
+                  <option value={"Bike"}>Bike</option>
+                  <option value={"Scooter"}>Scooter</option>
+                  <option value={"Luxury"}>Luxury</option>
                 </NativeSelect>
               </FormControl>
               <Button
@@ -117,7 +133,44 @@ const UserReport = () => {
           </div>
         </Grid>
         <Grid item xs={false} sm={4} md={9}>
-          <Album />
+          <Container className={classes.cardGrid} maxWidth="md">
+            <Grid container spacing={4}>
+              {vehicals &&
+                vehicals.map((card) => (
+                  // <div>
+                  //   {type === card.vehicleType || type === "None" ? (
+                  <Grid item key={card} xs={12} sm={6} md={4}>
+                    <Card className={classes.card}>
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629518812/afproject/SPM%20Project/bavdbbnata8yrgjsuiix.jpg"
+                        title="Image title"
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {card.vehicleName} {card.manufactureYear}
+                        </Typography>
+                        <Typography>
+                          {card.vehicleCategory} {card.specification}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to={{ pathname: "/carcheckout", state: card }}
+                        >
+                          <Button size="small" color="primary">
+                            View
+                          </Button>
+                        </Link>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                  //   ) : null}
+                  // </div>
+                ))}
+            </Grid>
+          </Container>
         </Grid>
       </Grid>
     </div>
@@ -126,44 +179,12 @@ const UserReport = () => {
 
 export default UserReport;
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 function Album() {
   const classes = useStyles();
 
   return (
     <React.Fragment>
-      <main>
-        <Container className={classes.cardGrid} maxWidth="md">
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629518812/afproject/SPM%20Project/bavdbbnata8yrgjsuiix.jpg"
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button href={"/carcheckout"} size="small" color="primary">
-                      View
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </main>
+      <main></main>
     </React.Fragment>
   );
 }

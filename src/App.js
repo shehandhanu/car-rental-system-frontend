@@ -23,15 +23,15 @@ import TripHistory from "./components/User/TripHistory/TripHistory";
 import Payment from "./components/Payments/Payment";
 import CarList from "./components/CarSelection/CarList";
 import CarCheckout from "./components/CarSelection/CarReservation/CarReservation";
-import CreateReportOfService from "./components/RepairAndService/createReportOfService";
-import GetListOfApprovedQuotation from "./components/RepairAndService/getListOfApprovedQuotation";
-import tableDeails from "./components/RepairAndService/table";
-import GetListOfQuotationOwner from "./components/RepairAndService/getListViewOfQuotationOwner";
-import GetListReportOfFailure from "./components/RepairAndService/getListReportOfFailure";
-import QuotationForTheVehicle from "./components/RepairAndService/quotationForVehicle";
-import GenerateReport from "./components/RepairAndService/generateReport";
-import EditQuotationForTheVehicle from "./components/RepairAndService/editQuotationForVehicle";
-import NavigationBar from "./components/RepairAndService/navigationbar";
+// import CreateReportOfService from "./components/RepairAndService/createReportOfService";
+// import GetListOfApprovedQuotation from "./components/RepairAndService/getListOfApprovedQuotation";
+// import tableDeails from "./components/RepairAndService/table";
+// import GetListOfQuotationOwner from "./components/RepairAndService/getListViewOfQuotationOwner";
+// import GetListReportOfFailure from "./components/RepairAndService/getListReportOfFailure";
+// import QuotationForTheVehicle from "./components/RepairAndService/quotationForVehicle";
+// import GenerateReport from "./components/RepairAndService/generateReport";
+// import EditQuotationForTheVehicle from "./components/RepairAndService/editQuotationForVehicle";
+// import NavigationBar from "./components/RepairAndService/navigationbar";
 
 function App() {
   return (
@@ -60,7 +60,7 @@ function App() {
       <Route path="/carcheckout" component={CarCheckout} exact />
       <Route path="/confirmation/:token" component={EmailConfirmation} exact />
 
-      <NavigationBar />
+      {/* <NavigationBar />
       <Route path="/createReportOfService" component={CreateReportOfService} exact></Route>
       <Route path="/getListOfApprovedQuotation" component={GetListOfApprovedQuotation} exact></Route>
       <Route path="/tableDeails" component={tableDeails} exact></Route>
@@ -68,7 +68,7 @@ function App() {
       <Route path="/getListReportOfFailure" component={GetListReportOfFailure} exact></Route>
       <Route path="/quotationForTheVehicle" component={QuotationForTheVehicle} exact></Route>
       <Route path="/generateReport" component={GenerateReport} exact></Route>
-      <Route path="/editQuotationForTheVehicle" component={EditQuotationForTheVehicle} exact></Route>
+      <Route path="/editQuotationForTheVehicle" component={EditQuotationForTheVehicle} exact></Route> */}
       <Footer />
     </Router>
   );
