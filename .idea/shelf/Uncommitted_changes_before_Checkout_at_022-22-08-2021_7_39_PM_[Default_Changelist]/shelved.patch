@@ -1,0 +1,19 @@
+Index: src/components/Vehicle/OwnerInformation.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { FC, useState } from \"react\";\r\nimport MaterialTable from \"material-table\";\r\nimport { Container, Paper } from \"@material-ui/core\";\r\n\r\nimport Grid from \"@material-ui/core/Grid\";\r\n\r\nimport CssBaseline from \"@material-ui/core/CssBaseline\";\r\n\r\nexport default function OwnerInformation() {\r\n  const [columns, setColumns] = useState([\r\n    { title: \"First Name\", field: \"ownerFirstName\" },\r\n    { title: \"Last Name\", field: \"ownerLastName\" },\r\n    { title: \"NIC\", field: \"ownerNIC\" },\r\n    { title: \"Email\", field: \"ownerEmail\" },\r\n    { title: \"Contact Number\", field: \"ownerContact\" },\r\n    { title: \"Address\", field: \"ownerAddress\" },\r\n    { title: \"Vehicle Numbers\", field: \"vehicleNumbers\" },\r\n  ]);\r\n\r\n  const [data, setData] = useState([\r\n    {\r\n      ownerFirstName: \"Hashini\",\r\n      ownerLastName: \"Mudannayake\",\r\n      ownerNIC: \"596874235V\",\r\n      ownerEmail: \"hashini@gmail.com\",\r\n      ownerContact: \"0775698412\",\r\n      ownerAddress: \"15/4, Kottawa, Pannipitiya\",\r\n      vehicleNumbers: \"5898V\",\r\n    },\r\n    {\r\n      ownerFirstName: \"Saman\",\r\n      ownerLastName: \"Kumara\",\r\n      ownerNIC: \"856974123V\",\r\n      ownerEmail: \"saman@gmail.com\",\r\n      ownerContact: \"0779658412\",\r\n      ownerAddress: \"Colombo Rd, Boyagane\",\r\n      vehicleNumbers: \"9562G\",\r\n    },\r\n\r\n    {\r\n      ownerFirstName: \"Ayesh\",\r\n      ownerLastName: \"Rajapaksha\",\r\n      ownerNIC: \"896541285V\",\r\n      ownerEmail: \"ayesh@gmail.com\",\r\n      ownerContact: \"0778965239\",\r\n      ownerAddress: \"255/4, Werahera\",\r\n      vehicleNumbers: \"8965N\",\r\n    },\r\n  ]);\r\n\r\n  return (\r\n    <div style={{ height: \"100vh\" }}>\r\n      <CssBaseline />\r\n      <Paper>\r\n        <MaterialTable\r\n          style={{ padding: 20, marginTop: 100 }}\r\n          title=\"Vehicle Information\"\r\n          columns={columns}\r\n          data={data}\r\n          options={{\r\n            rowStyle: (rowData) => ({\r\n              backgroundColor: rowData.tableData.id % 2 === 0 ? \"#EEE\" : \"#FFF\",\r\n            }),\r\n            headerStyle: {\r\n              backgroundColor: \"#0460e9\",\r\n              color: \"#FFF\",\r\n            },\r\n            pageSize: 5,\r\n            paging: true,\r\n          }}\r\n        />\r\n      </Paper>\r\n    </div>\r\n  );\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Vehicle/OwnerInformation.jsx b/src/components/Vehicle/OwnerInformation.jsx
+--- a/src/components/Vehicle/OwnerInformation.jsx	(revision 45e62807ad9ee0ecda7260b8f354ef5f4768cf6a)
++++ b/src/components/Vehicle/OwnerInformation.jsx	(date 1629611579240)
+@@ -62,7 +62,7 @@
+               backgroundColor: rowData.tableData.id % 2 === 0 ? "#EEE" : "#FFF",
+             }),
+             headerStyle: {
+-              backgroundColor: "#0460e9",
++              backgroundColor: "#000",
+               color: "#FFF",
+             },
+             pageSize: 5,
