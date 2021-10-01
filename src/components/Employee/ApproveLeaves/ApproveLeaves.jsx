@@ -54,10 +54,6 @@ const LeavesList = () => {
         setLeaves(data.data.leaves)
         
     },[!leaves])
-
-
-
-
     
     // console.log(emp);
     return (
@@ -137,17 +133,11 @@ function FeaturedPost(props) {
 
                     </Box>
 
-
-      
                     <button type="button" className="btn btn-warning button m-2" onClick={()=>ApproveLeaves(leaves._id)}>Accept</button>
-            
-                    
-                    
+
                     <button type="button" className="btn btn-danger button m-2" onClick={()=>rejectLeaves(leaves._id)}>Reject</button>
+
                   </Grid>
-                  
-              
-                 
                   </div>
             </Hidden>
           </Card>
