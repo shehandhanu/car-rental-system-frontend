@@ -10,6 +10,10 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
+import DatePicker from "react-datepicker";
+import { useHistory } from "react-router-dom";
+import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,8 +111,82 @@ const tiers = [
   },
 ];
 
-const UserReport = () => {
+const UserReport = (props) => {
   const classes = useStyles();
+  const history = useHistory();
+
+  const [reservationStartDate, setreservationStartDate] = React.useState(
+    new Date()
+  );
+  const [reservationEndDate, setreservationEndDate] = React.useState(
+    new Date()
+  );
+  const [price, setprice] = React.useState();
+
+  const [reserveDates, setreserveDates] = React.useState([]);
+  const [carData, setcarData] = React.useState(props.location.state);
+
+  const [checked, setchecked] = React.useState(false);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const data = await axios.get(
+        "http://localhost:4000/api/v1/reservation/getreservedates/" +
+          carData._id
+      );
+      setreserveDates(data.data.changedDates);
+      console.log(data.data.changedDates);
+    }
+    fetchData();
+  }, []);
+
+  const disableCustomDt = (datex) => {
+    if (reserveDates.length !== 0) {
+      let date = new Date(datex),
+        mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+        day = ("0" + date.getDate()).slice(-2);
+      return !reserveDates.includes([date.getFullYear(), mnth, day].join("-"));
+    } else {
+      let date = new Date(datex);
+      return date;
+    }
+  };
+
+  const onClickButtton = (e) => {
+    e.preventDefault();
+    getDateCount();
+    setchecked(true);
+  };
+
+  const onSubmitButtton = async (e) => {
+    const data = {
+      due: reservationStartDate,
+      to: reservationEndDate,
+      userID: "",
+      carID: carData._id,
+      payment: price,
+    };
+
+    const user = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/reservation/addreservation`,
+      data,
+      { withCredentials: true }
+    );
+
+    alert("Your Booking is Success");
+    history.push("/payment");
+  };
+
+  const getDateCount = () => {
+    console.log("working");
+    let start = new Date(reservationStartDate);
+    let end = new Date(reservationEndDate);
+    let datecount = end.getDate() - start.getDate();
+
+    let tot = carData.vehiclePrice * datecount;
+    setprice(tot);
+  };
+
   return (
     <div>
       <Grid container component="main" className={classes.root}>
@@ -158,31 +236,6 @@ const UserReport = () => {
                     </CardContent>
                   </Card>
                 </Grid>
-                <Grid item md={12}>
-                  <Card>
-                    <CardContent>
-                      <CardContent>
-                        <div className={classes.cardPricing}>
-                          <Typography variant="h6" color="textSecondary">
-                            Other Details
-                          </Typography>
-                        </div>
-                        <ul>
-                          {tiers[0].description.map((line) => (
-                            <Typography
-                              component="li"
-                              variant="subtitle1"
-                              align="center"
-                              key={line}
-                            >
-                              {line}
-                            </Typography>
-                          ))}
-                        </ul>
-                      </CardContent>
-                    </CardContent>
-                  </Card>
-                </Grid>
               </Grid>
             </Container>
           </div>
@@ -193,26 +246,18 @@ const UserReport = () => {
               Check Availability
             </Typography>
             <form className={classes.form} noValidate>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                type="date"
-                className={classes.text}
-                // label="Email Address"
-                name="email"
-                autoFocus
+              <DatePicker
+                selected={reservationStartDate}
+                onChange={(date) => setreservationStartDate(date)}
+                minDate={new Date()}
+                filterDate={disableCustomDt}
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                // label="Password"
-                type="date"
-                id="password"
-                autoComplete="current-password"
+              <DatePicker
+                selected={reservationEndDate}
+                onChange={(date) => setreservationEndDate(date)}
+                filterDate={disableCustomDt}
+                minDate={new Date()}
+                maxDate={new Date("2021-12-31")}
               />
               <Button
                 type="submit"
@@ -221,6 +266,7 @@ const UserReport = () => {
                 color="primary"
                 style={{ backgroundColor: "#bd9400" }}
                 className={classes.submit}
+                onClick={onClickButtton}
               >
                 Check Vehical
               </Button>
@@ -236,26 +282,39 @@ const UserReport = () => {
                   Pricing
                 </Typography>
                 <Typography
-                  variant="h7"
+                  variant="h6"
                   align="center"
                   color="textSecondary"
                   component="p"
                 >
-                  Quickly build an effective pricing table for your potential
-                  customers with this layout. It&apos;s built with default
-                  Material-UI components with little customization.
+                  Rs. {price}.00
                 </Typography>
               </Container>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                style={{ backgroundColor: "#bd9400" }}
-                className={classes.submit}
-              >
-                Book Now
-              </Button>
+              {checked == false ? (
+                <Button
+                  onClick={onSubmitButtton}
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  disabled
+                  style={{ backgroundColor: "#bd9400" }}
+                  className={classes.submit}
+                >
+                  Book Now
+                </Button>
+              ) : (
+                <Button
+                  onClick={onSubmitButtton}
+                  // href={"/payment"}
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  style={{ backgroundColor: "#bd9400" }}
+                  className={classes.submit}
+                >
+                  Book Now
+                </Button>
+              )}
             </form>
           </div>
         </Grid>

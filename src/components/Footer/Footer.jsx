@@ -7,12 +7,11 @@ import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    display: "flex",
     flexDirection: "column",
-    minHeight: "100vh",
+    // minHeight: "100vh",
     backgroundColor: theme.palette.background.paper,
-    marginTop: theme.spacing(8),
-    padding: theme.spacing(6, 0),
+    marginTop: theme.spacing(10),
+    // padding: theme.spacing(6, 0),
   },
 }));
 

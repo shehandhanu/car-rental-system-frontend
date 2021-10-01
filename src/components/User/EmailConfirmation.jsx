@@ -1,7 +1,10 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -38,22 +41,38 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "baseline",
     marginBottom: theme.spacing(2),
   },
-  footer: {
-    borderTop: `1px solid ${theme.palette.divider}`,
-    marginTop: theme.spacing(8),
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.up("sm")]: {
-      paddingTop: theme.spacing(6),
-      paddingBottom: theme.spacing(6),
-    },
+  hbutton: {
+    marginRight: theme.spacing(1),
+    marginLeft: theme.spacing(1),
+    color: "#fffff0",
+    textTransform: "none",
   },
 }));
 
 export default function ForgotPasswordEmail(props) {
   const classes = useStyles();
+  const history = useHistory();
+  const [token, setToken] = React.useState();
 
-  console.log(props.location.email);
+  React.useEffect(() => {
+    const url = window.location.href;
+    const words = url.split("/");
+    setToken(words[words.length - 1]);
+  }, []);
+
+  const handleSubmit = async (e) => {
+    // e.preventDefault();
+    console.log(token);
+    const user = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/user/confirmation/${token}`
+    );
+
+    console.log(user);
+
+    if (user.data.success === true) {
+      history.push("/");
+    }
+  };
 
   return (
     <React.Fragment>
@@ -66,16 +85,26 @@ export default function ForgotPasswordEmail(props) {
           gutterBottom
           style={{ color: "#bd9400" }}
         >
-          Password Reset Email Sent....
+          Your Account Verified....
         </Typography>
         <Typography
-          variant="h5"
+          component="h1"
+          variant="h2"
           align="center"
-          color="textSecondary"
-          component="p"
+          color="textPrimary"
+          gutterBottom
+          style={{ color: "#bd9400" }}
         >
-          Password reset email send to yor email '{props.location.email}'.
-          please check your inbox, i it is not thee please check the spam folder
+          <Button
+            // fullWidth
+            onClick={() => handleSubmit()}
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: "#bd9400" }}
+            className={classes.submit}
+          >
+            Home
+          </Button>
         </Typography>
       </Container>
     </React.Fragment>

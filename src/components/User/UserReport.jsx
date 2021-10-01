@@ -6,6 +6,8 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
+import ReactDatePicker from "react-datepicker";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,9 +45,27 @@ const useStyles = makeStyles((theme) => ({
 
 const UserReport = () => {
   const classes = useStyles();
-  const [file, setFile] = React.useState(
-    "https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629544285/afproject/SPM%20Project/Assessment_2_2021S2_REG_WE_10_1_iyqelm.pdf"
-  );
+  const [StartDate, setStartDate] = React.useState();
+  const [EndDate, setEndDate] = React.useState();
+  const [pdfResponse, setpdfResponse] = React.useState("");
+
+  React.useEffect(() => {}, [pdfResponse]);
+
+  async function getPDF(e) {
+    e.preventDefault();
+    const dates = {
+      StartDate: StartDate,
+      EndDate: EndDate,
+    };
+    const data = await axios.post(
+      "http://localhost:4000/api/v1/reservation/genreport/610d8c4ce7a1f853f49119b7",
+      dates,
+      { withCredentials: true }
+    );
+    setpdfResponse(data.data.response);
+    console.log(data);
+  }
+
   return (
     <div>
       <Grid container component="main" className={classes.root}>
@@ -61,30 +81,26 @@ const UserReport = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+                value={StartDate}
+                onChange={(e) => setStartDate(e.target.value)}
                 type="date"
-                // label="Email Address"
-                name="email"
-                autoFocus
               />
               <TextField
                 variant="outlined"
                 margin="normal"
                 required
                 fullWidth
-                name="password"
-                // label="Password"
+                value={EndDate}
+                onChange={(e) => setEndDate(e.target.value)}
                 type="date"
-                id="password"
-                autoComplete="current-password"
               />
               <Button
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 style={{ backgroundColor: "#bd9400" }}
                 className={classes.submit}
+                onClick={getPDF}
               >
                 Genarate
               </Button>
@@ -95,7 +111,7 @@ const UserReport = () => {
           <div>
             <iframe
               style={{ width: "100%", height: "666px" }}
-              src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629544285/afproject/SPM%20Project/Assessment_2_2021S2_REG_WE_10_1_iyqelm.pdf"
+              src={pdfResponse}
               type="application/pdf"
               title="title"
             ></iframe>

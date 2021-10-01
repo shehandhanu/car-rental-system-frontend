@@ -94,11 +94,14 @@ function FeaturedPost(props) {
   }
   //console.log(props);
   return (
-    <div className={classes.paper}>
-      <Grid item xs={12}>
-        <CardActionArea component="a" href="#">
+    
+      <div className={classes.paper}  id="EmployeeReportTable">
+    
+      <Grid item xs={12} >
+        <CardActionArea component="a" href="#" >
           <Card className={classes.card}>
             <div className={classes.cardDetails}>
+
               <Link style={{textDecoration: "none", color: "#000000"}}to= {{pathname:"/userprofile",data: {empData:emp}, }} >
               <CardContent>
                 <Typography component="h2" variant="h5">
@@ -134,11 +137,17 @@ function FeaturedPost(props) {
               
                  
                   </div>
+
             </Hidden>
           </Card>
         </CardActionArea>
       </Grid>
     </div>
+
+
+
+    
+    
   );
 }
 

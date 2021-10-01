@@ -8,6 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import CookieService from "../../Utils/Cookie";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,9 +37,83 @@ const useStyles = makeStyles((theme) => ({
 
 const SignUp = () => {
   const inputRef = React.useRef();
+  const classes = useStyles();
+  const history = useHistory();
+  const [token, settoken] = React.useState(CookieService.get("token"));
+  const [UserData, setUserData] = React.useState({
+    firstName: "",
+    lastName: "",
+    birthday: "",
+    email: "",
+    mobile: "",
+    url: "",
+  });
+
   const [selectedImg, setselectedImg] = React.useState();
   const [uploadedImg, setuploadedImg] = React.useState();
-  const classes = useStyles();
+
+  const [firstName, setfirstName] = React.useState();
+  const [lastName, setlastName] = React.useState();
+  const [birthday, setbirthday] = React.useState();
+  const [email, setemail] = React.useState();
+  const [mobile, setmobile] = React.useState();
+
+  React.useEffect(() => {
+    if (token == null) {
+      console.log("No User");
+    } else {
+      async function fectchData() {
+        console.log("works");
+        const userDetails = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/user/profile`,
+          {
+            withCredentials: true,
+          }
+        );
+        setfirstName(userDetails.data.user.firstName);
+        setlastName(userDetails.data.user.lastName);
+        setbirthday(userDetails.data.user.birthday);
+        setemail(userDetails.data.user.email);
+        setmobile(userDetails.data.user.phoneNumber);
+        setuploadedImg(userDetails.data.user.avatar.url);
+      }
+      fectchData();
+    }
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      url: uploadedImg,
+      birthday: birthday,
+      phoneNumber: mobile,
+    };
+
+    console.log(data);
+
+    const user = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/user/profileupdate`,
+      data,
+      { withCredentials: true }
+    );
+    history.push("/");
+  };
+
+  const uploadImage = async (e) => {
+    const formData = new FormData();
+    formData.append("file", selectedImg);
+    formData.append("upload_preset", "spmproject");
+    const { response } = await axios.post(
+      "https://api.cloudinary.com/v1_1/dxz8wbaqv/image/upload",
+      formData
+    );
+    setuploadedImg(response.data.url);
+    alert("Your Details Are Ok To SignUp");
+  };
+
   return (
     <Container component="main" maxWidth="md">
       <div className={classes.paper}>
@@ -46,19 +123,17 @@ const SignUp = () => {
         <Typography component="h1" variant="h5">
           Update User Profile
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="fname"
-                  name="firstName"
                   variant="outlined"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
+                  // label="First Name"
+                  value={firstName}
+                  onChange={(e) => setfirstName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -67,21 +142,11 @@ const SignUp = () => {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  // label="Last Name"
                   name="lastName"
-                  autoComplete="lname"
+                  value={lastName}
+                  onChange={(e) => setlastName(e.target.value)}
                 />
-              </Grid>
-              <Grid item xs={12}>
-                {/* <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                /> */}
               </Grid>
             </Grid>
             <Grid item xs={12} sm={6} container spacing={2}>
@@ -127,22 +192,27 @@ const SignUp = () => {
                 )}
               </Grid>
               <Grid item xs={6} xm={3}>
-                {!uploadedImg ? (
+                {!selectedImg ? (
                   <div>
-                    {!selectedImg ? (
+                    {!uploadedImg ? (
                       <img
                         src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1624880648/afproject/images_jjljf9.png"
                         style={{ width: 125, height: 125 }}
                       />
                     ) : (
                       <img
-                        src={URL.createObjectURL(selectedImg)}
-                        style={{ width: 125, height: 125 }}
+                        src={uploadedImg}
+                        style={{ width: 150, height: 150 }}
                       />
                     )}
                   </div>
                 ) : (
-                  <img src={uploadedImg} style={{ width: 150, height: 150 }} />
+                  <div>
+                    <img
+                      src={URL.createObjectURL(selectedImg)}
+                      style={{ width: 125, height: 125 }}
+                    />
+                  </div>
                 )}
               </Grid>
             </Grid>
@@ -154,9 +224,10 @@ const SignUp = () => {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  // label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setemail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={6} sm={3}>
@@ -164,10 +235,11 @@ const SignUp = () => {
                   variant="outlined"
                   required
                   fullWidth
-                  id="lastName"
-                  label="Mobile Number"
-                  name="lastName"
-                  autoComplete="lname"
+                  id="mobile"
+                  // label="Mobile Number"
+                  name="mobile"
+                  value={mobile}
+                  onChange={(e) => setmobile(e.target.value)}
                 />
               </Grid>
               <Grid item xs={6} sm={3}>
@@ -176,36 +248,11 @@ const SignUp = () => {
                   required
                   fullWidth
                   type="date"
-                  id="lastName"
-                  label="Birthday"
-                  name="lastName"
-                  autoComplete="lname"
-                />
-              </Grid>
-            </Grid>
-            <Grid item xs={12} container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Re-EnterPassword"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
+                  id="birthday"
+                  // label="Birthday"
+                  name="birthday"
+                  value={birthday}
+                  onChange={(e) => setbirthday(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -215,20 +262,33 @@ const SignUp = () => {
               type="submit"
               variant="contained"
               color="primary"
-              style={{ backgroundColor: "#bd9400" }}
+              style={{ backgroundColor: "#bd9400", marginRight: "10px" }}
               className={classes.submit}
             >
               Cancel
             </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              style={{ backgroundColor: "#bd9400" }}
-              className={classes.submit}
-            >
-              Update Profile
-            </Button>
+            {selectedImg ? (
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                style={{ backgroundColor: "#bd9400" }}
+                className={classes.submit}
+                onClick={uploadImage()}
+              >
+                Check Details
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                style={{ backgroundColor: "#bd9400" }}
+                className={classes.submit}
+              >
+                Update Profile
+              </Button>
+            )}
           </Grid>
         </form>
       </div>

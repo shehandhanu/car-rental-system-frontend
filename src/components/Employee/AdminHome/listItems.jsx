@@ -44,7 +44,9 @@ export const mainListItems = (
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Report Generate" />
+      <Link style={{textDecoration: "none", color: "#000000"}} to="/reportgen">
+        <ListItemText primary="Report Generate" />
+      </Link>
     </ListItem>
    
   </div>

@@ -1,12 +1,14 @@
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import CookieService from "../../Utils/Cookie";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,14 +40,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserProfile = () => {
+  const [token, settoken] = React.useState(CookieService.get("token"));
+  const [UserData, setUserData] = React.useState();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
   const classes = useStyles();
+  const history = useHistory();
+
+  React.useEffect(() => {
+    if (token == null) {
+      console.log("No User");
+    } else {
+      async function fectchData() {
+        const userDetails = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/user/profile`,
+          {
+            withCredentials: true,
+          }
+        );
+        setUserData(userDetails.data.user);
+      }
+      fectchData();
+    }
+  }, []);
+
+  console.log(UserData && UserData);
+
   return (
     <Container component="main" maxWidth="md">
       <div className={classes.paper}>
         <Grid item xs={12}>
           <div className={classes.paper}>
             <img
-              src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1629539043/afproject/SPM%20Project/1_itpduf.jpg"
+              src={UserData && UserData.avatar.url}
               style={{
                 width: 150,
                 height: 150,
@@ -63,14 +90,15 @@ const UserProfile = () => {
               <Grid item xs={12} sm={6} container spacing={1}>
                 <Grid item xs={12}>
                   <Typography component="h1" variant="h6">
-                    <b>First Name : </b> Shehan
+                    <b>First Name : </b> {UserData && UserData.firstName}
                   </Typography>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={6} container spacing={2}>
                 <Grid item xs={12}>
                   <Typography component="h1" variant="h6">
-                    <b>Last Name : </b> Dhanuddara
+                    <b>Last Name : </b>
+                    {UserData && UserData.lastName}
                   </Typography>
                 </Grid>
               </Grid>
@@ -78,23 +106,24 @@ const UserProfile = () => {
               <Grid item xs={12} container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <Typography component="h1" variant="h6">
-                    <b>Mobile Number : </b> 0765207513
+                    <b>Mobile Number : </b> {UserData && UserData.phoneNumber}
                   </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6}>
                   <Typography component="h1" variant="h6">
-                    <b>BirthDay : </b> 1998-05-31
+                    <b>BirthDay : </b>{" "}
+                    {UserData && UserData.birthday.slice(0, 10)}
                   </Typography>
                 </Grid>
               </Grid>
               <Grid item xs={12}>
                 <Typography component="h1" variant="h6">
-                  <b>Email Address : </b> shehan.dhanuddara1998@gmail.com
+                  <b>Email Address : </b> {UserData && UserData.email}
                 </Typography>
               </Grid>
               <Grid item xs={12}>
                 <Typography component="h1" variant="h6">
-                  <b>Password : </b> shehan123
+                  <b>Password : </b> *********
                 </Typography>
               </Grid>
             </Grid>
@@ -125,15 +154,20 @@ const UserProfile = () => {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            <Button
-              variant="contained"
-              align="center"
-              color="primary"
-              component="span"
-              style={{ width: "100%" }}
+            <Link
+              style={{ textDecoration: "none", color: "#fffff0" }}
+              to={"/profileupdate"}
             >
-              Edit Profile
-            </Button>
+              <Button
+                variant="contained"
+                align="center"
+                color="primary"
+                component="span"
+                style={{ width: "100%" }}
+              >
+                Edit Profile
+              </Button>
+            </Link>
           </Grid>
           <Grid item xs={12}>
             <Button
