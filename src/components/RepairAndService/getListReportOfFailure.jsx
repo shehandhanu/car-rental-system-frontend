@@ -3,6 +3,7 @@ import { MDBDataTable } from "mdbreact";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import MaterialTable from "material-table";
@@ -12,23 +13,13 @@ const initialState = {
 };
 
 export default class GetListReportOfFailure extends React.Component {
-  // const [serviceDetails, setServiceDetails] = useState([]);
-
-  // useEffect(async () => {
-  //   let details = await axios.get(
-  //     "http://localhost:4000/api/v1/service/getReportOfservice"
-  //   );
-  //   console.log(details.data.reportOfService);
-  //   setServiceDetails(details.data.reportOfService);
-  // }, [!serviceDetails]);
-
   constructor(props) {
     super(props);
     this.state = initialState;
     axios
       .get("http://localhost:4000/api/v1/service/getReportOfservice")
       .then((Response) => {
-        console.log(Response);
+        //console.log(Response);
         this.setState({ serviceDetails: Response.data.reportOfService });
       })
       .catch((error) => {
@@ -37,7 +28,7 @@ export default class GetListReportOfFailure extends React.Component {
   }
 
   ischecked = async (id) => {
-    console.log(id);
+    //console.log(id);
     await axios.get(
       "http://localhost:4000/api/v1/service/checkReportOfservice/" + id._id
     );
@@ -53,27 +44,10 @@ export default class GetListReportOfFailure extends React.Component {
       });
   };
 
-  // deleteRow(id, e) {
-  //   axios
-  //     .delete(
-  //       "http://localhost:4000/api/v1/service/deleteReportOfservice/${id}"
-  //     )
-  //     .then((Response) => {
-  //       console.log(Response);
-  //       console.log(Response.data);
-  //       const serviceDetails = this.state.serviceDetails.filter(
-  //         (item) => item._id !== id
-  //       );
-  //       this.setState({ serviceDetails });
-  //     })
-  //     .catch((error) => {
-  //       alert(error.message);
-  //     });
-  // }
   deleteDetails = (id) => {
     axios
       .delete(
-        "http://localhost:4000/api/v1/service/deleteReportOfservice/" + id
+        "http://localhost:4000/api/v1/service/deleteQuotationsManager/" + id
       )
       .then((response) => {
         if (response.data != null) {
@@ -85,6 +59,11 @@ export default class GetListReportOfFailure extends React.Component {
           });
         }
       });
+  };
+
+  UpdateDetails = (id) => {
+    //console.log(id);
+    this.props.history.push("/quotationForTheVehicle/" + id);
   };
 
   render() {
@@ -106,57 +85,104 @@ export default class GetListReportOfFailure extends React.Component {
         <table class="table table-striped table-bordered table-hover">
           <thead class="thead-dark">
             <tr className="table-dark">
-              <th scope="col">No</th>
-              <th scope="col">Failure/Service</th>
-              <th scope="col">Vehicle No.</th>
-              <th scope="col">Service/Failure Date</th>
-              <th scope="col">Assembling Parts</th>
-              <th scope="col" className="w-25">
+              <th scope="col" style={{ textAlign: "center" }}>
+                No
+              </th>
+              <th scope="col" style={{ textAlign: "center" }}>
+                Failure/Service
+              </th>
+              <th scope="col" style={{ textAlign: "center" }}>
+                Vehicle No.
+              </th>
+              <th scope="col" style={{ textAlign: "center" }}>
+                Service/Failure Date
+              </th>
+              <th scope="col" style={{ textAlign: "center" }}>
+                Assembling Parts
+              </th>
+              <th scope="col" style={{ width: 380, textAlign: "center" }}>
                 Actions
               </th>
             </tr>
           </thead>
           {this.state.serviceDetails.map((id, i) => (
             <tbody>
-              <tr>
-                <th scope="row">{i + 1}</th>
-                <td>{id.type}</td>
-                <td>{id.vehino}</td>
-                <td>{id.serviceDate}</td>
-                <td>{id.serviceParts}</td>
-                <td>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.ischecked(id)}
-                    style={{ marginLeft: 5 }}
+              {id.isDelated !== 2 && id.isDeleted !== 4 ? (
+                <tr>
+                  <th
+                    scope="row"
+                    style={{ textAlign: "center", fontSize: "16px" }}
                   >
-                    Check
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    style={{ marginLeft: 5 }}
-                    onClick={this.deleteDetails.bind(this, id._id)}
-                  >
-                    Delete
-                  </Button>
-                  {id.isChecked === true ? (
-                    // <div>
+                    {"0" + (i + 1)}
+                  </th>
+                  <td style={{ textAlign: "center", fontSize: "16px" }}>
+                    {id.type}
+                  </td>
+                  <td style={{ textAlign: "center", fontSize: "16px" }}>
+                    {id.vehino}
+                  </td>
+                  <td style={{ textAlign: "center", fontSize: "16px" }}>
+                    {id.serviceDate}
+                  </td>
+                  <td style={{ textAlign: "center", fontSize: "16px" }}>
+                    {id.serviceParts}
+                  </td>
+                  <td>
                     <Button
                       variant="contained"
                       color="primary"
+                      onClick={() => this.ischecked(id)}
                       style={{ marginLeft: 5 }}
-                      onClick={() =>
-                        (window.location.href = "/quotationForTheVehicle")
-                      }
                     >
-                      Create a Quotation
+                      Check
                     </Button>
-                  ) : // </div>
-                  null}
-                </td>
-              </tr>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      style={{ marginLeft: 5 }}
+                      onClick={this.deleteDetails.bind(this, id._id)}
+                    >
+                      Delete
+                    </Button>
+                    {id.isChecked === true ? (
+                      <div style={{ float: "right" }}>
+                        {id.isQutationCreated == false ? (
+                          <Link
+                            to={{
+                              pathname: "/quotationForTheVehicle",
+                              state: id,
+                            }}
+                            style={{ textDecoration: "none" }}
+                          >
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              style={{ marginLeft: 5 }}
+                            >
+                              Create a Quotation
+                            </Button>
+                          </Link>
+                        ) : (
+                          <Button
+                            variant="contained"
+                            style={{
+                              marginLeft: 5,
+                              backgroundColor: "#61CC63",
+                              color: "#ffffff",
+                              width: 180,
+                              fontSize: 12,
+                            }}
+                          >
+                            Quotation Completed
+                          </Button>
+                        )}
+                      </div>
+                    ) : // <div>
+                    // </div>
+                    null}
+                  </td>
+                </tr>
+              ) : null}
             </tbody>
           ))}
         </table>
