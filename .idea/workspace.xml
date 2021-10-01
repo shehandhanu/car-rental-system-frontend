@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="facd0b45-580e-4165-b969-9229821bcd83" name="Default Changelist" comment="cahnge form structure" />
+    <list default="true" id="facd0b45-580e-4165-b969-9229821bcd83" name="Default Changelist" comment="wrkspace">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Vehicle/ownerRegistration/OwnerRegistration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/ownerRegistration/OwnerRegistration.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Vehicle/vehicleRegistration/VehicleRegistration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Vehicle/vehicleRegistration/VehicleRegistration.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +32,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../car-rental-system-backend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -52,7 +56,8 @@
       <workItem from="1632937604570" duration="33000" />
       <workItem from="1632981704271" duration="1775000" />
       <workItem from="1633009021361" duration="558000" />
-      <workItem from="1633014989169" duration="11950000" />
+      <workItem from="1633014989169" duration="11983000" />
+      <workItem from="1633087368204" duration="3622000" />
     </task>
     <task id="LOCAL-00001" summary="basic functionality">
       <created>1629610791890</created>
@@ -103,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633027260627</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="wrkspace">
+      <created>1633054255223</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1633054255223</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,6 +142,7 @@
     <MESSAGE value="report gen" />
     <MESSAGE value="reset" />
     <MESSAGE value="cahnge form structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="cahnge form structure" />
+    <MESSAGE value="wrkspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="wrkspace" />
   </component>
 </project>

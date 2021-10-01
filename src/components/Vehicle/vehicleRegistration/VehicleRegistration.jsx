@@ -79,7 +79,37 @@ export default function VehicleRegistration() {
     registerDate: null,
     specification: "",
     open: false,
+    vehicleImage: "",
   };
+
+
+
+
+//
+// --------------------------------------
+//   const [selectedImg, setselectedImg] = React.useState();
+//   // const [uploadedImg, setuploadedImg] = React.useState();
+//
+//   const uploadImage = async (e) => {
+//     const formData = new FormData();
+//     formData.append("file", selectedImg);
+//     formData.append("upload_preset", "spmproject");
+//     const response = await axios.post(
+//         "https://api.cloudinary.com/v1_1/dxz8wbaqv/image/upload",
+//         formData
+//     );
+//     setValues({...values, vehicleImage: response.data.url})
+//     // setuploadedImg(response.data.url);
+//     alert("Your Details Are Ok To SignUp");
+//   };
+//
+// -----------------------------------------
+
+
+
+
+
+
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -92,7 +122,6 @@ export default function VehicleRegistration() {
 
   const [values, setValues] = React.useState(INITIAL_VALUES);
 
-  console.log("values", values);
 
   const classes = useStyles();
 
@@ -118,6 +147,7 @@ export default function VehicleRegistration() {
       registerDate: null,
       specification: "",
       open: true,
+      vehicleImage: "",
     })
   };
 
@@ -174,6 +204,24 @@ export default function VehicleRegistration() {
               >
                 Upload Image
               </Typography>
+
+              {/*{!values.vehicleImage ? (*/}
+              {/*    <div>*/}
+              {/*      {!selectedImg ? (*/}
+              {/*          <img*/}
+              {/*              src="https://res.cloudinary.com/dxz8wbaqv/image/upload/v1624880648/afproject/images_jjljf9.png"*/}
+              {/*              style={{ width: 125, height: 125 }}*/}
+              {/*          />*/}
+              {/*      ) : (*/}
+              {/*          <img*/}
+              {/*              src={URL.createObjectURL(selectedImg)}*/}
+              {/*              style={{ width: 125, height: 125 }}*/}
+              {/*          />*/}
+              {/*      )}*/}
+              {/*    </div>*/}
+              {/*) : (*/}
+              {/*    <img src={values.vehicleImage} style={{ width: 150, height: 150 }} />*/}
+              {/*)}*/}
 
               <input
                 type="file"
