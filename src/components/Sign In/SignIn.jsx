@@ -60,7 +60,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/user/signin`,
+      `${process.env.REACT_APP_BACKEND_URL}user/signin`,
       {
         password: password,
         email: userName,

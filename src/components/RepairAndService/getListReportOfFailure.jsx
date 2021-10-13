@@ -17,7 +17,9 @@ export default class GetListReportOfFailure extends React.Component {
     super(props);
     this.state = initialState;
     axios
-      .get("http://localhost:4000/api/v1/service/getReportOfservice")
+      .get(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/getReportOfservice"
+      )
       .then((Response) => {
         //console.log(Response);
         this.setState({ serviceDetails: Response.data.reportOfService });
@@ -30,11 +32,14 @@ export default class GetListReportOfFailure extends React.Component {
   ischecked = async (id) => {
     //console.log(id);
     await axios.get(
-      "http://localhost:4000/api/v1/service/checkReportOfservice/" + id._id
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/checkReportOfservice/" +
+        id._id
     );
 
     await axios
-      .get("http://localhost:4000/api/v1/service/getReportOfservice")
+      .get(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/getReportOfservice"
+      )
       .then((Response) => {
         console.log(Response);
         this.setState({ serviceDetails: Response.data.reportOfService });
@@ -47,7 +52,8 @@ export default class GetListReportOfFailure extends React.Component {
   deleteDetails = (id) => {
     axios
       .delete(
-        "http://localhost:4000/api/v1/service/deleteQuotationsManager/" + id
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/deleteQuotationsManager/" +
+          id
       )
       .then((response) => {
         if (response.data != null) {

@@ -84,7 +84,7 @@ const SignUp = () => {
     console.log(data);
 
     const user = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/user/signup`,
+      `${process.env.REACT_APP_BACKEND_URL}user/signup`,
       data
     );
     CookieService.set(user.data.token);

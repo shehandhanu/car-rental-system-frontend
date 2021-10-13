@@ -53,7 +53,7 @@ const UserProfile = () => {
     } else {
       async function fectchData() {
         const userDetails = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/user/profile`,
+          `${process.env.REACT_APP_BACKEND_URL}user/profile`,
           {
             withCredentials: true,
           }

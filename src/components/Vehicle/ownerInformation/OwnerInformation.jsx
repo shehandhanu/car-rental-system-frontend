@@ -20,50 +20,52 @@ export default function OwnerInformation() {
     { title: "Vehicle Numbers", field: "vehicleNumbers" },
   ]);
 
+  const [owners, setOwners] = React.useState([]);
 
+  React.useEffect(async () => {
+    let data = await axios.get(
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/owner/getowners"
+    );
 
+    setOwners(data.data.owner);
 
-    const [owners, setOwners] = React.useState([]);
+    console.log("ownersss", owners);
+  }, []);
 
-    React.useEffect(async () => {
-        let data = await axios.get(
-            "http://localhost:4000/api/v1/owner/getowners"
-        );
+  const updateOwner = async (newData) => {
+    console.log("new dataaa", newData);
+    console.log("new data iddd", newData._id);
+    await axios
+      .put(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/owner/updateowners/" +
+          newData._id,
+        newData
+      )
+      .then((res) => {
+        // alert("Successfully Updated")
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
-        setOwners(data.data.owner);
+  const deleteOwner = async (oldData) => {
+    // console.log("new dataaa", newData)
+    // console.log("new data iddd", newData._id)
+    await axios
+      .delete(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/owner/deleteowners/" +
+          oldData._id
+      )
+      .then((res) => {
+        // alert("Successfully Deleted")
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
-        console.log("ownersss", owners);
-    }, []);
-
-
-
-
-    const updateOwner = async (newData) => {
-        console.log("new dataaa", newData)
-        console.log("new data iddd", newData._id)
-        await axios.put("http://localhost:4000/api/v1/owner/updateowners/" + newData._id,newData)
-            .then((res)=>{
-                // alert("Successfully Updated")
-            })
-            .catch((err)=>{
-                alert(err.message)
-            })
-    }
-
-    const deleteOwner = async (oldData) => {
-        // console.log("new dataaa", newData)
-        // console.log("new data iddd", newData._id)
-        await axios.delete("http://localhost:4000/api/v1/owner/deleteowners/" + oldData._id)
-            .then((res)=>{
-                // alert("Successfully Deleted")
-            })
-            .catch((err)=>{
-                alert(err.message)
-            })
-    }
-
-
-    return (
+  return (
     <div style={{ height: "100vh" }}>
       <CssBaseline />
       <Typography
@@ -79,7 +81,7 @@ export default function OwnerInformation() {
         columns={columns}
         data={owners}
         options={{
-            exportButton: true,
+          exportButton: true,
           rowStyle: (rowData) => ({
             backgroundColor: rowData.tableData.id % 2 === 0 ? "#EEE" : "#FFF",
           }),
@@ -100,7 +102,7 @@ export default function OwnerInformation() {
                 dataUpdate[index] = newData;
                 setOwners([...dataUpdate]);
 
-                  updateOwner(newData);
+                updateOwner(newData);
 
                 resolve();
               }, 1000);
@@ -113,7 +115,7 @@ export default function OwnerInformation() {
                 dataDelete.splice(index, 1);
                 setOwners([...dataDelete]);
 
-                  deleteOwner(oldData);
+                deleteOwner(oldData);
 
                 resolve();
               }, 1000);

@@ -1,5 +1,5 @@
-import React from 'react'
-import axios from 'axios'
+import React from "react";
+import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 // import { useDispatch, useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
@@ -13,79 +13,82 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
-import { Button, Box } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
-import { Link } from 'react-router-dom';
-
+import { Button, Box } from "@material-ui/core";
+import { blue } from "@material-ui/core/colors";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(2),
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      width: 1350
-    },
-    list: {
-      align: "center",
-      justifyContent: "center",
-    },
-    card: {
-      display: "flex",
-      width: 1250,
-      align: "center",
-      margin: 10
-    },
-    cardDetails: {
-      flex: 1,
-    },
-    cardMedia: {
-      width: 200,
-    },
-  
-  }));
+  paper: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: 1350,
+  },
+  list: {
+    align: "center",
+    justifyContent: "center",
+  },
+  card: {
+    display: "flex",
+    width: 1250,
+    align: "center",
+    margin: 10,
+  },
+  cardDetails: {
+    flex: 1,
+  },
+  cardMedia: {
+    width: 200,
+  },
+}));
 
 const LeavesList = () => {
-    const classes = useStyles();
-    const [leaves, setLeaves] = React.useState([])
+  const classes = useStyles();
+  const [leaves, setLeaves] = React.useState([]);
 
-    React.useEffect(async() => {
-        let data = await axios.get('http://localhost:4000/api/v1/leaves/getleaves')
-        setLeaves(data.data.leaves)
-        
-    },[!leaves])
-    
-    // console.log(emp);
-    return (
-        <div>
-        <div className={classes.paper}>
-            <Container maxWidth="lg">
-            <Grid justifyContent="center" container spacing={4}>
-                {leaves.map((leaves) => (
-                <FeaturedPost  key={leaves._id} leaves={leaves} />
-                ))}
-            </Grid>
-            </Container>
-            </div>
-        </div>
-    )
-}
+  React.useEffect(async () => {
+    let data = await axios.get(
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/leaves/getleaves"
+    );
+    setLeaves(data.data.leaves);
+  }, [!leaves]);
 
-export default LeavesList
+  // console.log(emp);
+  return (
+    <div>
+      <div className={classes.paper}>
+        <Container maxWidth="lg">
+          <Grid justifyContent="center" container spacing={4}>
+            {leaves.map((leaves) => (
+              <FeaturedPost key={leaves._id} leaves={leaves} />
+            ))}
+          </Grid>
+        </Container>
+      </div>
+    </div>
+  );
+};
 
-
+export default LeavesList;
 
 function FeaturedPost(props) {
   const classes = useStyles();
   const { leaves } = props;
-  const ApproveLeaves = async (id)=>{
-    alert('Approved');
-    let data = await axios.get('http://localhost:4000/api/v1/leaves/approveleaves/'+ id);
-  }
-  const rejectLeaves = async (id)=>{
-    alert('Rejected');
-    let data = await axios.get('http://localhost:4000/api/v1/leaves/rejectleaves/'+ id);
-  }
+  const ApproveLeaves = async (id) => {
+    alert("Approved");
+    let data = await axios.get(
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/leaves/approveleaves/" +
+        id
+    );
+  };
+  const rejectLeaves = async (id) => {
+    alert("Rejected");
+    let data = await axios.get(
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/leaves/rejectleaves/" +
+        id
+    );
+  };
   //console.log(props);
   return (
     <div className={classes.paper}>
@@ -93,32 +96,35 @@ function FeaturedPost(props) {
         <CardActionArea component="a" href="#">
           <Card className={classes.card}>
             <div className={classes.cardDetails}>
-              <Link style={{textDecoration: "none", color: "#000000"}}to= {{pathname:"/userprofile",data: {empData:leaves}, }} >
-              <CardContent>
-                <Typography component="h5" variant="h5">
-                  <b>Employee Name : </b> {leaves.emName}
-                </Typography>
+              <Link
+                style={{ textDecoration: "none", color: "#000000" }}
+                to={{ pathname: "/userprofile", data: { empData: leaves } }}
+              >
+                <CardContent>
+                  <Typography component="h5" variant="h5">
+                    <b>Employee Name : </b> {leaves.emName}
+                  </Typography>
 
-                <Typography variant="subtitle1" color="textSecondary">
-                 <b>Number Of Days : </b> {leaves.noOfDates}
-                </Typography>
-            
-                <Typography component="subtitle1" color="textSecondary">
-                  <b>From : </b> {leaves.startDate}
-                </Typography>
-                <br/>
-                <Typography component="subtitle1" color="textSecondary">
-                  <b>To : </b> {leaves.endDate}
-                </Typography>
-                <br/>
-                <Typography component="subtitle1" color="textSecondary">
-                  <b>Email : </b> {leaves.email}
-                </Typography>
-                <br/>
-                <Typography component="subtitle1" color="textSecondary">
-                  <b>Reason : </b> {leaves.reason}
-                </Typography> 
-              </CardContent>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <b>Number Of Days : </b> {leaves.noOfDates}
+                  </Typography>
+
+                  <Typography component="subtitle1" color="textSecondary">
+                    <b>From : </b> {leaves.startDate}
+                  </Typography>
+                  <br />
+                  <Typography component="subtitle1" color="textSecondary">
+                    <b>To : </b> {leaves.endDate}
+                  </Typography>
+                  <br />
+                  <Typography component="subtitle1" color="textSecondary">
+                    <b>Email : </b> {leaves.email}
+                  </Typography>
+                  <br />
+                  <Typography component="subtitle1" color="textSecondary">
+                    <b>Reason : </b> {leaves.reason}
+                  </Typography>
+                </CardContent>
               </Link>
             </div>
             <Hidden xsDown>
@@ -127,18 +133,26 @@ function FeaturedPost(props) {
                 image={leaves.image}
                 title={leaves.imageTitle}
               >
-                  
-                  <Grid xs={12}>
-                    <Box mt={3}>
+                <Grid xs={12}>
+                  <Box mt={3}></Box>
 
-                    </Box>
+                  <button
+                    type="button"
+                    className="btn btn-warning button m-2"
+                    onClick={() => ApproveLeaves(leaves._id)}
+                  >
+                    Accept
+                  </button>
 
-                    <button type="button" className="btn btn-warning button m-2" onClick={()=>ApproveLeaves(leaves._id)}>Accept</button>
-
-                    <button type="button" className="btn btn-danger button m-2" onClick={()=>rejectLeaves(leaves._id)}>Reject</button>
-
-                  </Grid>
-                  </div>
+                  <button
+                    type="button"
+                    className="btn btn-danger button m-2"
+                    onClick={() => rejectLeaves(leaves._id)}
+                  >
+                    Reject
+                  </button>
+                </Grid>
+              </div>
             </Hidden>
           </Card>
         </CardActionArea>
@@ -150,4 +164,3 @@ function FeaturedPost(props) {
 FeaturedPost.propTypes = {
   post: PropTypes.object,
 };
-

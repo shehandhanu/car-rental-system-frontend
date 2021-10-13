@@ -51,7 +51,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     console.log("sample");
     const password = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/user/resetpassword/${Token}`,
+      `${process.env.REACT_APP_BACKEND_URL}user/resetpassword/${Token}`,
       {
         password: Password,
         confirmPassword: RePassword,

@@ -13,7 +13,9 @@ const GetListOfQuotationOwner = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/service/getListOfQuotations")
+      .get(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/getListOfQuotations"
+      )
       .then((Response) => {
         setQuotationDetails(Response.data.quotationOfService);
       })
@@ -25,7 +27,8 @@ const GetListOfQuotationOwner = (props) => {
   const deleteDetails = (id) => {
     axios
       .delete(
-        "http://localhost:4000/api/v1/service/deleteQuotationsOwner/" + id
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/deleteQuotationsOwner/" +
+          id
       )
       .then((response) => {
         if (response.data != null) {
@@ -43,11 +46,14 @@ const GetListOfQuotationOwner = (props) => {
   const isApproved = async (id) => {
     console.log(id);
     await axios.get(
-      "http://localhost:4000/api/v1/service/approveQuotations/" + id._id
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/approveQuotations/" +
+        id._id
     );
 
     await axios
-      .get("http://localhost:4000/api/v1/service/getListOfQuotations")
+      .get(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/getListOfQuotations"
+      )
       .then((Response) => {
         setQuotationDetails(Response.data.quotationOfService);
       })

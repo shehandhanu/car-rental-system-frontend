@@ -12,7 +12,9 @@ const GetListOfApprovedQuotation = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/v1/service/getListOfQuotations")
+      .get(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/getListOfQuotations"
+      )
       .then((Response) => {
         console.log(Response.data.quotationOfService);
         setQuotationDetails(Response.data.quotationOfService);
@@ -25,7 +27,8 @@ const GetListOfApprovedQuotation = () => {
   const deleteDetails = (id) => {
     axios
       .delete(
-        "http://localhost:4000/api/v1/service/deleteQuotationsManager/" + id
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/deleteQuotationsManager/" +
+          id
       )
       .then((response) => {
         if (response.data != null) {

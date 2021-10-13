@@ -58,7 +58,7 @@ const UserReport = () => {
       EndDate: EndDate,
     };
     const data = await axios.post(
-      "http://localhost:4000/api/v1/reservation/genreport/610d8c4ce7a1f853f49119b7",
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/reservation/genreport/610d8c4ce7a1f853f49119b7",
       dates,
       { withCredentials: true }
     );

@@ -15,7 +15,9 @@ const GenerateReport = () => {
   const getReportDetails = () => {
     console.log("hello");
     axios
-      .get("http://localhost:4000/api/v1/service/generateReport")
+      .get(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/generateReport"
+      )
       .then((Response) => {
         setReportUrl(Response.data.response);
         alert("Generate Report Successfully");

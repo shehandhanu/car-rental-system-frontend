@@ -64,7 +64,7 @@ export default function ForgotPasswordEmail(props) {
     // e.preventDefault();
     console.log(token);
     const user = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/user/confirmation/${token}`
+      `${process.env.REACT_APP_BACKEND_URL}user/confirmation/${token}`
     );
 
     console.log(user);

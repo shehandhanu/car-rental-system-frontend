@@ -100,12 +100,7 @@ const tiers = [
   {
     title: "Free",
     price: "0",
-    description: [
-      "10 users included",
-      "2 GB of storage",
-      "Help center access",
-      "Email support",
-    ],
+    description: ["Full AC", "Auto Gear", "5 Passanger", "Petrol"],
     buttonText: "Sign up for free",
     buttonVariant: "outlined",
   },
@@ -131,7 +126,7 @@ const UserReport = (props) => {
   React.useEffect(() => {
     async function fetchData() {
       const data = await axios.get(
-        "http://localhost:4000/api/v1/reservation/getreservedates/" +
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/reservation/getreservedates/" +
           carData._id
       );
       setreserveDates(data.data.changedDates);
@@ -167,7 +162,7 @@ const UserReport = (props) => {
     };
 
     const user = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/reservation/addreservation`,
+      `${process.env.REACT_APP_BACKEND_URL}reservation/addreservation`,
       data,
       { withCredentials: true }
     );
@@ -199,7 +194,7 @@ const UserReport = (props) => {
                 <Grid item md={8}>
                   <Card>
                     <CardHeader
-                      title="Hyhonda"
+                      title="Toyota Prius"
                       titleTypographyProps={{ align: "center" }}
                       subheaderTypographyProps={{ align: "center" }}
                       className={classes.cardHeader}

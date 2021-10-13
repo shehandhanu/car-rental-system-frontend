@@ -2,8 +2,8 @@ import React, { FC, useState } from "react";
 import MaterialTable from "material-table";
 import { Container, Paper } from "@material-ui/core";
 import axios from "axios";
-import 'jspdf-autotable';
-import jsPDF from 'jspdf';
+import "jspdf-autotable";
+import jsPDF from "jspdf";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
-
 
 export default function VehicleInformation() {
   const [columns, setColumns] = useState([
@@ -28,21 +27,18 @@ export default function VehicleInformation() {
     { title: "Employee Type", field: "emType" },
   ]);
 
-  console.log('hellp');
+  console.log("hellp");
 
   const [emp, setEmp] = React.useState([]);
 
   React.useEffect(async () => {
     let data = await axios.get(
-      "http://localhost:4000/api/v1/employee/getemployee"
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/employee/getemployee"
     );
-    setEmp(data.data.emp)
+    setEmp(data.data.emp);
 
     console.log("emp", emp);
   }, []);
-
-
-
 
   return (
     <div style={{ height: "100vh" }}>
@@ -60,7 +56,7 @@ export default function VehicleInformation() {
         columns={columns}
         data={emp}
         options={{
-        exportButton: true,
+          exportButton: true,
           headerStyle: {
             backgroundColor: "#ffc800",
             color: "#000",
@@ -68,8 +64,6 @@ export default function VehicleInformation() {
           pageSize: 5,
           paging: true,
         }}
-       
-         
       />
     </div>
   );

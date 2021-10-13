@@ -49,7 +49,8 @@ const QuotationForTheVehicle = (props) => {
     console.log(data._id);
     axios
       .post(
-        "http://localhost:4000/api/v1/service/createQuotation/" + data._id,
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/createQuotation/" +
+          data._id,
         details
       )
       .then((Response) => {

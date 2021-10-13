@@ -117,7 +117,7 @@ export default function VehicleRegistration() {
     e.preventDefault();
 
     const datax = await axios.post(
-      "http://localhost:4000/api/v1/vehical/addvehical",
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/vehical/addvehical",
       values
     );
     setValues({

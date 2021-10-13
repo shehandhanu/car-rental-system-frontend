@@ -10,11 +10,11 @@ import Grid from "@material-ui/core/Grid";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export default function VehicleInformation() {
@@ -34,47 +34,49 @@ export default function VehicleInformation() {
     { title: "Specification", field: "specification" },
   ]);
 
-
-
-
   const [vehicles, setVehicles] = React.useState([]);
 
   React.useEffect(async () => {
     let data = await axios.get(
-      "http://localhost:4000/api/v1/vehical/getvehicals"
+      "https://car-rentalsystem-backend.herokuapp.com/api/v1/vehical/getvehicals"
     );
     setVehicles(data.data.vehical);
   }, []);
 
+  const updateVehicle = async (newData) => {
+    console.log("new dataaa", newData);
+    console.log("new data iddd", newData._id);
+    await axios
+      .put(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/vehical/updatevehicals/" +
+          newData._id,
+        newData
+      )
+      .then((res) => {
+        console.log(res);
+        window.location.reload();
+        // alert("Successfully Updated")
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
-
-
-    const updateVehicle = async (newData) => {
-        console.log("new dataaa", newData)
-        console.log("new data iddd", newData._id)
-        await axios.put("http://localhost:4000/api/v1/vehical/updatevehicals/" + newData._id,newData)
-            .then((res)=>{
-                console.log(res)
-                window. location. reload()
-                // alert("Successfully Updated")
-            })
-            .catch((err)=>{
-                alert(err.message)
-            })
-    }
-
-    const deleteVehicle = async (oldData) => {
-        // console.log("new dataaa", newData)
-        // console.log("new data iddd", newData._id)
-        await axios.delete("http://localhost:4000/api/v1/vehical/deletevehicals/" + oldData._id)
-            .then((res)=>{
-                // alert("Successfully Deleted")
-            })
-            .catch((err)=>{
-                alert(err.message)
-            })
-    }
-
+  const deleteVehicle = async (oldData) => {
+    // console.log("new dataaa", newData)
+    // console.log("new data iddd", newData._id)
+    await axios
+      .delete(
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/vehical/deletevehicals/" +
+          oldData._id
+      )
+      .then((res) => {
+        // alert("Successfully Deleted")
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
 
   return (
     <div style={{ height: "100vh" }}>
@@ -93,10 +95,10 @@ export default function VehicleInformation() {
         columns={columns}
         data={vehicles}
         options={{
-            exportButton: true,
-            rowStyle: (rowData) => ({
-                backgroundColor: rowData.tableData.id % 2 === 0 ? "#EEE" : "#FFF",
-            }),
+          exportButton: true,
+          rowStyle: (rowData) => ({
+            backgroundColor: rowData.tableData.id % 2 === 0 ? "#EEE" : "#FFF",
+          }),
           headerStyle: {
             backgroundColor: "#ffc800",
             color: "#000",

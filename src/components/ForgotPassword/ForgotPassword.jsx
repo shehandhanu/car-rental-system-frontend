@@ -43,7 +43,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     console.log("sample");
     const email = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/user/forgotpassword`,
+      `${process.env.REACT_APP_BACKEND_URL}user/forgotpassword`,
       {
         email: Email,
       }

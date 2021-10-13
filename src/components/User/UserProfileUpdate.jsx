@@ -65,7 +65,7 @@ const SignUp = () => {
       async function fectchData() {
         console.log("works");
         const userDetails = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/user/profile`,
+          `${process.env.REACT_APP_BACKEND_URL}user/profile`,
           {
             withCredentials: true,
           }
@@ -95,7 +95,7 @@ const SignUp = () => {
     console.log(data);
 
     const user = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/user/profileupdate`,
+      `${process.env.REACT_APP_BACKEND_URL}user/profileupdate`,
       data,
       { withCredentials: true }
     );

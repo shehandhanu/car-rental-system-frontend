@@ -21,7 +21,7 @@ const CreateReportOfService = () => {
 
     axios
       .post(
-        "http://localhost:4000/api/v1/service/reportOfServiceRepair",
+        "https://car-rentalsystem-backend.herokuapp.com/api/v1/service/reportOfServiceRepair",
         details
       )
       .then((Response) => {

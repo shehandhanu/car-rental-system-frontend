@@ -77,7 +77,7 @@ export default function Checkout() {
     console.log(data);
 
     const user = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/reservation/addpaymentdetails/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}reservation/addpaymentdetails/${id}`,
       data
     );
     if (user.status === 200) {
