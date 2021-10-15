@@ -35,7 +35,7 @@ This is a Car Rental Management System which allows the customer to keep track o
 **Prequisites**
 
 - Clone the porject \
-`git clone https://github.com/shehandhanu/car-rental-system-frontend.git`\
+`git clone https://github.com/shehandhanu/car-rental-system-frontend.git`
 - Or download the repository as a zip file and extract.
 
 **Runing the Project**
