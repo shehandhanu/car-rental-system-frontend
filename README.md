@@ -28,6 +28,8 @@ This is a Car Rental Management System which allows the customer to keep track o
 
 **Prequisites**
 
+- jjj
+
 
 
 ### `npm install`
