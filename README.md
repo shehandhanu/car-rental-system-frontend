@@ -1,8 +1,12 @@
-# Getting Started with Create React App
+# Group-ID
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+2021S2_REG_WE_10
 
-## Available Scripts
+## Project name
+
+BlackCode Car Rental Management System
+
+## Group details
 
 In the project directory, you can run:
 
