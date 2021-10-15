@@ -10,7 +10,8 @@ BlackCode Car Rental Management System
 
 **Member Details**
 
-|Name|StudentID|Username|
+|Name|Student ID|Username|
+|----|----------|--------|
 
 
 
