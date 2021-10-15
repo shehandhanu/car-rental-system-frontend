@@ -8,6 +8,9 @@ BlackCode Car Rental Management System
 
 ## Group details
 
+**Member Details**
+
+|Name|StudentID|Username|
 
 
 
@@ -28,27 +31,16 @@ This is a Car Rental Management System which allows the customer to keep track o
 
 **Prequisites**
 
-- Clone the porject\
-`npm install`
-- or download the repository as a zip file
+- Clone the porject \
+`git clone https://github.com/shehandhanu/car-rental-system-frontend.git`\
+- Or download the repository as a zip file and extract.
 
+**Runing the Project**
 
+- `npm install`
+- `npm start`
 
-### `npm install`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Runs the app in the development mode
 
 
 
