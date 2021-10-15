@@ -28,7 +28,7 @@ This is a Car Rental Management System which allows the customer to keep track o
 
 **Prequisites**
 
-- Clone 
+- Clone the porject\
 `npm install`
 - or download the repository as a zip file
 
